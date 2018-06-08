@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="TestProgram.Model.ViewTree"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TestProgram.Model"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1200">
+    <Grid>
+        <TreeView  ItemsSource="{Binding TreeViewTest1}"   BorderThickness="1">
+            <!--<TreeViewItem Name="Test" >
+                <TreeViewItem Name="Name" Header="{Binding Name}" />
+                <TreeViewItem Header="{Binding Score}" />
+                <TreeViewItem Header="{Binding Description}"  />
+                <TreeViewItem Header="{Binding Description}"  />
+                <TreeViewItem Header="{Binding GroupName}"  />
+                <TreeViewItem Name="WrittenItems" >
+                    <TreeViewItem Name="WrittenItem" >
+                        <TreeViewItem Header="{Binding WrittenItem.Score}"  />
+                        <TreeViewItem Header="{Binding WrittenItem.Title}"  />
+                        <TreeViewItem Header="{Binding WrittenItem.Answer}"  />
+                        <TreeViewItem Header="{Binding WrittenItem.IsMultiple}"  />
+                        <TreeViewItem Header="{Binding WrittenItem.Type}"  />
+                        <TreeViewItem Name="Option" >
+                            <TextBlock Name="Serial"  Text="{Binding Serial}" ></TextBlock>
+                            <TextBlock Name="Title" Text="{Binding Title}" ></TextBlock>
+                        </TreeViewItem>
+                    </TreeViewItem>
+                </TreeViewItem>-->
+            <!--</TreeViewItem>-->
+        </TreeView>
+    </Grid>
+</UserControl>

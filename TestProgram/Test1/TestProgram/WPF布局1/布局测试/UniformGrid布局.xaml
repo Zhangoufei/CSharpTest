@@ -1,0 +1,21 @@
+﻿<Page x:Class="WPF布局1.布局测试.UniformGrid布局"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF布局1.布局测试"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="500"
+      Title="UniformGrid布局">
+
+    <Grid>
+        <UniformGrid>
+            <Ellipse Margin="10" Fill="AntiqueWhite" />
+            <Ellipse Margin="10" Fill="AntiqueWhite" />
+            <Ellipse Margin="10" Fill="AntiqueWhite" />
+            <Ellipse Margin="10" Fill="AntiqueWhite" />
+            <Ellipse Margin="10" Fill="AntiqueWhite" />
+            <Button ></Button>
+        </UniformGrid>
+    </Grid>
+</Page>

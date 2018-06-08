@@ -1,0 +1,37 @@
+﻿<Page x:Class="Welding.MyPage.InspectionBeforeWeldingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Welding.MyPage"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="1440"
+      Title="EnvCheckWithTipsPage">
+    <Page.Background>
+        <ImageBrush ImageSource="/Image/NBackGround.png"></ImageBrush>
+    </Page.Background>
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="VerticalAlignment" 
+                        Value="Center"/>
+                <Setter Property="FontSize"
+                        Value="28"/>
+                <Setter Property="FontFamily" Value="Microsoft YaHei UI"></Setter>
+                <Setter Property="Foreground"
+                        Value="#FFDEDEDD"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.9*"/>
+            <RowDefinition Height="4.2*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <TextBlock xml:space="preserve" Margin="59 0 59 0" Style="{StaticResource tbTitle}">焊前检查</TextBlock>
+        <Image Grid.Row="1" Width="745" Source="/Image/StartBG.png" Height="611" Margin="658,4.2,37,4.8"></Image>
+        <TextBlock Grid.Row="1" TextWrapping="Wrap" xml:space="preserve" Margin="38,168.2,650,13.8" LineHeight="100" 
+                           FontSize="52" Height="438">   请检查电源线、二次线是否完好，完成后点击下一步。</TextBlock>
+
+        <Button Grid.Row="2" Style="{StaticResource btnStart}"  Margin="0 0 50 30" Click="Button_Click">下一步</Button>
+    </Grid>
+</Page>

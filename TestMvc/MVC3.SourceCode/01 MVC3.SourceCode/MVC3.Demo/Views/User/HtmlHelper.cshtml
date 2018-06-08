@@ -1,0 +1,33 @@
+﻿@model MVC3.Demo.Models.UserModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HtmlHelper</title>
+</head>
+<body>
+   @* @Html.TextBox("txtUserName")
+    @Html.TextBoxFor(model => model.UserName, new { @class = "main", @style = "width:80px;" })
+    @Html.LabelFor(model => model.UserName, Model.UserName)*@
+    @Html.TextBox("txtUserName")
+    @Html.Label("txtUserName", "显示值")
+    @{
+        //下拉列表的值
+        List<SelectListItem> selectList = new List<SelectListItem>();
+        selectList.Add(new SelectListItem { Value = "1", Text = "列表项一" });
+        selectList.Add(new SelectListItem { Value = "2", Text = "列表项二" });
+    }
+    @Html.DropDownList("ddlList", (SelectList)new SelectList(selectList.AsEnumerable(), "Value", "Text"))
+    @Html.Password("txtPassword")
+    @Html.RadioButton("rdo", "男")
+    @{
+        IDictionary<string, object> htmlAttributes = new Dictionary<string, object>();
+        htmlAttributes.Add("1", "语文");
+        htmlAttributes.Add("2", "数学");
+    }
+    @Html.CheckBox("chk")
+    @Html.ActionLink("链接首页", "Login")
+</body>
+</html>

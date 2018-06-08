@@ -1,0 +1,35 @@
+﻿<Page x:Class="Simulation.SimulationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Simulation"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="SimulationPage">
+
+    <Grid x:Name="Grid1" CheckBox.Checked="OnCheckChange" CheckBox.Unchecked="OnCheckChange">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <CheckBox Grid.Row="0" Tag="PowerLine" Content="电源线"/>
+        <CheckBox Grid.Row="1" Tag="SecondaryLine" Content="二次线"/>
+        <CheckBox Grid.Row="2" Tag="PowerSwitch" Content="电源开关"/>
+        <CheckBox Grid.Row="3" Tag="ExhaustValve" Content="排气阀"/>
+        <CheckBox Grid.Row="4" Tag="OxygenBottleValve" Content="氧气瓶阀门"/>
+        <CheckBox Grid.Row="5" Tag="AcetyleneBottleValve" Content="乙炔瓶阀门"/>
+        <CheckBox Grid.Row="6" Tag="CarbonDioxideBottleValve" Content="二氧化碳瓶阀门"/>
+        <CheckBox Grid.Row="7" Tag="ArgonGasCylinderValve" Content="氩气瓶阀门"/>
+        <CheckBox Grid.Row="8" Tag="OilDrum" Content="油桶放置是否正确"/>
+        <CheckBox Grid.Row="9" Tag="Bucket" Content="水桶放置是否正确"/>
+    </Grid>
+</Page>

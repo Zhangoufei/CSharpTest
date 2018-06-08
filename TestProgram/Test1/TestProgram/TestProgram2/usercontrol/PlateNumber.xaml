@@ -1,0 +1,25 @@
+﻿<Window x:Class="TestProgram2.PlateNumber"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:usercontrol="clr-namespace:TestProgram2.usercontrol"
+        Title="VerifyFail" Height="550" Width="500" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" ShowInTaskbar="False" WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <ImageBrush ImageSource="/Image/verifyFail.png"></ImageBrush>
+    </Window.Background>
+    <Grid Background="#00000000">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32*"></RowDefinition>
+            <RowDefinition Height="190*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="6*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1"  Margin="16,7,30,28" Grid.Row="1" />
+        <Grid Grid.Row="1" Grid.Column="1" Margin="10,3,3,-25" >
+            <Canvas Margin="6,21,334,185" Name="canvas1"  />
+            <usercontrol:CalculatorControl x:Name="Counter4" Margin="31,18,41,-175" Panel.ZIndex="1" />
+        </Grid>
+    </Grid>
+</Window>

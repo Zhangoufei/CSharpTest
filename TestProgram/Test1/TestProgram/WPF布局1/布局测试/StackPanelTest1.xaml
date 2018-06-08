@@ -1,0 +1,25 @@
+﻿<Page x:Class="WPF布局1.布局测试.StackPanelTest1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF布局1.布局测试"
+      mc:Ignorable="d" 
+      d:DesignHeight="150" d:DesignWidth="300"
+      Title="StackPanelTest1">
+
+    <Grid Background="#FFB9CEEE">
+        <GroupBox Header="请选择没有错别字的成语" BorderBrush="Black" Margin="5" >
+            <StackPanel >
+                <CheckBox Content="A.迫不及待" />
+                <CheckBox Content="B,首屈一指" />
+                <CheckBox Content="C,唉声叹气" />
+                <CheckBox Content="D,不可理喻" />
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" >
+                    <Button Content="清空" Width="60" Margin="5" />
+                    <Button Content="确定" Width="60" Margin="5" />
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</Page>

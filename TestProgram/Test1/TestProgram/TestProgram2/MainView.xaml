@@ -1,0 +1,128 @@
+﻿<Page x:Class="TestProgram2.MainView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TestProgram2"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="MainView">
+    <Page.Resources>
+        <LinearGradientBrush x:Key="NormalBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#FFDC3939" Offset="0.0"/>
+                    <GradientStop Color="#FFE80E0E" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#FFFBE618" />
+
+        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <Border x:Name="Border" Grid.ColumnSpan="2" CornerRadius="2"
+  Background="{StaticResource NormalBrush}"
+  BorderThickness="1" />
+                <Border 
+  Grid.Column="0"
+  CornerRadius="2,0,0,2" 
+  Margin="1" 
+  Background="red" 
+  BorderThickness="0,0,1,0" />
+                <Path 
+  x:Name="Arrow"
+  Grid.Column="1"     
+  HorizontalAlignment="Center"
+  VerticalAlignment="Center"
+  Data="M 0 0 L 4 4 L 8 0 Z"/>
+            </Grid>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ComboBoxTextBox" TargetType="TextBox">
+            <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
+        </ControlTemplate>
+
+
+        <Style x:Key="{x:Type ComboBox}" TargetType="ComboBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton 
+         Name="ToggleButton" 
+         Template="{StaticResource ComboBoxToggleButton}" 
+         Grid.Column="2" 
+         Focusable="false"
+         IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+         ClickMode="Press">
+                            </ToggleButton>
+                            <ContentPresenter
+        Name="ContentSite"
+        IsHitTestVisible="False" 
+        Margin="3,3,23,3"
+        VerticalAlignment="Center"
+        HorizontalAlignment="Left" />
+                            <TextBox x:Name="PART_EditableTextBox"
+         Style="{x:Null}" 
+         Template="{StaticResource ComboBoxTextBox}" 
+         HorizontalAlignment="Left" 
+         VerticalAlignment="Center" 
+         Margin="3,3,23,3"
+         Focusable="True" 
+         Background="Transparent"
+         Visibility="Hidden"
+         IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                            <Popup 
+        Name="Popup"
+        Placement="Bottom"
+        IsOpen="{TemplateBinding IsDropDownOpen}"
+        AllowsTransparency="True" 
+        Focusable="False"
+        PopupAnimation="Slide">
+                                <Grid 
+          Name="DropDown"
+          SnapsToDevicePixels="True"                
+          MinWidth="{TemplateBinding ActualWidth}"
+          MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border 
+            x:Name="DropDownBorder"
+            Background="{StaticResource WindowBackgroundBrush}"
+            BorderThickness="1"/>
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    
+    <Grid x:Name="gridControl" >
+        <Button x:Name="button" Content="键盘" HorizontalAlignment="Left" Margin="19,43,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+        <Button x:Name="butt1" Content="更新列表" HorizontalAlignment="Left" Margin="21,80,0,0" VerticalAlignment="Top" Width="75" Click="butt1_Click" />
+        <Button x:Name="butt1_Copy" Content="动态更新" HorizontalAlignment="Left" Margin="22,117,0,0" VerticalAlignment="Top" Width="75" Click="butt1_Copy_Click"  />
+        <Button x:Name="butt2" Content="弹窗封装" HorizontalAlignment="Left" Margin="25,152,0,0" VerticalAlignment="Top" Width="75" Click="butt2_Click"   />
+        <Button x:Name="btnSetScreen" Content="动态设置分辨率" HorizontalAlignment="Left" Margin="26,182,0,0" VerticalAlignment="Top" Width="75" Click="btnSetScreen_Click"    />
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="135,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="butt3" Content="弹窗封装2" HorizontalAlignment="Left" Margin="109,152,0,0" VerticalAlignment="Top" Width="75" Click="butt3_Click"   />
+        <Button x:Name="btnSetBtton" Content="动态添加按钮" HorizontalAlignment="Left" Margin="26,210,0,0" VerticalAlignment="Top" Width="75" Click="btnSetBtton_Click"     />
+        <Button x:Name="btnShow" Content="特效弹窗" HorizontalAlignment="Left" Margin="25,238,0,0" VerticalAlignment="Top" Width="75" Click="btnShow_Click"   />
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="156,94,0,0" VerticalAlignment="Top" Width="120">
+        </ComboBox>
+        <Button x:Name="regesisterA" Content="注册mvvm事件" HorizontalAlignment="Left" Margin="142,190,0,0" VerticalAlignment="Top" Width="111" Click="regesisterA_Click"  />
+        <Button x:Name="regesisterA_Copy" Content="点击mvvm事件" HorizontalAlignment="Left" Margin="143,227,0,0" VerticalAlignment="Top" Width="111"  Click="regesisterA_Copy_Click" />
+
+
+
+    </Grid>
+</Page>

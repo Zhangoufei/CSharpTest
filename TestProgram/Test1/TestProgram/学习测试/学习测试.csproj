@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6F139A03-3F4E-4D7A-9FB9-4FE32DEE3C5A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>学习测试</RootNamespace>
+    <AssemblyName>学习测试</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Controls">
+      <HintPath>..\TestProgram2\bin\Debug\AForge.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Imaging, Version=2.2.5.0, Culture=neutral, PublicKeyToken=ba8ddea9676ca48b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\AForge.Imaging.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Math, Version=2.2.5.0, Culture=neutral, PublicKeyToken=abba2e25397ee8c9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\AForge.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video, Version=2.2.5.0, Culture=neutral, PublicKeyToken=cbfb6e07d173c401, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\AForge.Video.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video.DirectShow, Version=2.2.5.0, Culture=neutral, PublicKeyToken=61ea4348d43881b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\AForge.Video.DirectShow.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.gregn6Lib">
+      <HintPath>..\Common\bin\Debug\Interop.gregn6Lib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UHFReader18CSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\UHFReader18CSharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GRID++\GridViewTest.cs" />
+    <Compile Include="GRID++\PrintTestView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GRID++\PrintTestView.Designer.cs">
+      <DependentUpon>PrintTestView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GRID++\TestGrid1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GRID++\TestGrid1.Designer.cs">
+      <DependentUpon>TestGrid1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GRID++\TestView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GRID++\TestView.Designer.cs">
+      <DependentUpon>TestView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RDLC报表学习\ReportTest1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RDLC报表学习\ReportTest1.Designer.cs">
+      <DependentUpon>ReportTest1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RDLC报表学习\ReportTest2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RDLC报表学习\ReportTest2.Designer.cs">
+      <DependentUpon>ReportTest2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RDLC报表学习\ReportTest3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RDLC报表学习\ReportTest3.Designer.cs">
+      <DependentUpon>ReportTest3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RDLC报表学习\ReportTest4.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RDLC报表学习\ReportTest4.Designer.cs">
+      <DependentUpon>ReportTest4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Test1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test1.Designer.cs">
+      <DependentUpon>Test1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="基础学习\EventTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="基础学习\EventTest.Designer.cs">
+      <DependentUpon>EventTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="基础学习\ExcelTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="基础学习\ExcelTest.Designer.cs">
+      <DependentUpon>ExcelTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="基础学习\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="基础学习\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="基础学习\MultipleScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="基础学习\MultipleScreen.Designer.cs">
+      <DependentUpon>MultipleScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="基础学习\RFIDTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="基础学习\RFIDTest.Designer.cs">
+      <DependentUpon>RFIDTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="基础学习\视频.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="基础学习\视频.Designer.cs">
+      <DependentUpon>视频.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GRID++\PrintTestView.resx">
+      <DependentUpon>PrintTestView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GRID++\TestGrid1.resx">
+      <DependentUpon>TestGrid1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GRID++\TestView.resx">
+      <DependentUpon>TestView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RDLC报表学习\ReportTest2.resx">
+      <DependentUpon>ReportTest2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RDLC报表学习\ReportTest3.resx">
+      <DependentUpon>ReportTest3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RDLC报表学习\ReportTest4.resx">
+      <DependentUpon>ReportTest4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report1.rdlc" />
+    <EmbeddedResource Include="RDLC报表学习\ReportTest1.resx">
+      <DependentUpon>ReportTest1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report2.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test1.resx">
+      <DependentUpon>Test1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="基础学习\EventTest.resx">
+      <DependentUpon>EventTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="基础学习\ExcelTest.resx">
+      <DependentUpon>ExcelTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="基础学习\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="基础学习\MultipleScreen.resx">
+      <DependentUpon>MultipleScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="基础学习\RFIDTest.resx">
+      <DependentUpon>RFIDTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="基础学习\视频.resx">
+      <DependentUpon>视频.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{240d0cb8-64cf-49df-9e90-cc00346b04bb}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HardWare\HardWare.csproj">
+      <Project>{903bfae2-0468-4619-9070-6172344789bc}</Project>
+      <Name>HardWare</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="log4net.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Report\" />
+    <Folder Include="Unitity\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Axgrdes6Lib">
+      <Guid>{C5A16330-A084-48C9-BC0F-0D0B37A14123}</Guid>
+      <VersionMajor>6</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="grdes6Lib">
+      <Guid>{C5A16330-A084-48C9-BC0F-0D0B37A14123}</Guid>
+      <VersionMajor>6</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(SolutionDir)Common\bin\Debug" "$(TargetDir)"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

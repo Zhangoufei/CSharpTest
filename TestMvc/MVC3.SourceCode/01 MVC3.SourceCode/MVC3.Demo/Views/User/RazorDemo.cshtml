@@ -1,0 +1,71 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RazorDemo</title>
+</head>
+<body>
+    <!--基本用法-->
+    <div>
+        @{
+            int id = 100;
+            var ID = 101;
+            string Name = "大写名称";
+            string name = "变量区分大小写";
+        }
+    </div>
+    <div>@id</div>
+    <div>@ID</div>
+    <div>@Name</div>
+    <div>@name</div>
+    <div>
+        Hi@name</div>
+    <!--字符串拼接-->
+    <div>
+        字符串拼接：aa @name bb</div>
+    <div>
+        字符串拼接：Begin@{@Name}
+        End
+    </div>
+    <!--在@@{使用文本}-->
+    <div>
+        @{
+            <div>
+                内部<br />
+                文本一</div>
+            @:内部<br />文本二
+        }
+    </div>
+    <!--在@@{使用注释}，内部注释与HTML注释不一样，不在客户端显示-->
+    <div>
+        @{
+            //注释一，单行
+@*
+            注释二，多行
+            *@
+        }
+    </div>
+    <!--在使用循环-->
+    <div>
+        @{
+            for (int i = 0; i < 10; i++)
+            {
+            @:@i
+            }
+        }
+    </div>
+    <!--特殊字符-->
+    <div>
+        @{
+            var Password = @"""123456!@#$%^\""";
+        }
+    </div>
+    <div>
+        @Password
+    </div>
+    <div>
+        @@</div>
+</body>
+</html>

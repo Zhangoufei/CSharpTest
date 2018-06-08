@@ -1,0 +1,38 @@
+﻿<Page x:Class="Welding.MyPage.CheckTroublePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Welding.MyPage"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="1440"
+      Title="ExamIntroductionPage">
+    <Page.Background>
+        <ImageBrush ImageSource="/Image/NBackGround.png"></ImageBrush>
+    </Page.Background>
+
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="VerticalAlignment" 
+                        Value="Center"/>
+                <Setter Property="FontSize"
+                        Value="28"/>
+                <Setter Property="FontFamily" Value="Microsoft YaHei UI"></Setter>
+                <Setter Property="Foreground"
+                        Value="#FFDEDEDD"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.9*"/>
+            <RowDefinition Height="4.2*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <TextBlock xml:space="preserve" Margin="59 0 59 0" Style="{StaticResource tbTitle}">安全隐患检查</TextBlock>
+        <Image Grid.Row="1" Width="745" Source="/Image/StartBG.png" Height="611" Margin="618,4.2,77,4.8"></Image>
+        <TextBlock Grid.Row="1" TextWrapping="Wrap" xml:space="preserve" Margin="15,60.2,125,459.8" LineHeight="100" 
+                           FontSize="52">    请检查安全隐患，完成后点击提交。</TextBlock>
+        <Button Grid.Row="2" Style="{StaticResource btnStart}" Click="Button_Click" Margin="0 0 50 30">提交</Button>
+
+    </Grid>
+</Page>

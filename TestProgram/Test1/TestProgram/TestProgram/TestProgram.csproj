@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{154F9EC1-C294-491D-B6AE-12495C95E34D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TestProgram</RootNamespace>
+    <AssemblyName>TestProgram</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.0.2.32240, Culture=neutral, PublicKeyToken=0e453835af4ee6ce, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.MvvmLightLibs.5.0.2.0\lib\net40\GalaSoft.MvvmLight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.0.2.32240, Culture=neutral, PublicKeyToken=f46ff315b1088208, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.MvvmLightLibs.5.0.2.0\lib\net40\GalaSoft.MvvmLight.Extras.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.MvvmLightLibs.5.0.2.0\lib\net40\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UHFReader18CSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\项目\安全用具使用\JAAJ.PEAR\bin\Release\UHFReader18CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WpfAnimatedGif, Version=1.4.14.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WpfAnimatedGif.1.4.14\lib\net\WpfAnimatedGif.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BLL\Camera_Process.cs" />
+    <Compile Include="BLL\CommonUnity\CommonHelper.cs" />
+    <Compile Include="BLL\ICCardBLL.cs" />
+    <Compile Include="BLL\SerialMessageHandler.cs" />
+    <Compile Include="BLL\Serial\BytesHelper.cs" />
+    <Compile Include="BLL\Serial\CmdParseResult.cs" />
+    <Compile Include="BLL\Serial\SerialClass.cs" />
+    <Compile Include="BLL\Serial\SerialDataHandler.cs" />
+    <Compile Include="MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CalculatorControl.xaml.cs">
+      <DependentUpon>CalculatorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DataBinding.xaml.cs">
+      <DependentUpon>DataBinding.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DataGridTest.xaml.cs">
+      <DependentUpon>DataGridTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ICCardMode.xaml.cs">
+      <DependentUpon>ICCardMode.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LinqTest2.xaml.cs">
+      <DependentUpon>LinqTest2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PhotoPicture.xaml.cs">
+      <DependentUpon>PhotoPicture.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PlateNumber.xaml.cs">
+      <DependentUpon>PlateNumber.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\QRCodeTest.xaml.cs">
+      <DependentUpon>QRCodeTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Screen.xaml.cs">
+      <DependentUpon>Screen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ScreenParaMin.xaml.cs">
+      <DependentUpon>ScreenParaMin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SerialTestView.xaml.cs">
+      <DependentUpon>SerialTestView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SocreSubmit.xaml.cs">
+      <DependentUpon>SocreSubmit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SpeakTest.xaml.cs">
+      <DependentUpon>SpeakTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TestView2.xaml.cs">
+      <DependentUpon>TestView2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\UFRFID.xaml.cs">
+      <DependentUpon>UFRFID.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ViewTree.xaml.cs">
+      <DependentUpon>ViewTree.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="ViewModel\DataBindingVM.cs" />
+    <Compile Include="ViewModel\DataGridVM.cs" />
+    <Compile Include="ViewModel\ICCardVM.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\PhotoPictureVM.cs" />
+    <Compile Include="ViewModel\PlateNumberVM.cs" />
+    <Compile Include="ViewModel\ScreemView.cs" />
+    <Compile Include="ViewModel\Tests\Item.cs" />
+    <Compile Include="ViewModel\Tests\Items.cs" />
+    <Compile Include="ViewModel\Tests\Option.cs" />
+    <Compile Include="ViewModel\Tests\Options.cs" />
+    <Compile Include="ViewModel\Tests\Test.cs" />
+    <Compile Include="ViewModel\Tests\Tests.cs" />
+    <Compile Include="ViewModel\Tests\WrittenItem.cs" />
+    <Compile Include="ViewModel\Tests\WrittenItems.cs" />
+    <Compile Include="ViewModel\Tests\WrittenTest.cs" />
+    <Compile Include="ViewModel\Tests\WrittenTests.cs" />
+    <Compile Include="ViewModel\UFRFIDVM.cs" />
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="ViewModel\VMViewTree.cs" />
+    <Page Include="MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\CalculatorControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Model\DataBinding.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\DataGridTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\ICCardMode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\LinqTest2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\PhotoPicture.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\PlateNumber.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\QRCodeTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\Screen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\ScreenParaMin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\SerialTestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\SocreSubmit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\SpeakTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\TestView2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\UFRFID.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\ViewTree.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Lib\Qt4.8.6-OSG3.2.0-opencvaruco2411-cegui0.8.7.msi" />
+    <None Include="Lib\颜色识别配置说明.docx" />
+    <Resource Include="Image\捷安高科-LOGO-市场部-200x109.png" />
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\NBackGround.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\MainBackGround.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\resultText.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Lib\Basic.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Lib\ColorDistinguish.dll" />
+    <Content Include="Lib\JHCap2.dll" />
+    <Content Include="Lib\msvcp100.dll" />
+    <Content Include="Lib\msvcr100.dll" />
+    <Content Include="Lib\platForm.exe" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{240D0CB8-64CF-49DF-9E90-CC00346B04BB}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HardWare\HardWare.csproj">
+      <Project>{903bfae2-0468-4619-9070-6172344789bc}</Project>
+      <Name>HardWare</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JaaJ.DAL\JaaJ.DAL.csproj">
+      <Project>{10B550D7-1875-48E3-9E57-93C78C885C45}</Project>
+      <Name>JaaJ.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestView\TestView.csproj">
+      <Project>{FE4C4079-2AC8-43DD-B667-9DD82B0F060A}</Project>
+      <Name>TestView</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\学习测试\学习测试.csproj">
+      <Project>{6F139A03-3F4E-4D7A-9FB9-4FE32DEE3C5A}</Project>
+      <Name>学习测试</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

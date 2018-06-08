@@ -1,0 +1,104 @@
+﻿<Page x:Class="Welding.MyPage.Login"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="1440"
+      Title="Login">
+
+
+    <Page.Background>
+        <ImageBrush ImageSource="/Image/NBackGround.png"></ImageBrush>
+    </Page.Background>
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="VerticalAlignment" 
+                        Value="Center"/>
+                <Setter Property="FontSize"
+                        Value="36"/>
+                <Setter Property="FontFamily" Value="Microsoft YaHei UI"></Setter>
+                <Setter Property="Foreground"
+                        Value="#FFDEDEDD"/>
+            </Style>
+            <Style TargetType="StackPanel">
+                <Setter Property="Height" Value="57"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                <Setter Property="Width" Value="508"></Setter>
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <ImageBrush ImageSource="/Image/NTextBG.png"></ImageBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2.7*"/>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4.2*"/>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.ColumnSpan="3">
+            <TextBlock xml:space="preserve" Margin="59 20 0 109" Style="{StaticResource tbTitle}">熔化焊接与热切割考试-考生信息</TextBlock>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0" Grid.RowSpan="5">
+            <Image x:Name="imgPhoto" Source="/Image/NDefaultHead.png" Width="312" Height="385" Stretch="Fill"></Image>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <TextBlock xml:space="preserve">  考       号：</TextBlock>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="2">
+            <StackPanel>
+                <TextBlock Style="{StaticResource tbMargin}" Text="{Binding ExamineeID, Mode=OneWay}"></TextBlock>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <TextBlock xml:space="preserve">  姓       名：</TextBlock>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="2">
+            <StackPanel>
+                <TextBlock Style="{StaticResource tbMargin}" Text="{Binding Name, Mode=OneWay}"></TextBlock>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="3" Grid.Column="1">
+            <TextBlock xml:space="preserve">  性       别：</TextBlock>
+        </Grid>
+        <Grid Grid.Row="3" Grid.Column="2">
+            <StackPanel>
+                <TextBlock Style="{StaticResource tbMargin}" Text="{Binding Sex, Mode=OneWay}"></TextBlock>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="4" Grid.Column="1">
+            <TextBlock xml:space="preserve">  民       族：</TextBlock>
+        </Grid>
+        <Grid Grid.Row="4" Grid.Column="2">
+            <StackPanel>
+                <TextBlock Style="{StaticResource tbMargin}" Text="{Binding Nation, Mode=OneWay}"></TextBlock>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="5" Grid.Column="1">
+            <TextBlock xml:space="preserve">  身份证号：</TextBlock>
+        </Grid>
+        <Grid Grid.Row="5" Grid.Column="2" >
+            <StackPanel>
+                <TextBlock Style="{StaticResource tbMargin}" Text="{Binding IDCode, Mode=OneWay}"/>
+            </StackPanel>
+        </Grid>
+        <Button Grid.Row="6" Grid.Column="2"  Content="跳过登录" 
+                Width="100" Height="45" Click="SkipClick"/>
+        <Grid Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Right">
+            <TextBlock Text="多次刷卡无效，请联系考务人员解决！" Margin="0 0 10 0"></TextBlock>
+        </Grid>
+    </Grid>
+</Page>
