@@ -1,0 +1,199 @@
+﻿@using CyPhone.Model
+@using CyPhone.BLL
+@using CyPhone.Common
+@using CyPhone.Common.UI
+@model List<bs_Article>
+@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>郑州八中网站资讯检索</title>
+    <style type="text/css">
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="@Url.Content("~/Content/layui/css/layui.css")" media="all" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/bootstrap.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/system.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/index.css")" />
+    <script src="@Url.Content("~/Content/js/polyfill.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/js/axios.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/js/jquery-1.8.3.min.js")" type="text/javascript"></script>
+</head>
+
+<body>
+    <div id="searchForm">
+            <input type="hidden" name="pn" id="pn" />
+            <div  class="container-fluid index2Top">
+                <div class="row ind">
+                    <div class="col-xs-12 col-sm-1 pull-left text-center padL0">
+                        <a href="http://www.zzbz.net/"><img src="~/Content/images/logo2.png"></a>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 pull-left align-content padL1">
+                        <div class="input-group btn-lg padL0 text-center">
+                            <input type="text" name="keywords" id="keywords" class="form-control btn-block" value="@ViewData["keywords"]">
+                            <span class="input-group-btn">
+                                <a href="javascript:;" class="btn btn-default bg01" id="search">
+                                    &nbsp;&nbsp;搜索&nbsp;&nbsp;
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mainx">
+                <div class="col-xs-12 col-md-1"></div>
+                <div class="col-xs-12 col-md-4">
+                    <div id="message" class="soushuo">
+                        为您找到相关结果约 @ViewData["listcnt"]个
+                    </div>
+                </div>
+            </div>
+            <div class="row mainx">
+                <div class="col-xs-12 col-md-1"></div>
+                <div id="errMsgDiv_" class="col-xs-12 col-md-4" style="color: red; font-size: 16px; display: none;"></div>
+                <div id="contentDiv_" class="col-xs-12 col-md-4">
+                    <ul class="newsLNr">
+                        <div class="el-loading-mask" style="display: none;">
+                            <div class="el-loading-spinner">
+                                <svg viewBox="25 25 50 50" class="circular">
+                                    <circle cx="50" cy="50" r="20" fill="none" class="path"></circle>
+                                </svg>
+                                <!---->
+                            </div>
+                        </div>
+                        @{
+                            if (Model!=null)
+                            {
+                                int row = 1;
+                                foreach (bs_Article m in Model)
+                                {
+                                    string url = string.Format("{2}/ViewPc/{0}.html?ClassArticleId={1}", m.ArticleID, m.ArticleClassID,ConfigHelper.GetConfigString("domain"));
+                                    <li>
+                                        <div class="bt" style="position: relative;">
+                                            <a href="@url" target="_blank" class="btname">@Utils.CutString(m.Title,48)</a>
+                                            <!---->
+                                        </div>
+                                        <div class="nr" style="font-size: 13px;">
+                                            <!---->
+                                            <div>
+                                                <!---->
+                                                <p class="nrcontent">
+                                                    @Html.Raw(Utils.DropHTML(m.Body, 200))
+                                                </p>
+                                            </div> <span><a href="@url" target="_blank">@url</a>&nbsp;-&nbsp;
+                                            <label>作者：@m.Author</label>&nbsp;
+                                            <i style="font-style: normal;">@m.AddTime.ToString("yyyy-MM-dd")</i></span>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </li>
+                                    row++;
+                                }
+                            }
+                        }
+                    </ul>
+                    <!--分页样式-->
+                    <div  id="page">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-1"></div>
+                <div class="col-xs-12 col-md-3 newsR">
+                    <div class="newsRBt newsRBtTop">
+                        <a href="javascript:;">最新资讯</a>
+                    </div>
+                    <ul class="newsRNr">
+                        @{
+                            if (ViewData["newlist"] != null)
+                            {
+                                List<bs_Article> newlist = (List<bs_Article>)ViewData["newlist"];
+                                foreach (bs_Article n in newlist)
+                                {
+                                    string url = string.Format("{2}/ViewPc/{0}.html?ClassArticleId={1}", n.ArticleID, n.ArticleClassID, ConfigHelper.GetConfigString("domain"));
+                                    <li>
+                                        <a href="@url" target="_blank">@n.Title</a>
+                                    </li>
+                                }
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+</div>
+    <div class="clearfix"></div>
+    <!--底部开始-->
+    <div class="ain_nav_bottom text-center1 foot2">
+        <div class="col-xs-12 col-md-1"></div>
+        <div class="col-xs-12 col-md-11 padL0">
+            版权所有：郑州第八中学地址：河南省郑州市金水区经五路七号　<br> 备案信息：豫ICP备05012843号-1
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!--底部结束-->
+    <script type="text/javascript">
+			try {
+				axios.defaults.baseURL = "./";
+			} catch(e) {
+				document.getElementById("errMsgDiv_").style.display = "";
+				document.getElementById("errMsgDiv_").innerHTML = ("您的浏览器版本太低，请升级为高版本的浏览器！<br/>IE浏览器请使用IE9及以上；<br/>360浏览器请使用极速模式。");
+				document.getElementById("contentDiv_").style.display = "none";
+			}
+    </script>
+    <script src="@Url.Content("~/Content/layui/layui.js")" type="text/javascript"></script>
+    <script>
+		layui.config({
+			base: '/Content/layui/modules/'
+		}).use([ 'laypage','layer'], function () {
+            //下拉列表
+            var $ = layui.jquery,
+                laypage = layui.laypage,
+                layer = parent.layer === undefined ? layui.layer : parent.layer;;
+		    //分页设置
+			laypage({
+			    cont: 'page',
+			    pages: '@ViewData["pagecnt"]' //总页数
+                    ,
+			    groups: 10 //连续显示分页数
+					,
+                curr: '@ViewData["pn"]'//当前页
+                    ,
+			    jump: function (obj, first) {
+			        //得到了当前页，用于向服务端请求对应数据
+                    var curr = obj.curr;
+                    if (!first) {
+                        $("#pn").val(curr);
+                        location.href = '/News/search?pn=' + curr + "&wd=" + $("#keywords").val();
+                    }
+			    }
+            });
+			//搜索查询
+            $("#search").bind("click", function () {
+                var word = $("#keywords").val();
+                if (word=='')
+                {
+                    layer.msg("请输入要查询的关键字！", { icon: 5 });
+                    return false;
+                }
+                location.href = '/News/search?pn=1&wd=' + $("#keywords").val();
+            });
+            });
+        $(function () {
+            //关键字加高亮显示
+            var text = document.getElementById("keywords");
+            var value = text.value;
+            if (value!='')
+            {
+                var values = $(".btname").html().split(value);
+                $(".btname").html(values.join('<em style="font-style: normal;color:red;">' + value + '</em>')); 
+                var nrvalues = $(".nrcontent").html().split(value);
+                $(".nrcontent").html(nrvalues.join('<em style="font-style: normal;color:red;">' + value + '</em>'));
+            }
+        })
+    </script>
+</body>
+
+</html>
