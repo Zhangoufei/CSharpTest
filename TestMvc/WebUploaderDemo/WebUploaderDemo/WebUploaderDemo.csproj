@@ -28,6 +28,7 @@
     <OldToolsVersion>4.0</OldToolsVersion>
     <Use64BitIISExpress />
     <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,6 +38,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -45,11 +47,13 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -60,12 +64,9 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -105,6 +106,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -172,8 +174,36 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\htmleaf-demo.css" />
+    <Content Include="Content\themes\jquery.lineProgressbar.css" />
+    <Content Include="Content\themes\normalize.css" />
+    <Content Include="Content\webupload1.5\css\layui.css" />
+    <Content Include="Content\webupload1.5\css\uploadify.css" />
+    <Content Include="Content\webupload1.5\css\webuploader.css" />
+    <None Include="Content\webupload1.5\js\jquery-1.7.1.intellisense.js" />
+    <Content Include="Content\webupload1.5\js\jquery-1.7.1.js" />
+    <Content Include="Content\webupload1.5\js\jquery-1.7.1.min.js" />
+    <Content Include="Content\webupload1.5\js\jquery.uploadify.js" />
+    <Content Include="Content\webupload1.5\js\layui.js" />
+    <Content Include="Content\webupload1.5\js\Uploader.swf" />
+    <Content Include="Content\webupload1.5\js\webuploader.custom.js" />
+    <Content Include="Content\webupload1.5\js\webuploader.custom.min.js" />
+    <Content Include="Content\webupload1.5\js\webuploader.fis.js" />
+    <Content Include="Content\webupload1.5\js\webuploader.flashonly.js" />
+    <Content Include="Content\webupload1.5\js\webuploader.flashonly.min.js" />
+    <Content Include="Content\webupload1.5\js\webuploader.html5only.js" />
+    <Content Include="Content\webupload1.5\js\webuploader.html5only.min.js" />
+    <Content Include="Content\webupload1.5\js\webuploader.js" />
+    <Content Include="Content\webupload1.5\js\webuploader.min.js" />
+    <Content Include="Content\webupload1.5\js\webuploader.noimage.js" />
+    <Content Include="Content\webupload1.5\js\webuploader.noimage.min.js" />
+    <Content Include="Content\webupload1.5\js\webuploader.nolog.js" />
+    <Content Include="Content\webupload1.5\js\webuploader.nolog.min.js" />
+    <Content Include="Content\webupload1.5\js\webuploader.withoutimage.js" />
+    <Content Include="Content\webupload1.5\js\webuploader.withoutimage.min.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\webupload1.5\js\README.md" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
@@ -182,6 +212,7 @@
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery.lineProgressbar.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
@@ -230,11 +261,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Files\" />
-    <Folder Include="Content\TempFile\" />
     <Folder Include="Models\" />
-    <Folder Include="upload\Files\" />
-    <Folder Include="upload\TempFile\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

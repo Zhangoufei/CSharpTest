@@ -15,6 +15,11 @@ namespace WebUploaderDemo.Controllers
         {
             return View();
         }
+
+        public ActionResult Demo()
+        {
+            return View();
+        }
         public ActionResult FileUpload()
         {
             string fileDataJson = Request.Params["fileDataJson"];//文件信息json

@@ -15,14 +15,14 @@ namespace WebUploaderDemo
         /// <summary>
         /// 文件的总长度
         /// </summary>
-        public int fileSize { get; set; }
+        public Int64 fileSize { get; set; }
         /// <summary>
         /// 文件偏移量开始点
         /// </summary>
-        public int fileStart { get; set; }
+        public Int64 fileStart { get; set; }
         /// <summary>
         /// 文件偏移量结束点
         /// </summary>
-        public int fileEnd { get; set; }
+        public Int64 fileEnd { get; set; }
     }
 }
