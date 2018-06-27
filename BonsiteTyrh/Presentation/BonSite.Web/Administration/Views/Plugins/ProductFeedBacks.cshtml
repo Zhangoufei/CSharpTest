@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "List";
+}
+
+@section body{
+    @using (Html.BeginForm("List", "FriendLink"))
+{
+     <div class="main">
+<div class="nav">当前位置：
+     <span> &rsaquo; </span> <a href="#">系统管理</a> 
+     <span> &rsaquo; </span> <a href="#">售后反馈管理</a> 
+</div>
+
+        <ul class="submenu">
+        	<li class="sel"><a href="#">售后反馈管理</a></li>
+        </ul>
+
+
+    <div class="top15">
+        	<table width="100%" cellpadding="5" cellspacing="0" class="tblist">
+            	<tr>
+                    <th width="40" align="center">序号</th>
+                    <th width="90" align="left" >城市</th>
+                    <th width="90" align="left" >产品</th>
+                    <th  width="90" align="left" >型号</th>
+                    <th  width="90" align="left" >客户姓名</th>
+                    <th  width="90" align="left" >联系方式</th>
+                    <th width="60" align="left" >地址</th>  
+	                <th align="left">意见</th>  
+	                <th width="90" align="left">时间</th>  
+	                <th width="90" align="left">图片</th>  
+                </tr>
+                @foreach (DataRow row in Model.DataList.Rows)
+  {
+  <tr>
+    <td align="center">@row["ID"]</td>
+    <td>@row["CityName"]</td>
+    <td>@row["ProductName"]</td>
+    <td>@row["ProductModel"]</td>
+    <td>@row["CustomerName"] </td>
+    <td>@row["Contact"] </td>
+    <td>@row["Address"] </td>
+    <td>@row["Body"]</td>
+    <td>@TypeHelper.ObjectToDateTime(row["CreateTime"].ToString()).ToString("yyyy-MM-dd") </td>
+      <td>
+          @{
+              int i=1;
+          }
+          @foreach (var list in row["imgs"].ToString().Split(','))
+          {
+              if (list.Length > 0)
+              {
+              <a href="@list">图片@(i)</a><br/>
+              }
+              i++;
+          }
+
+      </td>
+   
+    </tr>
+  }
+  
+                </table>
+        <div class="dataListEdit">
+</div>
+</div>
+         
+         </div>
+    
+    }
+}

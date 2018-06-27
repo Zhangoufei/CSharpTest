@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "List";
+}
+@section body{
+    @using (Html.BeginForm("List", "Special"))
+{
+     <div class="main">
+<div class="nav">当前位置：
+     <span> &rsaquo; </span> <a href="#">系统管理</a> 
+     <span> &rsaquo; </span> <a href="#">专题管理</a> 
+    
+
+</div>
+
+        <ul class="submenu">
+        	<li class="sel"><a href="#">专题列表</a></li>
+        	<li ><a href="@Url.Action("Add")">新加内容</a></li>
+        </ul>
+
+
+    <div class="top15">
+        	<table width="100%" cellpadding="5" cellspacing="0" class="tblist">
+            	<tr>
+                    <th width="40" align="center"><input type="checkbox" id="allSelect"/></th>
+                    <th width="90" align="left" >图片</th>  
+                    <th width="130" align="left" >专题名称</th>
+                    <th align="left" >全称</th>
+                    <th width="60" align="left" >外部专题</th>  
+                    <th  width="250" align="left" >外部地址</th>
+                    <th width="60" align="left" >排序</th>  
+                    <th width="90" align="left">管理操作</th>
+                </tr>
+                @{
+  string thumbSize = ViewData["size"].ToString();
+  foreach (SpecialInfo info in Model.SpecialList)
+  {
+  <tr>
+    <td align="center"><input type="checkbox" value="@info.SpecialID" selectItem="true" name="idList" /></td>
+    <td><img width="50" height="50" src="/upload/special/thumb200_160/@info.ImgUrl" /></td>
+    <td>@info.Name</td>
+    <td>@info.Title</td>
+    <td>
+        @{
+      if (info.IsOut == 0)
+        {
+            @:是
+            }
+            else
+            {
+            @:否
+            }
+            }
+            </td>
+    <td>@info.OutUrl</td>
+    <td>@info.DisplayOrder</td>
+    <td>
+        @Html.ActionLink("编辑", "edit", new { id = info.SpecialID }, new { @class = "editOperate" })
+        @Html.ActionLink("删除", "del", new { idList = info.SpecialID }, new { @class = "deleteOperate" })
+    </td>
+    </tr>
+  }
+  }
+                </table>
+        <div class="dataListEdit">
+<a href="#" delUrl="@Url.Action("del")" class="batch batchDel">批量删除</a>
+</div>
+</div>
+         
+         </div>
+    
+    }
+}

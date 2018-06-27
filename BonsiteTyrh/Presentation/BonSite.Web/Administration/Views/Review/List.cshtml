@@ -1,0 +1,279 @@
+﻿@model BonSite.Web.Admin.Models.ArticleListModel
+@{
+    ViewBag.Title = "ArticleList";
+}
+@section header{
+    <link rel="stylesheet" href="/administration/content/ueditor/themes/default/css/ueditor.css" />
+    <script type="text/javascript" src="/administration/scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/administration/content/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="/administration/content/ueditor/ueditor.all.js"></script>
+    <script type="text/javascript" src="/administration/scripts/jquery.validate.js"></script>
+    <script type="text/javascript" src="/administration/scripts/jquery.validate.unobtrusive.js"></script>
+    <script type="text/javascript" src="/administration/content/my97datepicker/WdatePicker.js"></script>
+    <link href="/administration/content/css/uploadify.css" rel="stylesheet" type="text/css" />
+    @*<script type="text/javascript" src="/administration/scripts/jquery.uploadify.js"></script>*@
+    <script language="javascript" type="text/javascript">
+        //防止客户端缓存文件，造成uploadify.js不更新，而引起的“喔唷，崩溃啦”
+        document.write("<script type='text/javascript' "
+                + "src='/administration/scripts/jquery.uploadify.js?" + new Date()
+                + "'></s" + "cript>");
+    </script>
+
+    <script type="text/javascript" src="/administration/scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/administration/scripts/showlist.js"></script>
+    <script>
+        //全部选中复选框
+        function checkAll(e, itemName, faName) {
+            var aa = document.getElementsByName(itemName);
+            for (var i = 0; i < aa.length; i++) {
+                aa[i].checked = document.getElementsByName(faName)[0].checked;
+            }
+        }
+    </script>
+}
+
+@section body{
+    @using (Html.BeginForm("List", "Article"))
+    {
+        <div class="main">
+            <div class="nav">
+                当前位置：<a href="@Url.Action("SiteRunInfo","Home")">管理后台</a>
+                @foreach (ArticleClassInfo info in (ViewData["classPath"] as List<ArticleClassInfo>))
+                {
+                    <span> &rsaquo; </span> <a href="@Url.Action("List","Article",new {articleClassID=@info.ArticleClassID})">@info.ClassName</a>
+                }
+
+            </div>
+            <div class="btnbar top15" style="font-size:16px;">
+                审核状态：<select name="status" id="status" style="display: inline-block; padding: 4px 8px; font-size: 14px;">
+                    <option value="4">全部状态</option>
+                    @{
+                string[] statusArray = (string[])ViewData["statusArray"];
+                string[] status = new string[3] { "待审核", "审核通过", "未通过" };
+                for (int i = 0; i < statusArray.Length; i++)
+                {
+                    <option value="@i" @statusArray[i]>@status[i]</option>
+                }
+                    }
+                </select>
+                <select name="setArticleClassId" id="setArticleClassId" style="display: inline-block; padding: 4px 8px; font-size: 14px;">
+                    <option value="0">全部栏目</option>
+                    @{
+                BonSite.Web.Admin.Models.MenuModel menuModel = new BonSite.Web.Admin.Models.MenuModel();
+                menuModel.MenuList = (List<BonSite.Core.ArticleClassInfo>)ViewData["MenuList"];
+                int setArticleClassId = 0;
+                string setArticleClassId1 = (string)ViewData["setArticleClassId"];
+                if (!string.IsNullOrEmpty(setArticleClassId1))
+                {
+                    setArticleClassId = Convert.ToInt32(setArticleClassId1);
+                }
+                foreach (BonSite.Core.ArticleClassInfo item in menuModel.MenuList)
+                {
+                    if (item.ClassType == 2 || item.ClassType == 3 || item.ClassType == 4)
+                    {
+                        if (setArticleClassId.Equals(item.ArticleClassID))
+                        {
+                            <option value="@item.ArticleClassID" selected="selected">@item.ClassName</option>
+                        }
+                        else
+                        {
+                            <option value="@item.ArticleClassID">@item.ClassName</option>
+                        }
+                    }
+
+
+                }
+                    }
+                </select>
+                选择时间：<input type="text" id="dayTime" value="@ViewData["dayTime"]" onfocus="WdatePicker({dateFmt:'yyyy年MM月dd日'})" class="Wdate" style="width: 150px; padding: 4px 8px;" />
+                @*栏目列表*@
+                <input type="text" id="Keywords" value="@ViewData["Keywords"]" placeholder="请输入标题关键字" style="width: 150px; padding: 4px 8px;" />
+                <input type="hidden" value="@Model.ArticleClassID" id="articleClassID" name="sortDirection" />
+                <a onclick="searchs(1)" type="button" style="display: inline-block; border: 1px #ccc solid; padding: 4px 8px; font-size: 14px; border-radius: 4px; background-color: #015E70; color: #fff;">搜索</a>
+                <a onclick="batchStatusEdits(1)" style="display: inline-block; border: 1px #ccc solid; padding: 4px 8px; font-size: 14px; border-radius: 4px; background-color: #009688;color:#fff;">批量通过</a>
+                <a onclick="batchStatusEdits(2)" style="display: inline-block; border: 1px #ccc solid; padding: 4px 8px; font-size: 14px; border-radius: 4px; background-color: red; color: #fff; ">批量拒绝</a>
+                <a onclick="batchDel()" style="display: inline-block; border: 1px #ccc solid; padding: 4px 8px; font-size: 14px; border-radius: 4px; background-color: red; color: #fff; ">批量删除</a>
+
+                @*<a href="#" delurl="@Url.Action("del")" onclick="batchStatusEdit(1)">批量通过</a>
+                    <a href="#" delurl="@Url.Action("del")" onclick="batchStatusEdit(2)">批量拒绝</a>*@
+
+            </div>
+
+
+            <div class="top15">
+                <input type="hidden" value="@Model.SortColumn" id="sortColumn" name="sortColumn" />
+                <input type="hidden" value="@Model.SortDirection" id="sortDirection" name="sortDirection" />
+                <table width="100%" cellpadding="5" cellspacing="0" class="tblist">
+                    <tr>
+                        <th width="5%" class="headertdGreen"><input type="checkbox" onclick="checkAll(this, 'articleIdList', 'FaCheck');" name="FaCheck" /></th>
+                        <th>标题</th>
+                        <th>栏目</th>
+                        <th>审核人</th>
+                        <th style="width:60px;">审核状态</th>
+                        <th style="width:60px;">添加人</th>
+                        <th style="width:60px;">时间</th>
+                        <th style="width:150px;">操作</th>
+                    </tr>
+                    @foreach (DataRow row in Model.DataList.Rows)
+                    {
+                        <tr>
+                            <td align="center"><input type="checkbox" value="@row["ArticleID"]" selectitem="true" name="articleIdList" /></td>
+                            <td align="left">@BonSite.Core.StringHelper.SubString(row["Title"].ToString(),35)</td>
+                            @{
+                        if (BonSite.Services.ArticleClass.AdminGetModelById(int.Parse(row["ArticleClassID"].ToString())) != null)
+                        {
+                            <td align="center">@BonSite.Services.ArticleClass.AdminGetModelById(int.Parse(row["ArticleClassID"].ToString())).ClassName</td>
+                        }
+                        else
+                        {
+                            <td align="center">未知栏目</td>
+                        }
+                            }
+                            <td align="center"> @row["Auditor"].ToString()</td>
+                            <td align="center">
+                                @if (row["ApprovalStatus"].ToString() == "1")
+                                {
+                                    @:通过
+                          }
+                                else if (row["ApprovalStatus"].ToString() == "2")
+                                {
+                                    @:未通过
+                        }
+                                else
+                                {
+                                    @:待审核
+                        }
+                            </td>
+                            @if (BonSite.Services.Users.GetPartUserById(Convert.ToInt32(row["AdminID"])) != null)
+                            {
+                                <td align="center">@BonSite.Services.Users.GetPartUserById(Convert.ToInt32(row["AdminID"])).UserName</td>
+                            }
+                            else
+                            {
+                                <td align="center"> </td>
+                            }
+                            <td align="center">@row["addtime"]</td>
+                            <td align="center">
+                                @if (row["ApprovalStatus"].ToString() == "0")
+                                {
+                                     <a href="/ViewPc/@(row["ArticleID"]).html" target="_blank">预览</a>
+                                    @*@Html.ActionLink("预览", "Preview", new { id = row["ArticleID"] }, new { target = "_blank" })*@
+                                    <a href="@Url.Action("Edit", "Article", new { articleID = row["ArticleID"]})">编辑</a>
+                                    @Html.ActionLink("删除", "Del", "Article", new { articleIdList = row["ArticleID"] }, new { @class = "deleteOperate" })
+                                    @*<a href="@Url.Action("Preview", "Review", new { articleID = row["ArticleID"] })">预览</a>*@
+                                    <a href="@Url.Action("statusEdit", "Review", new { articleID = row["ArticleID"], ApprovalStatus = 1 })">通过</a>
+                                    <a style="color:red" href="@Url.Action("statusEdit", "Review", new { articleID = row["ArticleID"], ApprovalStatus = 2 })">拒绝</a>
+                                    @*<a class="operating" href="@Url.Action("error", "Article", new { articleID = row["ArticleID"], ApprovalStatus = 2 })">拒绝</a>*@
+                                }
+                                else
+                                {
+                                    <a href="/ViewPc/@(row["ArticleID"]).html" target="_blank">预览</a>
+                                    @*@Html.ActionLink("预览", "Preview", new { id = row["ArticleID"] }, new { target = "_blank" })*@
+                                    <a href="@Url.Action("Edit", "Article", new { articleID = row["ArticleID"]})">编辑</a>
+                                    @Html.ActionLink("删除", "Del", "Article", new { articleIdList = row["ArticleID"] }, new { @class = "deleteOperate" })
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+                <div class="pagelist">
+                    @Html.AdminPager(Model.PageModel)
+                </div>
+            </div>
+
+        </div>
+    }
+    <script>
+        function allCheckbox() {
+
+            var tt1 = "";
+            $("input[name='articleIdList']::checked").each(function () {
+                tt1 += ($(this).val()) + ',';
+            });
+            return tt1;
+        }
+        function batchStatusEdits(i) {
+            var articleidArry = allCheckbox();
+            var status = $("#status").val();
+            var setArticleClassId = $("#setArticleClassId").val();
+            var dayTime = $("#dayTime").val();
+            var Keywords = $("#Keywords").val();
+            $.ajax({
+                url: '/Review/batchStatusEdits',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    articleidArry: articleidArry,
+                    approvalStatus: i,
+                    status: status
+                },
+                timeout: 20000,
+                success: function (data) {
+                    alert(data.msg)
+                    location.href = '/Admin/Review/List?status=' + data.status + '&setArticleClassId=' + setArticleClassId + '&dayTime=' + dayTime + '&Keywords=' + Keywords;
+                    //?pindex=' + curr + "&gradeid=" + $("#gradeid").val() + "&classid=" + $("#classid").val();
+                },
+                error: function (errorThrown) {
+                }
+            });
+        }
+        function batchDel() {
+            var msg = "您真的确定要删除吗？\n\n请确认！";
+            var delBool = false;
+            if (confirm(msg) == true) {
+                delBool = true;
+            } else {
+                delBool = false;
+            }
+            if (delBool) {
+                batchDel2();
+            }
+        }
+        function batchDel2() {
+            var articleidArry = allCheckbox();
+            var status = $("#status").val();
+            var setArticleClassId = $("#setArticleClassId").val();
+            var dayTime = $("#dayTime").val();
+            var Keywords = $("#Keywords").val();
+            $.ajax({
+                url: '/Review/batchDel',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    articleidArry: articleidArry,
+                    status: status
+                },
+                timeout: 20000,
+                success: function (data) {
+                    alert(data.msg)
+                    location.href = '/Admin/Review/List?status=' + data.status + '&setArticleClassId=' + setArticleClassId + '&dayTime=' + dayTime + '&Keywords=' + Keywords;
+                },
+                error: function (errorThrown) {
+                }
+            });
+        }
+    </script>
+    <script>
+        function searchs(i) {
+            var status = $("#status").val();
+            var setArticleClassId = $("#setArticleClassId").val();
+            var dayTime = $("#dayTime").val();
+            var Keywords = $("#Keywords").val();
+            $.ajax({
+                url: '/Review/JsonStatusSearch',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    status: status
+                },
+                timeout: 20000,
+                success: function (data) {
+                    location.href = '/Admin/Review/List?status=' + data.status + '&setArticleClassId=' + setArticleClassId + '&dayTime=' + dayTime + '&Keywords=' + Keywords;
+                    //?pindex=' + curr + "&gradeid=" + $("#gradeid").val() + "&classid=" + $("#classid").val();
+                },
+                error: function (errorThrown) {
+                }
+            });
+        }
+    </script>
+}

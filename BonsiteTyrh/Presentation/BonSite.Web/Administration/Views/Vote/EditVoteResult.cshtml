@@ -1,0 +1,59 @@
+﻿@model BonSite.Web.Admin.Models.VoteResultModel
+@{
+    ViewBag.Title = "EditVoteResult";
+}
+
+
+@section body{
+     <div class="main">
+<div class="nav">当前位置：
+     <span> &rsaquo; </span> <a href="#">系统管理</a> 
+     <span> &rsaquo; </span> <a href="@Url.Action("VoteList")">投票管理</a> 
+     <span> &rsaquo; </span> <a href="#">投票选项管理</a> 
+     <span> &rsaquo; </span> <a href="#">编辑投票选项</a> 
+
+</div>
+
+        <ul class="submenu">
+        	<li><a href="@Url.Action("VoteList")">投票管理</a></li>
+        	<li class="sel"><a href="#">编辑投票选项</a></li>
+        </ul>
+
+
+    @using (Html.BeginForm())
+       { 
+           <div class="top15">
+        <table width="100%" class="tbstyle1" cellpadding="5" cellspacing="1">
+            <tr>
+    <th width="80px" align="right">内容：</th>
+    <td>@Html.TextBoxFor(x => x.Result, new { @class = "input", size = "60" })</td>
+    </tr>
+           
+        
+    <tr>
+    <th align="right">排序：</th>
+    <td>
+        @Html.TextBoxFor(x => x.DisplayOrder, new { @class = "input", size = "18"}) 
+    </td>
+    </tr>
+    <tr>
+    <th align="right">结果：</th>
+    <td>
+        @Html.TextBoxFor(x => x.Count, new { @class = "input", size = "18"}) 
+    </td>
+    </tr>
+      
+    
+            <tr>
+                <th></th>
+                <td><input type="submit" value="提交" /></td>
+            </tr>
+        </table>
+
+           </div>
+       }
+
+         
+         </div>
+    
+    }

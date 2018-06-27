@@ -1,0 +1,62 @@
+﻿@model BonSite.Web.Admin.Models.WeChatModel
+@{
+    ViewBag.Title = "Add";
+}
+
+@section header{
+
+    <script type="text/javascript" src="/administration/scripts/jquery-1.7.1.min.js"></script>
+    <link href="/administration/content/css/uploadify.css" rel="stylesheet" type="text/css" />
+    @*<script type="text/javascript" src="/administration/scripts/jquery.uploadify.js"></script>*@
+    <script language="javascript" type="text/javascript">
+        //防止客户端缓存文件，造成uploadify.js不更新，而引起的“喔唷，崩溃啦”
+        document.write("<script type='text/javascript' "
+                + "src='/administration/scripts/jquery.uploadify.js?" + new Date()
+                + "'></s" + "cript>");
+    </script>
+    <script type="text/javascript" src="/administration/scripts/jquery.validate.js"></script>
+    <script type="text/javascript" src="/administration/scripts/jquery.validate.unobtrusive.js"></script>
+
+}
+
+@section body{
+    <div class="main">
+        <div class="nav">
+            当前位置：<a href="@Url.Action("SiteRunInfo","Home")">管理后台</a>
+            <span> &rsaquo; </span> <a href="#">系统管理</a>
+            <span> &rsaquo; </span> <a href="#">公众号管理</a>
+            <span> &rsaquo; </span> 新加公众号
+
+        </div>
+        <ul class="submenu">
+            <li class="sel"><a href="#">新加公众号</a></li>
+        </ul>
+
+        @using (Html.BeginForm())
+        {
+            <div class="top15">
+                <table width="100%" class="tbstyle1" cellpadding="5" cellspacing="1">
+                    <tr>
+                        <th width="80px" align="right">公众号：</th>
+                        <td>@Html.TextBoxFor(x => x.name, new { size = "50" })@Html.ValidationMessageFor(x => x.name) </td>
+                        
+                       
+                    </tr>
+                    <tr>
+                        <th width="80px" align="right">appid：</th>
+                        <td>@Html.TextBoxFor(x => x.appid, new { size = "50" })@Html.ValidationMessageFor(x => x.appid) </td>
+
+                    </tr>
+                    <tr>
+                        <th width="80px" align="right">密钥：</th>
+                        <td>@Html.TextBoxFor(x => x.secret, new { size = "50" })@Html.ValidationMessageFor(x => x.secret) </td>
+
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td><input type="submit" value="提交" /></td>
+                    </tr>
+                </table>
+
+            </div>
+        }

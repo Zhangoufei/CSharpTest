@@ -1,0 +1,730 @@
+﻿@model BonSite.Web.Admin.Models.ArticleModel
+@section header{
+    <link rel="stylesheet" href="/administration/content/web/css/bootstrap.css" />
+    <link rel="stylesheet" href="/administration/content/ueditor/themes/default/css/ueditor.css" />
+    <link rel="stylesheet" href="/administration/content/web/css/layui.css" media="all" />
+
+
+
+
+    <script type="text/javascript" src="/administration/scripts/jquery-1.7.1.min.js"></script>
+    <script src="/administration/content/web/js/layui.js"></script>
+
+
+    <script type="text/javascript" src="/administration/content/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="/administration/content/ueditor/ueditor.all.js"></script>
+    <script type="text/javascript" src="/administration/scripts/jquery.validate.js"></script>
+    <script type="text/javascript" src="/administration/scripts/jquery.validate.unobtrusive.js"></script>
+
+    <link rel="stylesheet" href="/administration/content/web/css/webuploader.css" />
+    <link href="/administration/content/css/uploadify.css" rel="stylesheet" type="text/css" />
+    <script src="/administration/content/web/js/webuploader.js"></script>
+
+
+    <script language="javascript" type="text/javascript">
+        //防止客户端缓存文件，造成uploadify.js不更新，而引起的“喔唷，崩溃啦”
+        document.write("<script type='text/javascript' "
+            + "src='/administration/scripts/jquery.uploadify.js?" + new Date()
+            + "'></s" + "cript>");
+    </script>
+    <script type="text/javascript">
+    $(function () {
+        if ($("input:radio[name='DisplayType']:checked").val() == "1") {
+            $(".trUrl").show();
+            $(".trBody").hide();
+            $(".trBody2").hide();
+            $(".HeadImg").show();
+            $(".IsClassBrand").hide();
+            $(".trType").hide();
+            $(".Grouping").hide();
+            $(".trCo").show();
+            $(".jianjie").show();
+            $(".video").hide();
+        } else if ($("input:radio[name='DisplayType']:checked").val() == "3") {
+            $(".trUrl").hide();
+            $(".trBody").hide();
+            $(".trBody2").hide();
+            $(".HeadImg").show();
+            $(".IsClassBrand").hide();
+            $(".trType").show();
+            $(".Grouping").show();
+            $(".trCo").hide();
+            $(".jianjie").show();
+            $(".video").hide();
+        } else if ($("input:radio[name='DisplayType']:checked").val() == "2") {
+            $(".trUrl").hide();
+            $(".trBody").hide();
+            $(".trBody2").show();
+            $(".HeadImg").hide();
+            $(".IsClassBrand").show();
+            $(".trType").hide();
+            $(".Grouping").show();
+            $(".trCo").hide();
+            $(".jianjie").show();
+            $(".video").hide();
+        } else if ($("input:radio[name='DisplayType']:checked").val() == "4") {
+            $(".trUrl").hide();
+            $(".trBody").hide();
+            $(".trBody2").hide();
+            $(".HeadImg").show();
+            $(".IsClassBrand").hide();
+            $(".trType").hide();
+            $(".Grouping").hide();
+            $(".trCo").hide();
+            $(".jianjie").hide();
+            $(".video").show();
+        }
+        else {
+            $(".trUrl").hide();
+            $(".trBody").show();
+            $(".trBody2").hide();
+            $(".HeadImg").show();
+            $(".IsClassBrand").hide();
+            $(".trType").hide();
+            $(".Grouping").hide();
+            $(".trCo").show();
+            $(".jianjie").show();
+            $(".video").hide();
+        }
+
+        $("input:radio[name='DisplayType']").click(function () {
+            if ($(this).val() == "1") {
+                $(".trUrl").show();
+                $(".trBody").hide();
+                $(".trBody2").hide();
+                $(".HeadImg").show();
+                $(".IsClassBrand").hide();
+                $(".trType").hide();
+                $(".Grouping").hide();
+                $(".trCo").show();
+                $(".jianjie").show();
+                $(".video").hide();
+            } else if ($(this).val() == "3") {
+                $(".trUrl").hide();
+                $(".trBody").hide();
+                $(".trBody2").hide();
+                $(".HeadImg").show();
+                $(".IsClassBrand").hide();
+                $(".trType").show();
+                $(".Grouping").show();
+                $(".trCo").hide();
+                $(".jianjie").show();
+                $(".video").hide();
+            }
+            else if ($(this).val() == "2") {
+                $(".trUrl").hide();
+                $(".trBody").hide();
+                $(".trBody2").show();
+                $(".HeadImg").hide();
+                $(".IsClassBrand").show();
+                $(".trType").hide();
+                $(".Grouping").show();
+                $(".trCo").hide();
+                $(".jianjie").show();
+                $(".video").hide();
+            } else if ($(this).val() == "4") {
+                $(".trUrl").hide();
+                $(".trBody").hide();
+                $(".trBody2").hide();
+                $(".HeadImg").show();
+                $(".IsClassBrand").hide();
+                $(".trType").hide();
+                $(".Grouping").hide();
+                $(".trCo").hide();
+                $(".jianjie").hide();
+                $(".video").show();
+            }
+            else {
+                $(".trUrl").hide();
+                $(".trBody").show();
+                $(".trBody2").hide();
+                $(".HeadImg").show();
+                $(".IsClassBrand").hide();
+                $(".trType").hide();
+                $(".Grouping").hide();
+                $(".trCo").show();
+                $(".jianjie").show();
+                $(".video").hide();
+            }
+        })
+
+
+
+       @* $("#uploadify").uploadify({
+            'formData': { 'uid': '@WorkContext.Uid', 'password': '@WorkContext.EncryptPwd' },
+            'swf': '/administration/content/flashes/uploadify.swf',
+            'uploader': '/admin/tool/uploadarticleimage',
+            'buttonText': '上传图片',
+            'height': 24,
+            'width': 80,
+            'fileTypeDesc': 'Image Files',
+            'fileTypeExts': '@ViewData["allowImgType"]',
+            'fileSizeLimit': '@ViewData["maxImgSize"]',
+            'fileObjName': 'articleImage',
+            'auto': true,
+            'multi': false,
+            'removeTimeout': 2,
+            'onUploadSuccess': function (file, data, response) {
+                if (data == "-1")
+                    alert('上传图片不能为空');
+                else if (data == "-2")
+                    alert('上传图片的类型不允许');
+                else if (data == "-3")
+                    alert('上传图片超过系统允许的最大大小');
+                else {
+                    $(".uploadPreview").empty().append("<img width=\"88\" height=\"88\" src=\"/upload/article/show/thumb@{@ViewData["size"].ToString()}/" + data + "\"  />");
+                    $("#ImgUrl").val(data);
+                    $(".upload span[htmlFor='ShowImg']").empty();
+                }
+            }
+        });
+
+
+        $("#videoify").uploadify({
+            'formData': { 'uid': '@WorkContext.Uid', 'password': '@WorkContext.EncryptPwd' },
+            'swf': '/administration/content/flashes/uploadify.swf',
+            'uploader': '/admin/tool/uploadarticlevideo',
+            'buttonText': '上传文件',
+            'height': 24,
+            'width': 80,
+            'fileTypeDesc': 'Image Files',
+            'fileTypeExts': '@ViewData["allowImgType"]',
+            'fileSizeLimit': '3072MB',
+            'fileObjName': 'articleVideo',
+            'auto': true,
+            'multi': false,
+            'removeTimeout': 2,
+            'successTimeout': 99999,
+            'onUploadSuccess': function (file, data, response) {
+                if (data == "-1")
+                    alert('上传文件不能为空');
+                else if (data == "-2")
+                    alert('上传文件的类型不允许');
+                else if (data == "-3")
+                    alert('上传文件超过系统允许的最大大小');
+                else {
+                    //$(".uploadPreviews").empty().append("<video width=\"88\" height=\"88\" src=\"/upload/article/video/source/" + data + "\"  />");
+                    $(".uploadPreviews").empty().append("上传成功");
+                    $("#MicroVideo").val(data);
+                    $(".upload span[htmlFor='ShowMicroVideo']").empty();
+                }
+            }
+        });*@
+
+		//上传视频
+        $(function () {
+            var GUID = WebUploader.Base.guid();
+			var uploader = WebUploader.create({
+				formData: { guid:GUID },
+				auto:true,														    //自动上传
+				swf:'/administration/content/web/js/Uploader.swf',
+				server: '/admin/tool/uploadarticlevideo',						    //文件接收服务端。
+				pick:{id:'#picker'},												//选择文件的按钮容器
+                duplicate: true,													//去重
+                resize: false,
+				//accept:{
+				//	title: 'Video',
+				//	extensions: '',
+				//	mimeTypes: 'video/*'
+				//},
+                fileNumLimit: 1,
+                chunkSize: 2*1024*1024, //每次上传2M
+                chunked: true,//是否要分片处理大文件上传
+                threads: 1,//上传并发数。允许同时最大上传进程数
+                fileSizeLimit: 6 * 1024 * 1024 * 1024,    // 所有文件总大小限制 6G
+                fileSingleSizeLimit: 5 * 1024 * 1024 * 1024    // 单个文件大小限制 5 G
+			});
+			// 当有文件被添加进队列的时候
+			var $list=$("#thelist");
+			uploader.on( 'fileQueued', function( file ) {
+				$list.append( '<div id="' + file.id + '" class="item">' +
+					'<h4 class="info">' + file.name + '</h4>' +
+					'<p class="state">等待上传...</p>' +
+				'</div>' );
+            });
+            var startIndex = 0;//post数据包的索引
+			// 文件上传过程中创建进度条实时显示。
+            uploader.on('uploadProgress', function (file, percentage) {
+
+				var $li = $( '#'+file.id ),
+					$percent = $li.find('.progress .progress-bar');
+
+				// 避免重复创建
+				if ( !$percent.length ) {
+					$percent = $('<div class="progress progress-striped active">' +
+					  '<div class="progress-bar" role="progressbar" style="width: 0%">' +
+					  '</div>' +
+					'</div>').appendTo( $li ).find('.progress-bar');
+				}
+
+				$li.find('p.state').text('上传中');
+
+                $percent.css('width', percentage * 100 + '%');
+                ++startIndex;
+			});
+            uploader.on('uploadSuccess', function (file,data) {
+                startIndex = 0;
+                $('#' + file.id).find('p.state').text('已上传');
+                $("#MicroVideo").val( data["_raw"]);
+                $(".upload span[htmlFor='ShowMicroVideo']").empty();
+			});
+
+            uploader.on('uploadError', function (file) {
+                startIndex = 0;
+				$( '#'+file.id ).find('p.state').text('上传出错');
+			});
+
+			uploader.on( 'uploadComplete', function( file ) {
+				$( '#'+file.id ).find('.progress').fadeOut();
+			});
+        });
+
+
+
+		//上传图片
+		$(function(){
+			 var $list = $('#fileList')
+			 ratio = window.devicePixelRatio || 1,
+			// 缩略图大小
+			thumbnailWidth = 100 * ratio,
+			thumbnailHeight = 100 * ratio;
+			var uploader = WebUploader.create({
+				auto: true,
+				swf:'/administration/content/web/js/Uploader.swf',
+				server: '/admin/tool/uploadarticleimage',
+				pick: {id:'#filePicker',multiple:false},
+				accept: {
+					title: 'Images',
+					extensions: 'gif,jpg,jpeg,bmp,png',
+					mimeTypes: 'image/*'
+				},
+				fileNumLimit:1
+			});
+			// 当有文件添加进来的时候
+			uploader.on( 'fileQueued', function( file ) {
+				var $li = $(
+						'<div id="' + file.id + '" class="file-item thumbnail">' +
+							'<img>' +
+							'<div class="info">' + file.name + '</div>' +
+						'</div>'
+						),
+					$img = $li.find('img');
+
+				$list.append( $li );
+
+				// 创建缩略图
+				uploader.makeThumb( file, function( error, src ) {
+					if ( error ) {
+						$img.replaceWith('<span>不能预览</span>');
+						return;
+					}
+
+					$img.attr( 'src', src );
+				}, thumbnailWidth, thumbnailHeight );
+			});
+			// 文件上传过程中创建进度条实时显示。
+            uploader.on('uploadProgress', function (file, percentage) {
+				var $li = $( '#'+file.id ),
+					$percent = $li.find('.progress span');
+
+				// 避免重复创建
+				if ( !$percent.length ) {
+					$percent = $('<p class="progress"><span></span></p>')
+							.appendTo( $li )
+							.find('span');
+				}
+
+				$percent.css( 'width', percentage * 100 + '%' );
+				console.log(percentage * 100 + '%');
+			});
+
+			// 文件上传成功，给item添加成功class, 用样式标记上传成功。
+			uploader.on( 'uploadSuccess', function( file ,data) {
+				$( '#'+file.id ).addClass('upload-state-done');
+                console.log("成功");
+
+			});
+
+			// 文件上传失败，现实上传出错。
+			uploader.on( 'uploadError', function( file ) {
+				var $li = $( '#'+file.id ),
+					$error = $li.find('div.error');
+
+				// 避免重复创建
+				if ( !$error.length ) {
+					$error = $('<div class="error"></div>').appendTo( $li );
+				}
+
+				$error.text('上传失败');
+				console.log("失败");
+			});
+
+			// 完成上传完了，成功或者失败，先删除进度条。
+			uploader.on( 'uploadComplete', function( file,data ) {
+                $('#' + file.id).find('.progress').remove();
+
+			});
+
+		});
+
+
+        //$(function () {
+        //    var xy = 1;
+
+        //    $("#btnCheckAll").bind("click", function () {
+        //        if (xy == 1) {
+        //            $("[name = InformGroup]:checkbox").attr("checked", true);
+        //            $("#btnCheckAll").val("取消全选");
+        //            xy = 0;
+        //        } else {
+        //            $("[name = InformGroup]:checkbox").removeAttr("checked");
+        //            $("#btnCheckAll").val("全选");
+        //            xy = 1;
+        //        }
+        //        //console.log($("input[type='checkbox']:checked").next().text());
+        //    });
+        //})
+
+        $(".ck").on("click", function () {
+            //$(this).addClass("ck1")
+            //var x = $(this).index();
+            //console.log(x)
+            if ($(this).hasClass("ck")) {
+                $(this).attr("checked", "true");
+                $(this).removeClass("ck");
+                $(this).val($(this).next().text());
+            } else {
+                $(this).removeAttr("checked");
+                $(this).addClass("ck");
+                $(this).val("")
+            }
+        });
+
+
+        $("#btnSubmit").on("click", function () {
+            //var result=new Array();
+            var result;
+            $("[name = InformGroup]:checkbox").each(function () {
+                if ($(this).is(":checked")) {
+                    $(this).val($(this).next().text());
+                    var temp = $(this).val() + ",";
+                    result += temp;
+                    //result.push($(this).next().text());  //数组格式
+                    //console.log(result.push($(this).next().text()))
+                    // result.toString();
+                    console.log(result);
+                }
+            });
+
+        });
+
+        //百度编辑器监听
+
+    })
+    </script>
+}
+@section body{
+    <div class="main">
+        <div class="nav">
+            当前位置：<a href="@Url.Action("SiteRunInfo", "Home")">管理后台</a>
+            @foreach (ArticleClassInfo info in (ViewData["classPath"] as List<ArticleClassInfo>))
+            {
+                <span> &rsaquo; </span> <a href="@Url.Action("List", "Article", new { articleClassID = @info.ArticleClassID })">@info.ClassName</a>
+            }
+            <span> &rsaquo; </span> 新加新内容
+        </div>
+        <ul class="submenu">
+            <li class="sel"><a href="#">新加新内容</a></li>
+        </ul>
+
+        @using (Html.BeginForm())
+        {
+            <div class="top15">
+                <table width="100%" class="tbstyle1" cellpadding="5" cellspacing="1">
+                    <tr>
+                        <th style="width:80px;">分类：</th>
+                        <td>@Html.DropDownListFor(x => x.ArticleClassID, ViewData["ArticleClassList"] as List<SelectListItem>)</td>
+                    </tr>
+                    <tr>
+                        <th>标题：</th>
+                        <td>@Html.TextBoxFor(x => x.Title, new { size = "100" }) @Html.ValidationMessageFor(x => x.Title)</td>
+                    </tr>
+                    <tr>
+                        <th>专题：</th>
+                        <td>@Html.DropDownListFor(x => x.SpecialID, ViewData["specialList"] as List<SelectListItem>)</td>
+                    </tr>
+
+
+                    <tr>
+                        <th>类型：</th>
+                        <td>
+                            <label>@Html.RadioButtonFor(x => x.DisplayType, 0)普通文章</label>
+                            <label>@Html.RadioButtonFor(x => x.DisplayType, 2)模板文章</label>
+                            <label>@Html.RadioButtonFor(x => x.DisplayType, 1)外部链接</label>
+                            <label>@Html.RadioButtonFor(x => x.DisplayType, 3)电子班牌</label>
+                            <label>@Html.RadioButtonFor(x => x.DisplayType, 4)微视频</label>
+                        </td>
+                    </tr>
+
+
+                    @*@if (Model.DisplayType.Equals(0)){<text>style="display:none;"</text>}*@
+                    <tr class="trUrl">
+                        <th>转向地址：</th>
+                        <td>@Html.TextBoxFor(x => x.Url, new { size = "100" })</td>
+                    </tr>
+
+                    <tr class="trBody">
+                        <th colspan="1" style="text-align:right;">正文：</th>
+                        <td colspan="2">
+                            <textarea name="Body" id="bsEditor">@Model.Body</textarea>
+                            <script type="text/javascript">
+                                UE.getEditor('bsEditor', {
+
+
+                                    imageUrl: "/admin/tool/uploadarticleeditorimage?width=680",
+                                    fileUrl: "/admin/tool/uplaodarticleeditorfile"
+                                });
+                            </script>
+
+                        </td>
+                    </tr>
+
+                    <tr class="trBody2">
+                        <th colspan="1" style="text-align:right;">正文：</th>
+                        <td colspan="2">
+                            <textarea name="bsEditor2" id="bsEditor2">@Model.Body</textarea>
+                            <script type="text/javascript">
+                                UE.getEditor('bsEditor2', {
+                                    imageUrl: "/admin/tool/uploadarticleeditorimage?width=680",
+                                    fileUrl: "/admin/tool/uplaodarticleeditorfile",
+                                    toolbars: [['FullScreen', 'source', 'insertimage', 'insertvideo', 'link', 'attachment', 'fontfamily', 'fontsize', 'forecolor', 'backcolor', 'background', 'lineheight', 'bold', 'justifyleft', 'justifyright', 'justifycenter', 'removeformat', 'formatmatch', 'autotypeset']]
+                                    //initialFrameWidth: 450,
+                                    //initialFrameHeight: 500
+                                });
+                            </script>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2" style="height:5px; padding:0px;"></td>
+                    </tr>
+
+                    <tr class="trType">
+                        <th>通知类型</th>
+                        <td>
+                            <label>@Html.RadioButtonFor(x => x.InformType, 0, new { @checked = true })滚动通知</label>
+                            <label>@Html.RadioButtonFor(x => x.InformType, 1)紧急通知</label>
+                            <label>@Html.RadioButtonFor(x => x.InformType, 2)待机全屏通知</label>
+                        </td>
+                    </tr>
+                    <tr class="jianjie">
+                        <th>摘要：</th>
+                        <td>@Html.TextAreaFor(x => x.Digest, new { cols = "100", rows = "6" })</td>
+                    </tr>
+                    <tr class="trType">
+                        <th>通知结束时间</th>
+                        <td>
+                            @Html.TextBoxFor(x => x.EndTime, new { size = "18", onfocus = "WdatePicker({el:'EndTime'})" })
+                        </td>
+                    </tr>
+                    <tr class="Grouping">
+                        <th>通知分组</th>
+                        <td>
+                            @{
+                                if (Model.InformGroupList != null)
+                                {
+                                    foreach (var item in Model.InformGroupList)
+                                    {
+                                        if (item.isSel)
+                                        {
+                                            <input type="checkbox" id="checkboxGroup" name="checkboxGroup" value="@item.GroupName" checked="checked" /><span> @item.GroupName</span>
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" id="checkboxGroup" name="checkboxGroup" value="@item.GroupName" /><span> @item.GroupName</span>
+                                        }
+                                    }
+                                }
+                            }
+
+                            @*<input id="btnCheckAll" type="button" value="全选">
+                                <input class="ck" name="InformGroup" id="InformGroup" type="checkbox" /> <label>1</label>
+                                <input class="ck" name="InformGroup" id="InformGroup" type="checkbox" /> <label>2</label>*@
+                        </td>
+
+                    </tr>
+                    <tr class="HeadImg">
+                        <th>题图：</th>
+                        <td>
+                            @*<div class="upload">
+                                <div class="uploadPreview">
+                                    @{
+                                            if (!string.IsNullOrEmpty(Model.ImgUrl))
+                                            {
+                                                        <img width="88" height="88" src="/upload/article/show/thumb@{@ViewData["size"].ToString()}/@Model.ImgUrl" />
+                                            }
+                                            else
+                                            {
+                                                                            @:暂无图片
+                                            }
+                                    }
+                                        </div>
+                                        <div class="uploadProgressBar" id="uploadify-queue"></div>
+                                        <div class="uploadBut"><input type="file" name="uploadify" id="uploadify" /></div>
+                                        <input type="hidden" name="ShowImg" id="ShowImg" value=""/>
+                                        @Html.TextBoxFor(x => x.ImgUrl, new { @class = "hide" })
+                                        <div style="position:absolute;top:30px; left:180px;"></div>
+                                      </div>*@
+
+                            <div id="uploader-img">
+                                <!--用来存放item-->
+                                <div id="fileList" class="uploader-list"></div>
+                                <div id="filePicker" style="display: inline-block; margin-left:10px;">选择图片</div>
+                            </div>
+
+                        </td>
+                    </tr>
+
+
+                    <tr class="video">
+                        <th>微视频：</th>
+                        <td>
+                            <div id="uploader" class="wu-example">
+                                <!--用来存放文件信息-->
+                                <div id="thelist" class="uploader-list"></div>
+                                <div class="btns">
+                                    <div id="picker">选择视频</div>
+                                    <input type="hidden" name="ShowMicroVideo" id="ShowMicroVideo" value="" />
+                                    @Html.TextBoxFor(x => x.MicroVideo, new { @class = "hide" })
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    @*<tr class="video">
+                            <th colspan="1" style="text-align:right;">微视频：</th>
+                            <td colspan="2">
+                                <textarea name="bsEditor2" id="bsEditor2">@Model.MicroVideo</textarea>
+                                <script type="text/javascript">
+                                    UE.getEditor('bsEditor2', {
+                                        //imageUrl: "/admin/tool/uploadarticleeditorimage?width=680",
+                                        fileUrl: "/admin/tool/uplaodarticleeditorfile",
+                                        toolbars: [['FullScreen', 'source', 'insertimage', 'insertvideo', 'link', 'attachment', 'fontfamily', 'fontsize', 'forecolor', 'backcolor', 'background', 'bold', 'justifyleft', 'justifyright', 'justifycenter', 'removeformat', 'formatmatch', 'autotypeset']]
+                                        //initialFrameWidth: 450,
+                                        //initialFrameHeight: 500
+                                    });
+                                </script>
+
+                            </td>
+                        </tr>*@
+
+
+
+
+                    @*<tr class="video">
+                            <th>微视频</th>
+                            <td>@Html.TextBoxFor(x => x.MicroVideo, new { size = "35" })</td>
+                        </tr>*@
+                    <tr class="video">
+                        <th>首页推荐：</th>
+                        <td>
+                            <label>@Html.RadioButtonFor(x => x.IsHome, 1)校园新闻</label>
+                            <label>@Html.RadioButtonFor(x => x.IsHome, 2)通知公告</label>
+                            <label>@Html.RadioButtonFor(x => x.IsHome, 0)否</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>作者：</th>
+                        <td>@Html.TextBoxFor(x => x.Author, new { size = "35" })</td>
+                    </tr>
+                    <tr>
+                        <th>单位：</th>
+                        <td>@Html.TextBoxFor(x => x.ComeForm, new { size = "50" })</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="height:5px; padding:0px;"></td>
+                    </tr>
+
+                    <tr class="trCo">
+                        <th>是否显示：</th>
+                        <td>
+                            <label>@Html.RadioButtonFor(x => x.IsShow, 1)是</label>
+                            <label>@Html.RadioButtonFor(x => x.IsShow, 0)否</label>
+                        </td>
+                    </tr>
+                    <tr class="trCo">
+                        <th>置顶：</th>
+                        <td>
+                            <label>@Html.RadioButtonFor(x => x.IsTop, 1)是</label>
+                            <label>@Html.RadioButtonFor(x => x.IsTop, 0)否</label>
+                        </td>
+                    </tr>
+                    <tr class="trCo">
+                        <th>首页推荐：</th>
+                        <td>
+                            <label>@Html.RadioButtonFor(x => x.IsHome, 1)校园新闻</label>
+                            <label>@Html.RadioButtonFor(x => x.IsHome, 2)通知公告</label>
+                            <label>@Html.RadioButtonFor(x => x.IsHome, 0)否</label>
+                        </td>
+                    </tr>
+                    @*<tr class="trCo">
+                            <th>推荐：</th>
+                            <td>
+                                <label>@Html.RadioButtonFor(x => x.IsBest, 1)是</label>
+                                <label>@Html.RadioButtonFor(x => x.IsBest, 0)否</label>
+                            </td>
+                        </tr>*@
+
+                    <tr class="IsClassBrand">
+                        <th>推送到电子班牌：</th>
+                        <td>
+                            <label>@Html.RadioButtonFor(x => x.IsClassBrand, 1)是</label>
+                            <label>@Html.RadioButtonFor(x => x.IsClassBrand, 0)否</label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>创建时间：</th>
+                        <td>
+                            @Html.TextBoxFor(x => x.AddTime, new { size = "18", onfocus = "WdatePicker({el:'AddTime'})" })
+                            <span class="layui-form">
+                                <input type="checkbox" name="saveImg" title="保存编辑器图片">
+                            </span>
+                        </td>
+                    </tr>
+                    @if (WorkContext.SiteConfig.ShowSEO.Equals(1))
+                    {
+                        <tr>
+                            <td colspan="2">
+                                SEO信息
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Keywords</th>
+                            <td>
+                                @Html.TextAreaFor(x => x.Keyword, new { row = "3", style = "width:500px;" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td>
+                                @Html.TextAreaFor(x => x.Description, new { row = "3", style = "width:500px;" })
+                            </td>
+                        </tr>
+                    }
+                    <tr>
+                        <th></th>
+                        <td><input id="btnSubmit" type="submit" value="提交" /></td>
+                    </tr>
+                    <script>
+                        layui.use('form', function () {
+                            var form = layui.form;
+                        });
+                    </script>
+
+                </table>
+
+            </div>
+        }
+

@@ -1,0 +1,117 @@
+﻿@model BonSite.Web.Models.FeedBackListModel
+@{
+               ViewBag.Title = @Model.FeedBackTypeInfo.TypeName + " - " + @WorkContext.SiteConfig.SiteTitle;
+}
+@section header{
+    
+    <script type="text/javascript" src="/Scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/Scripts/utils.js"></script>
+    <script type="text/javascript" src="/Scripts/FeedBack.js"></script>
+    }
+
+@section body{
+<div class="navpath wrap"">
+    	当前位置：<a href="/">首页</a> 
+            <span> &rsaquo; </span>  互动交流
+            <span> &rsaquo; </span>  @Model.FeedBackTypeInfo.TypeName   
+</div>
+
+<div class="wrap top15">
+    <div class="cont_page_left">
+    	<dl class="leftmenu">
+        	<dt>互动交流
+            </dt>
+            <dd>
+            	<ul>                    
+                    <li><a href="#">使用说明</a> 
+                    <li><a href="#">提交问题</a>  
+                    <li><a href="#">查询问题回复</a>   
+                    @*<li><a href="#" class="sel">组织结构</a></li>   
+                	</li>
+                        <li class="submenu"><a href="../menu/form.html">OA系统</a></li>
+                        <li class="submenu"><a href="../menu/nodots.html">备课系统</a></li>
+                        <li class="submenu"><a href="../menu/hover_click.html">诺亚教育平台</a></li>
+              
+                    <li><a href="#">组织结构</a></li>  *@
+                </ul>
+            </dd>
+        </dl>
+
+    </div>
+    <div class="cont_page_main" style="min-height:500px;">
+    	<div class="cont_page_main_tab">
+        	使用说明
+        </div>
+        <div class="cont_page_main_body">
+            @Model.FeedBackTypeInfo.Body
+        </div>
+    	<div class="cont_page_main_tab">
+        	提交问题
+        </div>
+        <div>
+        <form name="submitFeedbackForm" action="">
+    	<table width="100%" class="tbstyle1" cellpadding="5" cellspacing="1">
+            <tr>
+                <th style="width:80px;">联系人：</th>
+                <td><input id="LinkMan" name="LinkMan" type="text" value="" />
+                    <input id="typeid" name="typeid" type="hidden" value="@Model.FeedBackTypeInfo.FeedBackTypeId" />
+                    <input id="tag" name="tag" type="hidden" value="" />
+
+                </td>
+            </tr>
+            <tr>
+                <th>电话：</th>
+                <td><input id="Tel" name="Tel" type="text" value="" /></td>
+            </tr>
+            <tr>
+                <th>邮箱：</th>
+                <td><input id="Email" name="Email" type="text" value="" /></td>
+            </tr>
+            <tr>
+                <th>主题：</th>
+                <td><input id="Title" name="Title" size="80" type="text" value="" /></td>
+            </tr>
+            <tr>
+                <th>内容：</th>
+                <td><textarea cols="80" id="Body" name="Body" rows="8">
+</textarea></td>
+            <tr>
+                <th>允许公开：</th>
+                <td><input id="isOut" name="isOut" type="radio" value="1" />是 <input id="isOut" name="isOut" type="radio" value="0" checked="checked" />否</td>
+            </tr>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="button" onclick="submitFeedBack()" value="提交" /></td>
+            </tr>
+        </table>
+
+        </form>
+            
+    	<div class="cont_page_main_tab">
+        	查询问题回复
+        </div>
+        <div>
+            
+        <form name="searchFeedbackForm" action="">
+    	<table width="100%" class="tbstyle1" cellpadding="5" cellspacing="1">
+            <tr>
+                <th style="width:150px;">请输入查询码：</th>
+                <td><input id="searchkey" name="searchkey" type="text" value="" /><input type="button" onclick="getFeedBackByKey()" value="查询问题回复" /></td>
+            </tr>
+        </table>
+        </form>
+        </div>
+
+         <div id="searchresult">
+            
+        </div>
+
+        
+        </div>
+        
+    </div>
+    <div class="clear"></div>
+</div>
+    }
+

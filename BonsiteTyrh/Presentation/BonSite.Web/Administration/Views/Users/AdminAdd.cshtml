@@ -1,0 +1,87 @@
+﻿@model BonSite.Web.Admin.Models.UsersModel
+
+
+@section header{
+    <script type="text/javascript" src="/administration/scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/administration/scripts/users.js"></script>
+
+}
+@section body{
+    <div class="main">
+        <div class="nav">
+            当前位置：<a href="@Url.Action("SiteRunInfo","Home")">管理后台</a>
+
+            <span> &rsaquo; </span> <a href="@Url.Action("AdminList","Users")">用户管理</a>
+
+            <span> &rsaquo; </span> 新增用户
+        </div>
+        <ul class="submenu">
+            <li class="sel"><a href="#">新增用户</a></li>
+        </ul>
+
+        @using (Html.BeginForm())
+       {
+            <div class="top15">
+                <table width="100%" class="tbstyle1" cellpadding="5" cellspacing="1">
+
+                    <tr>
+                        <th>用户名：</th>
+                        <td>@Html.TextBoxFor(x => x.UserName, new { size = "50" }) @Html.ValidationMessageFor(x => x.UserName) </td>
+                    </tr>
+                    <tr>
+                        <th>密码：</th>
+                        <td>@Html.PasswordFor(x => x.Password, new { size = "50" }) @Html.ValidationMessageFor(x => x.Password)</td>
+                    </tr>
+
+                    <tr>
+                        <th>昵称：</th>
+                        <td>@Html.TextBoxFor(x => x.NickName, new { size="35"})</td>
+                    </tr>
+                    <tr>
+                        <th>E-mail：</th>
+                        <td>@Html.TextBoxFor(x => x.Email, new { size="35"}) @Html.ValidationMessageFor(x => x.Email)</td>
+                    </tr>
+                    <tr>
+                        <th>手机：</th>
+                        <td>@Html.TextBoxFor(x => x.Mobile, new { size="35"}) @Html.ValidationMessageFor(x => x.Mobile)</td>
+                    </tr>
+
+                    @*<tr>
+                            <th>类型：</th>
+                            <td>
+                                <label>@Html.RadioButtonFor(x => x.AdminGroupID, 2)普通管理员</label>
+                                <label>@Html.RadioButtonFor(x => x.AdminGroupID, 1)超级管理员</label></td>
+                        </tr>*@
+                    <tr>
+                        <th>类型：</th>
+                        <td>
+
+                            <select name="AdminGroupID" id="AdminGroupID">
+                                <option value="">请选择所属角色</option>
+                                @{
+           List<BonSite.Core.Domain.Site.UserRoleInfo> modelList = TempData["modelList"] as List<BonSite.Core.Domain.Site.UserRoleInfo>;
+                                    foreach (var item in modelList)
+                                        {
+                                                <option value="@item.RoleID">@item.RoleName</option>
+                                        }
+                                        }
+                            </select>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>状态：</th>
+                        <td>
+                            <label>@Html.RadioButtonFor(x => x.State, 0)正常</label>
+                            <label>@Html.RadioButtonFor(x => x.State, 1)锁定</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td><input id="btnSubmit" type="submit" value="提交" onclick="Su()" /></td>
+                    </tr>
+                </table>
+
+            </div>
+       }

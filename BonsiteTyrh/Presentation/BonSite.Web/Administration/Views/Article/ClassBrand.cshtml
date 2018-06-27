@@ -1,0 +1,202 @@
+﻿@model BonSite.Web.Admin.Models.ArticleModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>班牌预览</title>
+    <script type="text/javascript" src="/administration/scripts/jquery-2.1.0.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .oDiv {
+            width: 100%;
+            max-height: 410px;
+            overflow: hidden;
+            line-height: 30px;
+            /*text-align: center;*/
+        }
+
+        .cont_page_main_title {
+            line-height: 22px;
+            font-family: 微软雅黑, 黑体;
+            font-size: 18px;
+            padding-bottom: 15px;
+            text-align: left;
+            color: rgb(143, 0, 11);
+            margin-top: 5px;
+            margin-right: 5px;
+            margin-bottom: 0px;
+            margin-left: 5px;
+            max-height: 30px;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            border-bottom-width: 1px;
+            border-bottom-style: dotted;
+            border-bottom-color: rgb(204, 204, 204);
+        }
+
+        .cont_page_main_info {
+            margin: 5px;
+            line-height: 35px;
+            font-size: 14px;
+            text-align: left;            
+            color: #666;
+        }
+
+        .cont_page_main_body {
+            padding: 1px 2px;
+            line-height: 180%;
+            height: 410px;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .cont_page_main_img {
+            width: 100%;
+        }
+        /*图片滚动*/
+        .swiper-container {
+            margin: 0 auto;
+            width:680px;
+            overflow: hidden;
+            height: auto;
+        }
+
+        .swiper-wraper {
+            width: 10000%;
+            overflow: hidden;
+        }
+
+        .swiper-slide {
+            float: left;
+            width: 680px;
+        }
+
+            .swiper-slide > img {
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
+    </style>
+</head>
+<body>
+    <div class="cont_page_main">
+       <div style="width:680px;margin:auto">
+           <h1 style="text-align:center;font-weight:normal;">新闻</h1>
+           <div class="cont_page_main_title" >
+               @Model.Title
+           </div>
+       </div>
+        <div style="width:680px;margin:0 auto;margin-top:2px">
+            <div class="cont_page_main_info">
+                @Model.Author 
+                 @Model.AddTime
+            </div>            
+        </div>
+        
+        @*@if (Model.ImgUrl.Length > 0)
+        {
+            <div class="cont_page_main_img">
+                <img width="100%" height="100%" src="/Upload/Article/Show/thumb640_480/@Model.ImgUrl" />
+            </div>
+        }*@
+        <div class="cont_page_main_body" style="min-height: 400px;">
+            <div class="swiper-container">
+                <div class="swiper-wraper">
+                    <ul>
+                        @*添加图片*@
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="oDiv" id="oDiv">
+                <ul class="ul-cut">
+                    <li>
+                        @Html.Raw(Model.Body)
+                    </li>
+                    <li>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+
+    <script>
+        //当鼠标放上去的时候，滚动停止，鼠标离开的时候滚动开始
+        $(function () {
+            if ($(".ul-cut li").height() > 400) {
+                var myar = self.setInterval('autoScroll(".oDiv", ".ul-cut")', 1000)
+            }
+        });
+
+        function autoScroll(obj, ul_bz) {
+            $(obj).find(ul_bz).animate({
+                marginTop: -$(obj).find("li").height()
+            }, 178000, 'linear', function () {
+                $(this).css({
+                    marginTop: 0
+                }).find("li").eq(0).appendTo($(this))
+            })
+        }
+
+        //图片滚动
+
+
+
+        $(window).load(function () {
+            function autoMove() {
+                var x = 0, timer1, timer2;
+                clearInterval(timer1);
+                //获取图片路径
+                var imgs = document.getElementById("oDiv").getElementsByTagName("img");
+
+                console.log(imgs.length)
+                $("#oDiv").find("img").hide()
+                for (var i = 0; i < imgs.length; i++) {
+                    $(".swiper-wraper ul").append('<li class="swiper-slide"><img src="' + imgs[i].src + '" alt="" /></li>');
+                }
+                timer1 = setInterval(function () {
+                    x++;
+                    if (x >= $(".swiper-wraper ul li").length) {
+                        x = 0;
+                        $(".swiper-container").scrollLeft(0);
+                    }
+                    var start = $(".swiper-container").scrollLeft();
+                    var end = $(" .swiper-slide").width() * x;
+                    var step = 0, stepMax = 20, everyStep = (end - start) / stepMax;
+                    clearInterval(timer2)
+                    timer2 = setInterval(function () {
+                        step++;
+                        if (step >= stepMax) {
+                            step = 0;
+                            clearInterval(timer2)
+                        }
+                        start += everyStep;
+                        $(".swiper-container").scrollLeft(start);
+                    }, 10)
+
+                }, 2000)
+            }
+
+            autoMove()
+        })
+    </script>
+</body>
+</html>

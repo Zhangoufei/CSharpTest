@@ -1,0 +1,209 @@
+﻿@model BonSite.Web.Admin.Models.ArticleListModel
+@{
+    ViewBag.Title = "ArticleList";
+    int count = 1;
+}
+@section header{
+    <script type="text/javascript" src="/administration/scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/administration/scripts/showlist.js"></script>
+    <script type="text/javascript">
+        //全部选中复选框
+        function checkAll(e, itemName, faName) {
+            var aa = document.getElementsByName(itemName);
+            for (var i = 0; i < aa.length; i++) {
+                aa[i].checked = document.getElementsByName(faName)[0].checked;
+            }
+        }
+
+
+        function multiApprove() {
+            var array = GetAccessInfo('articleIdList')
+            var apfOrder = "NOT_USE";
+            //
+            if (array == null || array == "") {
+                alert("请选择文章！");
+                return false;
+            }
+            else {
+                //document.getElementById('hiddenDelete').value = array;
+                //return true;
+                //var isSure = confirm("是否确认群发？");
+                var isSure = true;
+                if (isSure) {
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "/SourceAdmin/SendWeChat",
+                        data: "{ mydata:'" + apfOrder + "#" + array + "'}",
+                        dataType: "json",
+                        async: false,
+                        success: function (data) {
+                            alert("1111");
+                            //alertFrame("信息", '/admin/SourceAdmin/SendWeChat', 480, 340)
+                        },
+                        error: function (msg) {
+                            // alert(msg.responseText);
+                        }
+                    });
+                }
+
+            }
+        }
+
+        function multiApprove11() {
+            var array = GetAccessInfo('articleIdList')
+            var apfOrder = "NOT_USE";
+
+            if (array == null || array == "") {
+                alert("请选择文章！");
+                return false;
+            }
+            else {
+                var array = apfOrder + "#" + array;
+                alert(array);
+                document.getElementById('mydata').value = array;
+            }
+        }
+
+        function GetAccessInfo(name) {
+            var delInfo = document.getElementsByName(name);
+            var array = '';
+            for (var i = 0; i < delInfo.length; i++) {
+                if (delInfo[i].checked) {
+                    array += delInfo[i].value + '#';
+                }
+            }
+            return array;
+        }
+
+
+    </script>
+}
+
+@section body{
+    @using (Html.BeginForm("List", "Article"))
+    {
+        <div class="main">
+            <div class="nav">
+                当前位置：<a href="@Url.Action("SiteRunInfo","Home")">管理后台</a>
+                @foreach (ArticleClassInfo info in (ViewData["classPath"] as List<ArticleClassInfo>))
+                {
+                    <span> &rsaquo; </span> <a href="@Url.Action("List","Article",new {articleClassID=@info.ArticleClassID})">@info.ClassName</a>
+                }
+
+            </div>
+
+            <ul class="submenu">
+                <li class="sel"><a href="#">@(Model.ClassInfo.ClassName)列表</a></li>
+                <li><a href="@Url.Action("Add", "Article", new { articleClassID = @Model.ArticleClassID, keyWord = "2" })">新加新内容</a></li>
+                @*<li>*@
+                @*<a href="@Url.Action("SendWeChat", "SourceAdmin", new { articleClassID = @Model.ArticleClassID, keyWord = "2" })">微信群发</a>*@
+
+                @*<a href="@Url.Action("SendWeChat", "SourceAdmin", new { articleClassID = @Model.ArticleClassID, keyWord = "2", mydata = "NOT_USE#3346*东海开渔第一网海鲜抵岸 渔民3天赚10万(组图)#3332*微信预览2#3319*微信群发3#3316*微信群发4#" })">微信群发</a>
+                    </li>*@
+                <li style="@ViewData["weixinadmin"]">
+                    <a href="@Url.Action("SendWeChat1", "SourceAdmin", new { articleClassID = @Model.ArticleClassID, keyWord = "2" })">微信群发</a>
+                </li>
+                @*<li>
+                        <a onclick="multiApprove()">微信群发1</a>
+                    </li>*@
+                @*<li><a href="@Url.Action("SendWeChatKefu", "SourceAdmin", new { articleClassID = @Model.ArticleClassID, mydata = "NOT_USE#3346*东海开渔第一网海鲜抵岸 渔民3天赚10万(组图)#3332*微信预览2#3319*微信群发3#3316*微信群发4#" })">微信粉丝推送</a></li>*@
+            </ul>
+            <div class="btnbar top15" style="display:none;">
+                搜索 标题：@Html.TextBox("NewsTitle", Model.ArticleTitle, new { height = "18" })
+
+                <input type="hidden" value="@Model.ArticleClassID" id="articleClassID" name="sortDirection" />
+                <input type="submit" name="btnSearch" value="搜索" id="btnSearch" />
+
+                <a href="#" delurl="@Url.Action("del")">批量删除</a>
+            </div>
+
+
+            <div class="top15">
+                <input type="hidden" value="@Model.SortColumn" id="sortColumn" name="sortColumn" />
+                <input type="hidden" value="@Model.SortDirection" id="sortDirection" name="sortDirection" />
+                <input type="hidden" value="" id="HiddenArticleGroup" name="HiddenArticleGroup" />
+                @Html.Hidden("mydata")
+                <table width="100%" cellpadding="5" cellspacing="0" class="tblist">
+                    <tr>
+                        @*<th width="5%" class="headertdGreen"><input type="checkbox" onclick="checkAll(this, 'articleIdList', 'FaCheck');" name="FaCheck" /></th>*@
+                        @*<td width="5%" class="headertdGreen"></td>*@
+                        <th>序号</th>
+                        <th>标题</th>
+                        <th>所属栏目</th>
+                        <th>审核状态</th>
+                        <th>添加人</th>
+
+                        <th style="width:120px;">时间</th>
+                        <th style="width:60px;">操作</th>
+                    </tr>
+                    @foreach (DataRow row in Model.DataList.Rows)
+                    {
+                        var checkBoxIDName = @row["ArticleID"] + "*" + @row["Title"];
+                        <tr>
+                            <td>@count</td>
+                            @*<td align="center"><input type="checkbox" value="@row["ArticleID"]" selectitem="true" name="articleIdList" /></td>*@
+                            @*<td align="center"><input type="checkbox" onclick="singleCheck(this, 'articleIdList', 'FaCheck');" value="@checkBoxIDName" name="articleIdList" /></td>*@
+                            <td align="left">@row["Title"]</td>
+                            @if (BonSite.Services.ArticleClass.AdminGetModelById(int.Parse(row["ArticleClassID"].ToString())) != null)
+                            {
+                                <td align="center">@BonSite.Services.ArticleClass.AdminGetModelById(int.Parse(row["ArticleClassID"].ToString())).ClassName</td>
+                            }
+                            else
+                            {
+                                <td align="center">未知栏目</td>
+                            }
+                            <td align="center">
+                                @if (row["ApprovalStatus"].ToString() == "1")
+                                {
+                                    @:通过
+                          }
+                                else if (row["ApprovalStatus"].ToString() == "2")
+                                {
+                                    @:未通过
+                        }
+                                else
+                                {
+                                    @:待审核
+                        }
+                            </td>
+                            <td align="center">@row["UserName"]</td>
+
+                            <td align="center">@row["addtime"]</td>
+                            <td>
+                                @*@Html.ActionLink("编辑", "Edit", "Article", new { articleID = row["ArticleID"] })*@
+                                @*@Html.ActionLink("删除", "Del", "Article", new { articleIdList = row["ArticleID"] }, new { @class = "deleteOperate" })*@
+                                @*@Html.ActionLink("微信群发", "WeChatSend", new { articleID = row["ArticleID"] })
+                                    @Html.ActionLink("微信粉丝推送", "WeChatKefuSend", new { articleID = row["ArticleID"] })*@
+                                @*<a href="@Url.Action("Del", "Article", new { articleID = row["ArticleID"]}, new { @class = "deleteOperate" })">删除</a>*@
+                                @{
+                                    <a href="/ViewPc/@(row["ArticleID"]).html" target="_blank">预览</a>
+                                    <a href="@Url.Action("Edit", "Article", new { articleID = row["ArticleID"]})">编辑</a>
+                                int adminid = (int)ViewData["adminid"];
+                                int wxAdmin = (int)ViewData["wxAdmin"];
+                                int AdminGroupID = (int)ViewData["AdminGroupID"];
+                                if (AdminGroupID == wxAdmin)
+                                {
+                                    if (adminid.ToString().Equals(row["AdminID"].ToString()))
+                                    {
+                                        @Html.ActionLink("删除", "Del", "Article", new { articleIdList = row["ArticleID"] }, new { @class = "deleteOperate" })
+                                    }
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("删除", "Del", "Article", new { articleIdList = row["ArticleID"] }, new { @class = "deleteOperate" })
+                                }
+                                }
+                            </td>
+                        </tr>
+                        count++;
+                    }
+                </table>
+                <div class="pagelist">
+                    @Html.AdminPager(Model.PageModel)
+                </div>
+            </div>
+
+        </div>
+    }
+}

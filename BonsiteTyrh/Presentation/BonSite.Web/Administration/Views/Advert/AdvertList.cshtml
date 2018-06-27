@@ -1,0 +1,90 @@
+﻿@model BonSite.Web.Admin.Models.AdvertListModel
+@{
+    ViewBag.Title = "AdvertList";
+}
+@section body{
+
+     <div class="main">
+<div class="nav">当前位置：
+     <span> &rsaquo; </span> <a href="#">系统管理</a> 
+     <span> &rsaquo; </span> <a href="#">广告管理</a> 
+    
+
+</div>
+
+        <ul class="submenu">
+        	<li class="sel"><a href="#">广告列表</a></li>
+        	<li><a href="@Url.Action("AdvertPositionList")">广告位置列表</a></li>
+        	<li><a href="@Url.Action("AddAdvert")">新加新广告</a></li>
+        </ul>
+
+
+    <div class="top15">
+        	<table width="100%" cellpadding="5" cellspacing="0" class="tblist">
+            	<tr>
+                    <th width="40" align="center"></th>
+                    <th align="left" >标题</th>  
+                    <th width="130" align="left" >位置</th>
+                    <th  width="250" align="left" >类型</th>
+                    <th width="140" align="left">开始时间</th>  
+                    <th width="140" align="left">结束时间</th>  
+                    <th width="60" align="left" >排序</th>  
+                    <th width="60" align="left" >状态</th>  
+                    <th width="90" align="left">管理操作</th>
+                </tr>
+                @{
+  foreach (DataRow row in Model.AdvertList.Rows)
+  {
+  <tr>
+    <td align="center"></td>
+    <td>@row["atitle"]</td>
+    <td>@row["aptitle"].ToString()</td>
+    <td>@if (row["type"].ToString() == "0")
+      {
+          @:文字
+      }
+      else if (row["type"].ToString() == "1")
+      {
+            @:图片
+      }
+      else if (row["type"].ToString() == "2")
+      {
+            @:Flash
+      }
+      else
+      {
+            @:代码
+      }</td>
+    <td>@row["starttime"]</td>
+    <td>@row["endtime"]</td>
+    <td>@row["displayorder"]</td>
+    <td>
+        @if (row["state"].ToString() == "0")
+      {
+          @:隐藏
+      }
+      else
+      {
+          @:展示
+      }
+            </td>
+    <td>
+        @Html.ActionLink("[编辑]", "editadvert", new { adId = row["id"] }, new { @class = "editOperate" })
+        @Html.ActionLink("[删除]", "deladvert", new { adId = row["id"] }, new { @class = "deleteOperate" })
+    </td>
+    </tr>
+  }
+  }
+                </table>
+        <div class="dataListEdit" style="display:none;">
+<a href="#" delUrl="@Url.Action("del")" class="batch batchDel">批量删除</a>
+</div>
+<div class="page">
+    @Html.AdminPager(Model.PageModel)
+</div>
+</div>
+         
+         </div>
+    
+    }
+    }

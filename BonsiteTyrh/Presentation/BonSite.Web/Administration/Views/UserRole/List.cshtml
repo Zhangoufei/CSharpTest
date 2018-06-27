@@ -1,0 +1,64 @@
+﻿@*@model BonSite.Web.Admin.Models.UserRoleModel*@
+@{
+    ViewBag.Title = "List";
+    int content = 1;
+}
+
+@section body{
+    @using (Html.BeginForm("List", "UserRole"))
+    {
+        <div class="main">
+            <div class="nav">
+                当前位置：
+                <a href="@Url.Action("SiteRunInfo","Home")">管理后台</a>
+                <span> &rsaquo; </span> <a href="#">角色管理</a>
+
+
+            </div>
+
+            <ul class="submenu">
+                <li class="sel"><a href="#">角色列表</a></li>
+                <li><a href="@Url.Action("Add","UserRole")">新加角色</a></li>
+            </ul>
+
+
+            <div class="top15">
+                <table width="100%" cellpadding="5" cellspacing="0" class="tblist">
+                    <tr>
+                        
+                        <th width="50" >序号</th>
+                        <th width="130" >角色名称</th>
+                        <th width="130" >备注</th>
+                        <th width="90" >管理操作</th>
+                    </tr>
+                    @{
+
+        foreach (var info in Model.UserRoleList)
+        {
+            <tr>
+                @*<td align="center"><input type="checkbox" value="@info.RoleID" selectitem="true" name="RoleIDList" /></td>*@
+
+                <td align="center">@content</td>
+                <td align="center">@info.RoleName</td>
+                <td align="center">@info.Remark</td>
+                <td align="center">
+                    @if (info.RoleID.ToString() != "1")
+                    {
+                        @Html.ActionLink("权限", "RoleMenuEdit", new { RoleID = info.RoleID })
+                    }
+
+                    @Html.ActionLink("编辑", "edit", new { RoleID = info.RoleID }, new { @class = "editOperate" })
+                    @*@Html.ActionLink("删除", "del", new { RoleIDList = info.RoleID }, new { @class = "deleteOperate" })*@
+                </td>
+            </tr>
+            content++;
+        }
+                    }
+                </table>
+               
+            </div>
+
+        </div>
+
+    }
+}

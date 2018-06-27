@@ -1,0 +1,1352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://zzbz.com.net/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://zzbz.com.net/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://zzbz.com.net/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="userlogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_account" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="user_pwd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="isaccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="appid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="userloginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userloginResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getuserinfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="appid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getuserinfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getuserinfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getaccesstoken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="appid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="secret" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getaccesstokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getaccesstokenResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getclasslist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="access_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="school_code" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pagenow" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pagesize" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getclasslistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getclasslistResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getdepartmentlist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="access_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="school_code" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getdepartmentlistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getdepartmentlistResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getuserrolelist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="access_token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getuserrolelistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getuserrolelistResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getuserlist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="access_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="school_code" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="role_code" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="updatetime" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pagenow" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pagesize" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getuserlistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getuserlistResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getschoolyearlist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="access_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="school_code" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getschoolyearlistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getschoolyearlistResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getcourselist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="access_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="school_code" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getcourselistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getcourselistResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getcanlendarlistbymonth">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="access_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="school_code" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="month" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getcanlendarlistbymonthResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getcanlendarlistbymonthResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getcanlendardatebymonth">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="access_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="school_code" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="month" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getcanlendardatebymonthResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getcanlendardatebymonthResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getcanlendarlistbydate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="access_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="school_code" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ca_begaintime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ca_endtime" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getcanlendarlistbydateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getcanlendarlistbydateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getcanlendardetail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="access_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ca_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getcanlendardetailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getcanlendardetailResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="addwxconfirm">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="access_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="oid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mob" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="addwxconfirmResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="addwxconfirmResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="userloginSoapIn">
+    <wsdl:part name="parameters" element="tns:userlogin" />
+  </wsdl:message>
+  <wsdl:message name="userloginSoapOut">
+    <wsdl:part name="parameters" element="tns:userloginResponse" />
+  </wsdl:message>
+  <wsdl:message name="getuserinfoSoapIn">
+    <wsdl:part name="parameters" element="tns:getuserinfo" />
+  </wsdl:message>
+  <wsdl:message name="getuserinfoSoapOut">
+    <wsdl:part name="parameters" element="tns:getuserinfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getaccesstokenSoapIn">
+    <wsdl:part name="parameters" element="tns:getaccesstoken" />
+  </wsdl:message>
+  <wsdl:message name="getaccesstokenSoapOut">
+    <wsdl:part name="parameters" element="tns:getaccesstokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="getclasslistSoapIn">
+    <wsdl:part name="parameters" element="tns:getclasslist" />
+  </wsdl:message>
+  <wsdl:message name="getclasslistSoapOut">
+    <wsdl:part name="parameters" element="tns:getclasslistResponse" />
+  </wsdl:message>
+  <wsdl:message name="getdepartmentlistSoapIn">
+    <wsdl:part name="parameters" element="tns:getdepartmentlist" />
+  </wsdl:message>
+  <wsdl:message name="getdepartmentlistSoapOut">
+    <wsdl:part name="parameters" element="tns:getdepartmentlistResponse" />
+  </wsdl:message>
+  <wsdl:message name="getuserrolelistSoapIn">
+    <wsdl:part name="parameters" element="tns:getuserrolelist" />
+  </wsdl:message>
+  <wsdl:message name="getuserrolelistSoapOut">
+    <wsdl:part name="parameters" element="tns:getuserrolelistResponse" />
+  </wsdl:message>
+  <wsdl:message name="getuserlistSoapIn">
+    <wsdl:part name="parameters" element="tns:getuserlist" />
+  </wsdl:message>
+  <wsdl:message name="getuserlistSoapOut">
+    <wsdl:part name="parameters" element="tns:getuserlistResponse" />
+  </wsdl:message>
+  <wsdl:message name="getschoolyearlistSoapIn">
+    <wsdl:part name="parameters" element="tns:getschoolyearlist" />
+  </wsdl:message>
+  <wsdl:message name="getschoolyearlistSoapOut">
+    <wsdl:part name="parameters" element="tns:getschoolyearlistResponse" />
+  </wsdl:message>
+  <wsdl:message name="getcourselistSoapIn">
+    <wsdl:part name="parameters" element="tns:getcourselist" />
+  </wsdl:message>
+  <wsdl:message name="getcourselistSoapOut">
+    <wsdl:part name="parameters" element="tns:getcourselistResponse" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendarlistbymonthSoapIn">
+    <wsdl:part name="parameters" element="tns:getcanlendarlistbymonth" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendarlistbymonthSoapOut">
+    <wsdl:part name="parameters" element="tns:getcanlendarlistbymonthResponse" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendardatebymonthSoapIn">
+    <wsdl:part name="parameters" element="tns:getcanlendardatebymonth" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendardatebymonthSoapOut">
+    <wsdl:part name="parameters" element="tns:getcanlendardatebymonthResponse" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendarlistbydateSoapIn">
+    <wsdl:part name="parameters" element="tns:getcanlendarlistbydate" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendarlistbydateSoapOut">
+    <wsdl:part name="parameters" element="tns:getcanlendarlistbydateResponse" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendardetailSoapIn">
+    <wsdl:part name="parameters" element="tns:getcanlendardetail" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendardetailSoapOut">
+    <wsdl:part name="parameters" element="tns:getcanlendardetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="addwxconfirmSoapIn">
+    <wsdl:part name="parameters" element="tns:addwxconfirm" />
+  </wsdl:message>
+  <wsdl:message name="addwxconfirmSoapOut">
+    <wsdl:part name="parameters" element="tns:addwxconfirmResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="userloginHttpGetIn">
+    <wsdl:part name="user_account" type="s:string" />
+    <wsdl:part name="user_pwd" type="s:string" />
+    <wsdl:part name="isaccount" type="s:string" />
+    <wsdl:part name="appid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="userloginHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getuserinfoHttpGetIn">
+    <wsdl:part name="appid" type="s:string" />
+    <wsdl:part name="user_token" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getuserinfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getaccesstokenHttpGetIn">
+    <wsdl:part name="appid" type="s:string" />
+    <wsdl:part name="secret" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getaccesstokenHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getclasslistHttpGetIn">
+    <wsdl:part name="access_token" type="s:string" />
+    <wsdl:part name="school_code" type="s:string" />
+    <wsdl:part name="pagenow" type="s:string" />
+    <wsdl:part name="pagesize" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getclasslistHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getdepartmentlistHttpGetIn">
+    <wsdl:part name="access_token" type="s:string" />
+    <wsdl:part name="school_code" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getdepartmentlistHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getuserrolelistHttpGetIn">
+    <wsdl:part name="access_token" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getuserrolelistHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getuserlistHttpGetIn">
+    <wsdl:part name="access_token" type="s:string" />
+    <wsdl:part name="school_code" type="s:string" />
+    <wsdl:part name="role_code" type="s:string" />
+    <wsdl:part name="updatetime" type="s:string" />
+    <wsdl:part name="pagenow" type="s:string" />
+    <wsdl:part name="pagesize" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getuserlistHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getschoolyearlistHttpGetIn">
+    <wsdl:part name="access_token" type="s:string" />
+    <wsdl:part name="school_code" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getschoolyearlistHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getcourselistHttpGetIn">
+    <wsdl:part name="access_token" type="s:string" />
+    <wsdl:part name="school_code" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getcourselistHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendarlistbymonthHttpGetIn">
+    <wsdl:part name="access_token" type="s:string" />
+    <wsdl:part name="school_code" type="s:string" />
+    <wsdl:part name="month" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendarlistbymonthHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendardatebymonthHttpGetIn">
+    <wsdl:part name="access_token" type="s:string" />
+    <wsdl:part name="school_code" type="s:string" />
+    <wsdl:part name="month" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendardatebymonthHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendarlistbydateHttpGetIn">
+    <wsdl:part name="access_token" type="s:string" />
+    <wsdl:part name="school_code" type="s:string" />
+    <wsdl:part name="ca_begaintime" type="s:string" />
+    <wsdl:part name="ca_endtime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendarlistbydateHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendardetailHttpGetIn">
+    <wsdl:part name="access_token" type="s:string" />
+    <wsdl:part name="ca_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendardetailHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="addwxconfirmHttpGetIn">
+    <wsdl:part name="access_token" type="s:string" />
+    <wsdl:part name="oid" type="s:string" />
+    <wsdl:part name="mob" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="addwxconfirmHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="userloginHttpPostIn">
+    <wsdl:part name="user_account" type="s:string" />
+    <wsdl:part name="user_pwd" type="s:string" />
+    <wsdl:part name="isaccount" type="s:string" />
+    <wsdl:part name="appid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="userloginHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getuserinfoHttpPostIn">
+    <wsdl:part name="appid" type="s:string" />
+    <wsdl:part name="user_token" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getuserinfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getaccesstokenHttpPostIn">
+    <wsdl:part name="appid" type="s:string" />
+    <wsdl:part name="secret" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getaccesstokenHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getclasslistHttpPostIn">
+    <wsdl:part name="access_token" type="s:string" />
+    <wsdl:part name="school_code" type="s:string" />
+    <wsdl:part name="pagenow" type="s:string" />
+    <wsdl:part name="pagesize" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getclasslistHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getdepartmentlistHttpPostIn">
+    <wsdl:part name="access_token" type="s:string" />
+    <wsdl:part name="school_code" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getdepartmentlistHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getuserrolelistHttpPostIn">
+    <wsdl:part name="access_token" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getuserrolelistHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getuserlistHttpPostIn">
+    <wsdl:part name="access_token" type="s:string" />
+    <wsdl:part name="school_code" type="s:string" />
+    <wsdl:part name="role_code" type="s:string" />
+    <wsdl:part name="updatetime" type="s:string" />
+    <wsdl:part name="pagenow" type="s:string" />
+    <wsdl:part name="pagesize" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getuserlistHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getschoolyearlistHttpPostIn">
+    <wsdl:part name="access_token" type="s:string" />
+    <wsdl:part name="school_code" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getschoolyearlistHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getcourselistHttpPostIn">
+    <wsdl:part name="access_token" type="s:string" />
+    <wsdl:part name="school_code" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getcourselistHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendarlistbymonthHttpPostIn">
+    <wsdl:part name="access_token" type="s:string" />
+    <wsdl:part name="school_code" type="s:string" />
+    <wsdl:part name="month" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendarlistbymonthHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendardatebymonthHttpPostIn">
+    <wsdl:part name="access_token" type="s:string" />
+    <wsdl:part name="school_code" type="s:string" />
+    <wsdl:part name="month" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendardatebymonthHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendarlistbydateHttpPostIn">
+    <wsdl:part name="access_token" type="s:string" />
+    <wsdl:part name="school_code" type="s:string" />
+    <wsdl:part name="ca_begaintime" type="s:string" />
+    <wsdl:part name="ca_endtime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendarlistbydateHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendardetailHttpPostIn">
+    <wsdl:part name="access_token" type="s:string" />
+    <wsdl:part name="ca_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getcanlendardetailHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="addwxconfirmHttpPostIn">
+    <wsdl:part name="access_token" type="s:string" />
+    <wsdl:part name="oid" type="s:string" />
+    <wsdl:part name="mob" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="addwxconfirmHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="UserServiceSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="userlogin">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">用户登录，请求参数（user_account:平台账号/手机号/学籍号;user_pwd:加密密码;isaccount:0:(默认值)使用平台账号登录,1使用手机号登录,2使用学籍号登录;appid：授权应用id）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组{user_token,过期时间}）</wsdl:documentation>
+      <wsdl:input message="tns:userloginSoapIn" />
+      <wsdl:output message="tns:userloginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getuserinfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据user_token获取用户信息，请求参数（appid:应用id;user_token:用户token;）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getuserinfoSoapIn" />
+      <wsdl:output message="tns:getuserinfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getaccesstoken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-使用appid和secret获取全局access_token，用来调用公共接口，请求参数（appid:应用id;secret:应用密钥;）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getaccesstokenSoapIn" />
+      <wsdl:output message="tns:getaccesstokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getclasslist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-获取班级列表，请求参数（access_token:应用全局token（公共接口权限），school_code:学校代号，pagenow：页码，pagesize：显示条数）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retCount:总记录数,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getclasslistSoapIn" />
+      <wsdl:output message="tns:getclasslistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getdepartmentlist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-获取学校组织架构列表，请求参数（access_token:应用全局token（公共接口权限）,school_code:学校代号）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getdepartmentlistSoapIn" />
+      <wsdl:output message="tns:getdepartmentlistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getuserrolelist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-获取角色列表，请求参数（access_token:应用全局token（公共接口权限））,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getuserrolelistSoapIn" />
+      <wsdl:output message="tns:getuserrolelistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getuserlist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-获取学校用户列表，请求参数（access_token:应用全局token（公共接口权限）,school_code:学校代号，role_code:角色code,updatetime:Unix时间戳,pagenow：页码,pagesize：显示条数）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retCount:总记录数,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getuserlistSoapIn" />
+      <wsdl:output message="tns:getuserlistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getschoolyearlist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-获取学期列表，请求参数（access_token:应用全局token（公共接口权限）,school_code:学校代号）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getschoolyearlistSoapIn" />
+      <wsdl:output message="tns:getschoolyearlistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getcourselist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-获取课程列表，请求参数（access_token:应用全局token（公共接口权限）,school_code:学校代号）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getcourselistSoapIn" />
+      <wsdl:output message="tns:getcourselistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendarlistbymonth">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-根据月份获取当月所有事件，请求参数（access_token:应用全局token（公共接口权限）,school_code:学校代号，月份month：如 2017-08）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getcanlendarlistbymonthSoapIn" />
+      <wsdl:output message="tns:getcanlendarlistbymonthSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendardatebymonth">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-日期标记：根据月份获取当月有事件的日期（时间段），请求参数（access_token:应用全局token（公共接口权限）,school_code:学校代号，month：月份如 2017-08）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getcanlendardatebymonthSoapIn" />
+      <wsdl:output message="tns:getcanlendardatebymonthSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendarlistbydate">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-根据日期时间段获取事件列表，请求参数（access_token:应用全局token（公共接口权限）,school_code:学校代号，ca_begaintime：开始日期格式 2017-08-17，ca_endtime：结束日期格式 2017-08-17）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getcanlendarlistbydateSoapIn" />
+      <wsdl:output message="tns:getcanlendarlistbydateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendardetail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-根据事件id获取事件详情，请求参数（access_token:应用全局token（公共接口权限）,ca_id:电子校历事件ID）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getcanlendardetailSoapIn" />
+      <wsdl:output message="tns:getcanlendardetailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="addwxconfirm">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-微信扫码登录-扫码用户绑定，请求参数（access_token:接口调用凭证（公共接口权限）,oid:用户唯一标识，mob:绑定手机号）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:addwxconfirmSoapIn" />
+      <wsdl:output message="tns:addwxconfirmSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="UserServiceHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="userlogin">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">用户登录，请求参数（user_account:平台账号/手机号/学籍号;user_pwd:加密密码;isaccount:0:(默认值)使用平台账号登录,1使用手机号登录,2使用学籍号登录;appid：授权应用id）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组{user_token,过期时间}）</wsdl:documentation>
+      <wsdl:input message="tns:userloginHttpGetIn" />
+      <wsdl:output message="tns:userloginHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getuserinfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据user_token获取用户信息，请求参数（appid:应用id;user_token:用户token;）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getuserinfoHttpGetIn" />
+      <wsdl:output message="tns:getuserinfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getaccesstoken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-使用appid和secret获取全局access_token，用来调用公共接口，请求参数（appid:应用id;secret:应用密钥;）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getaccesstokenHttpGetIn" />
+      <wsdl:output message="tns:getaccesstokenHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getclasslist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-获取班级列表，请求参数（access_token:应用全局token（公共接口权限），school_code:学校代号，pagenow：页码，pagesize：显示条数）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retCount:总记录数,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getclasslistHttpGetIn" />
+      <wsdl:output message="tns:getclasslistHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getdepartmentlist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-获取学校组织架构列表，请求参数（access_token:应用全局token（公共接口权限）,school_code:学校代号）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getdepartmentlistHttpGetIn" />
+      <wsdl:output message="tns:getdepartmentlistHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getuserrolelist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-获取角色列表，请求参数（access_token:应用全局token（公共接口权限））,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getuserrolelistHttpGetIn" />
+      <wsdl:output message="tns:getuserrolelistHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getuserlist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-获取学校用户列表，请求参数（access_token:应用全局token（公共接口权限）,school_code:学校代号，role_code:角色code,updatetime:Unix时间戳,pagenow：页码,pagesize：显示条数）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retCount:总记录数,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getuserlistHttpGetIn" />
+      <wsdl:output message="tns:getuserlistHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getschoolyearlist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-获取学期列表，请求参数（access_token:应用全局token（公共接口权限）,school_code:学校代号）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getschoolyearlistHttpGetIn" />
+      <wsdl:output message="tns:getschoolyearlistHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getcourselist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-获取课程列表，请求参数（access_token:应用全局token（公共接口权限）,school_code:学校代号）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getcourselistHttpGetIn" />
+      <wsdl:output message="tns:getcourselistHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendarlistbymonth">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-根据月份获取当月所有事件，请求参数（access_token:应用全局token（公共接口权限）,school_code:学校代号，月份month：如 2017-08）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getcanlendarlistbymonthHttpGetIn" />
+      <wsdl:output message="tns:getcanlendarlistbymonthHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendardatebymonth">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-日期标记：根据月份获取当月有事件的日期（时间段），请求参数（access_token:应用全局token（公共接口权限）,school_code:学校代号，month：月份如 2017-08）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getcanlendardatebymonthHttpGetIn" />
+      <wsdl:output message="tns:getcanlendardatebymonthHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendarlistbydate">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-根据日期时间段获取事件列表，请求参数（access_token:应用全局token（公共接口权限）,school_code:学校代号，ca_begaintime：开始日期格式 2017-08-17，ca_endtime：结束日期格式 2017-08-17）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getcanlendarlistbydateHttpGetIn" />
+      <wsdl:output message="tns:getcanlendarlistbydateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendardetail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-根据事件id获取事件详情，请求参数（access_token:应用全局token（公共接口权限）,ca_id:电子校历事件ID）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getcanlendardetailHttpGetIn" />
+      <wsdl:output message="tns:getcanlendardetailHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="addwxconfirm">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-微信扫码登录-扫码用户绑定，请求参数（access_token:接口调用凭证（公共接口权限）,oid:用户唯一标识，mob:绑定手机号）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:addwxconfirmHttpGetIn" />
+      <wsdl:output message="tns:addwxconfirmHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="UserServiceHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="userlogin">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">用户登录，请求参数（user_account:平台账号/手机号/学籍号;user_pwd:加密密码;isaccount:0:(默认值)使用平台账号登录,1使用手机号登录,2使用学籍号登录;appid：授权应用id）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组{user_token,过期时间}）</wsdl:documentation>
+      <wsdl:input message="tns:userloginHttpPostIn" />
+      <wsdl:output message="tns:userloginHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getuserinfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据user_token获取用户信息，请求参数（appid:应用id;user_token:用户token;）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getuserinfoHttpPostIn" />
+      <wsdl:output message="tns:getuserinfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getaccesstoken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-使用appid和secret获取全局access_token，用来调用公共接口，请求参数（appid:应用id;secret:应用密钥;）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getaccesstokenHttpPostIn" />
+      <wsdl:output message="tns:getaccesstokenHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getclasslist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-获取班级列表，请求参数（access_token:应用全局token（公共接口权限），school_code:学校代号，pagenow：页码，pagesize：显示条数）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retCount:总记录数,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getclasslistHttpPostIn" />
+      <wsdl:output message="tns:getclasslistHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getdepartmentlist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-获取学校组织架构列表，请求参数（access_token:应用全局token（公共接口权限）,school_code:学校代号）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getdepartmentlistHttpPostIn" />
+      <wsdl:output message="tns:getdepartmentlistHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getuserrolelist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-获取角色列表，请求参数（access_token:应用全局token（公共接口权限））,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getuserrolelistHttpPostIn" />
+      <wsdl:output message="tns:getuserrolelistHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getuserlist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-获取学校用户列表，请求参数（access_token:应用全局token（公共接口权限）,school_code:学校代号，role_code:角色code,updatetime:Unix时间戳,pagenow：页码,pagesize：显示条数）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retCount:总记录数,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getuserlistHttpPostIn" />
+      <wsdl:output message="tns:getuserlistHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getschoolyearlist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-获取学期列表，请求参数（access_token:应用全局token（公共接口权限）,school_code:学校代号）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getschoolyearlistHttpPostIn" />
+      <wsdl:output message="tns:getschoolyearlistHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getcourselist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-获取课程列表，请求参数（access_token:应用全局token（公共接口权限）,school_code:学校代号）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getcourselistHttpPostIn" />
+      <wsdl:output message="tns:getcourselistHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendarlistbymonth">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-根据月份获取当月所有事件，请求参数（access_token:应用全局token（公共接口权限）,school_code:学校代号，月份month：如 2017-08）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getcanlendarlistbymonthHttpPostIn" />
+      <wsdl:output message="tns:getcanlendarlistbymonthHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendardatebymonth">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-日期标记：根据月份获取当月有事件的日期（时间段），请求参数（access_token:应用全局token（公共接口权限）,school_code:学校代号，month：月份如 2017-08）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getcanlendardatebymonthHttpPostIn" />
+      <wsdl:output message="tns:getcanlendardatebymonthHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendarlistbydate">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-根据日期时间段获取事件列表，请求参数（access_token:应用全局token（公共接口权限）,school_code:学校代号，ca_begaintime：开始日期格式 2017-08-17，ca_endtime：结束日期格式 2017-08-17）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getcanlendarlistbydateHttpPostIn" />
+      <wsdl:output message="tns:getcanlendarlistbydateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendardetail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-根据事件id获取事件详情，请求参数（access_token:应用全局token（公共接口权限）,ca_id:电子校历事件ID）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:getcanlendardetailHttpPostIn" />
+      <wsdl:output message="tns:getcanlendardetailHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="addwxconfirm">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">公共-微信扫码登录-扫码用户绑定，请求参数（access_token:接口调用凭证（公共接口权限）,oid:用户唯一标识，mob:绑定手机号）,返回参数（retCode:0:成功 其他失败;retMsg:提示信息,retData:json数组）</wsdl:documentation>
+      <wsdl:input message="tns:addwxconfirmHttpPostIn" />
+      <wsdl:output message="tns:addwxconfirmHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UserServiceSoap" type="tns:UserServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://zzbz.com.net/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="userlogin">
+      <soap:operation soapAction="http://zzbz.com.net/userlogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getuserinfo">
+      <soap:operation soapAction="http://zzbz.com.net/getuserinfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getaccesstoken">
+      <soap:operation soapAction="http://zzbz.com.net/getaccesstoken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getclasslist">
+      <soap:operation soapAction="http://zzbz.com.net/getclasslist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getdepartmentlist">
+      <soap:operation soapAction="http://zzbz.com.net/getdepartmentlist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getuserrolelist">
+      <soap:operation soapAction="http://zzbz.com.net/getuserrolelist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getuserlist">
+      <soap:operation soapAction="http://zzbz.com.net/getuserlist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getschoolyearlist">
+      <soap:operation soapAction="http://zzbz.com.net/getschoolyearlist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getcourselist">
+      <soap:operation soapAction="http://zzbz.com.net/getcourselist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendarlistbymonth">
+      <soap:operation soapAction="http://zzbz.com.net/getcanlendarlistbymonth" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendardatebymonth">
+      <soap:operation soapAction="http://zzbz.com.net/getcanlendardatebymonth" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendarlistbydate">
+      <soap:operation soapAction="http://zzbz.com.net/getcanlendarlistbydate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendardetail">
+      <soap:operation soapAction="http://zzbz.com.net/getcanlendardetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addwxconfirm">
+      <soap:operation soapAction="http://zzbz.com.net/addwxconfirm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="UserServiceSoap12" type="tns:UserServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://zzbz.com.net/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="userlogin">
+      <soap12:operation soapAction="http://zzbz.com.net/userlogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getuserinfo">
+      <soap12:operation soapAction="http://zzbz.com.net/getuserinfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getaccesstoken">
+      <soap12:operation soapAction="http://zzbz.com.net/getaccesstoken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getclasslist">
+      <soap12:operation soapAction="http://zzbz.com.net/getclasslist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getdepartmentlist">
+      <soap12:operation soapAction="http://zzbz.com.net/getdepartmentlist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getuserrolelist">
+      <soap12:operation soapAction="http://zzbz.com.net/getuserrolelist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getuserlist">
+      <soap12:operation soapAction="http://zzbz.com.net/getuserlist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getschoolyearlist">
+      <soap12:operation soapAction="http://zzbz.com.net/getschoolyearlist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getcourselist">
+      <soap12:operation soapAction="http://zzbz.com.net/getcourselist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendarlistbymonth">
+      <soap12:operation soapAction="http://zzbz.com.net/getcanlendarlistbymonth" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendardatebymonth">
+      <soap12:operation soapAction="http://zzbz.com.net/getcanlendardatebymonth" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendarlistbydate">
+      <soap12:operation soapAction="http://zzbz.com.net/getcanlendarlistbydate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendardetail">
+      <soap12:operation soapAction="http://zzbz.com.net/getcanlendardetail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addwxconfirm">
+      <soap12:operation soapAction="http://zzbz.com.net/addwxconfirm" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="UserServiceHttpGet" type="tns:UserServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="userlogin">
+      <http:operation location="/userlogin" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getuserinfo">
+      <http:operation location="/getuserinfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getaccesstoken">
+      <http:operation location="/getaccesstoken" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getclasslist">
+      <http:operation location="/getclasslist" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getdepartmentlist">
+      <http:operation location="/getdepartmentlist" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getuserrolelist">
+      <http:operation location="/getuserrolelist" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getuserlist">
+      <http:operation location="/getuserlist" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getschoolyearlist">
+      <http:operation location="/getschoolyearlist" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getcourselist">
+      <http:operation location="/getcourselist" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendarlistbymonth">
+      <http:operation location="/getcanlendarlistbymonth" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendardatebymonth">
+      <http:operation location="/getcanlendardatebymonth" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendarlistbydate">
+      <http:operation location="/getcanlendarlistbydate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendardetail">
+      <http:operation location="/getcanlendardetail" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addwxconfirm">
+      <http:operation location="/addwxconfirm" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="UserServiceHttpPost" type="tns:UserServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="userlogin">
+      <http:operation location="/userlogin" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getuserinfo">
+      <http:operation location="/getuserinfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getaccesstoken">
+      <http:operation location="/getaccesstoken" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getclasslist">
+      <http:operation location="/getclasslist" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getdepartmentlist">
+      <http:operation location="/getdepartmentlist" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getuserrolelist">
+      <http:operation location="/getuserrolelist" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getuserlist">
+      <http:operation location="/getuserlist" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getschoolyearlist">
+      <http:operation location="/getschoolyearlist" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getcourselist">
+      <http:operation location="/getcourselist" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendarlistbymonth">
+      <http:operation location="/getcanlendarlistbymonth" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendardatebymonth">
+      <http:operation location="/getcanlendardatebymonth" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendarlistbydate">
+      <http:operation location="/getcanlendarlistbydate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getcanlendardetail">
+      <http:operation location="/getcanlendardetail" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addwxconfirm">
+      <http:operation location="/addwxconfirm" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UserService">
+    <wsdl:port name="UserServiceSoap" binding="tns:UserServiceSoap">
+      <soap:address location="http://192.168.18.106:8003/api/UserService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="UserServiceSoap12" binding="tns:UserServiceSoap12">
+      <soap12:address location="http://192.168.18.106:8003/api/UserService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="UserServiceHttpGet" binding="tns:UserServiceHttpGet">
+      <http:address location="http://192.168.18.106:8003/api/UserService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="UserServiceHttpPost" binding="tns:UserServiceHttpPost">
+      <http:address location="http://192.168.18.106:8003/api/UserService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

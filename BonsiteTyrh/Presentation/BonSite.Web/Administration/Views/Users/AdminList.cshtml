@@ -1,0 +1,129 @@
+﻿@model BonSite.Web.Admin.Models.UsersListModel
+@{
+    ViewBag.Title = "AdminList";
+}
+@section header{
+    <script type="text/javascript" src="/administration/scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/administration/scripts/showlist.js"></script>
+}
+
+@section body{
+    @using (Html.BeginForm("List", "Article"))
+    {
+        <div class="main">
+            <div class="nav">
+                当前位置：<a href="@Url.Action("SiteRunInfo","Home")">管理后台</a>
+
+                <span> &rsaquo; </span> <a href="#">用户管理</a>
+
+
+            </div>
+
+            <ul class="submenu">
+                <li class="sel"><a href="#">用户列表</a></li>
+                <li><a href="@Url.Action("AdminAdd","Users")">新增用户</a></li>
+            </ul>
+            <div class="btnbar top15" style="display:none;">
+            </div>
+
+
+            <div class="top15">
+                <table width="100%" cellpadding="5" cellspacing="0" class="tblist">
+                    <tr>
+                        <th style="text-align: center; ">选择</th>
+                        <th style="text-align:left;">用户名</th>
+                        <th style="text-align:left;">昵称</th>
+                        <th style="text-align:left;">E-mail</th>
+                        <th style="text-align:left;">手机</th>
+                        <th style="width:60px;">类型</th>
+                        <th style="width:50px;">状态</th>
+                        <th style="width:100px;">操作</th>
+                    </tr>
+                    @foreach (DataRow row in Model.DataList.Rows)
+                    {
+                        // String AdminGroupID = row["AdminGroupID"].ToString();
+                        <tr>
+                            <td align="center"><input type="checkbox" value="@row["UserID"]" selectitem="true" name="userID" /></td>
+                            <td align="left">@row["UserName"]</td>
+                            <td align="left">@row["NickName"]</td>
+                            <td align="left">@row["Email"]</td>
+                            <td align="left">@row["Mobile"]</td>
+
+                            <td align="center">
+                                @{
+
+                        List<BonSite.Core.Domain.Site.UserRoleInfo> modelList = TempData["userModelList"] as List<BonSite.Core.Domain.Site.UserRoleInfo>;
+                        foreach (var item in modelList)
+                        {
+                            int roleID = item.RoleID;
+                            int role_ID = Int32.Parse(row["AdminGroupID"].ToString());
+                            if (roleID == role_ID)
+                            {
+                                @item.RoleName
+                            }
+                        }
+
+                                }
+
+                            </td>
+
+                            <td align="center">
+                                @if (row["state"].ToString() == "0")
+                                {
+                                    @:正常
+                          }
+                                else
+                                {
+                                    @:锁定
+                          }
+                            </td>
+
+                            <td align="center">
+                                @*@if (row["AdminGroupID"].ToString() != "1")
+                  {
+                            @Html.ActionLink("权限", "AdminMenuEdit", new { userID = row["UserID"] })
+            }*@
+                                @Html.ActionLink("编辑", "AdminEdit", new { userID = row["UserID"] })
+                                @Html.ActionLink("删除", "AdminDel", new { userID = row["UserID"] }, new { @class = "deleteOperate" })
+                            </td>
+                        </tr>
+                    }
+                </table>
+                <div class="pagelist">
+                    @Html.AdminPager(Model.PageModel)
+                </div>
+            </div>
+
+        </div>
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

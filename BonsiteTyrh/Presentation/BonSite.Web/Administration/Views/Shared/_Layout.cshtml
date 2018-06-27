@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="/administration/Content/Css/main.css" rel="stylesheet" type="text/css" />
+    @RenderSection("header",false)
+</head>
+
+<body>
+    @RenderSection("body")
+    @*<div class="footer">
+@WorkContext.SiteCopyright
+<br />
+程序版本:@WorkContext.SiteVersion
+</div>*@
+</body>
+</html>

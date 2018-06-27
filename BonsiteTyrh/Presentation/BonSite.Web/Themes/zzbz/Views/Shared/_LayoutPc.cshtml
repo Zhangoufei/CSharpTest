@@ -1,0 +1,281 @@
+﻿@using BonSite.Core
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="0">
+    <meta name="referrer" content="never" />
+    <meta name="Keywords" content="郑州八中、郑州八中官网">
+    <meta name="description" content="郑州市第八中学，位于郑州市金水区经五路七号，是一所全日制公办初级中学，创建于1952年7月，原名为“河南省立郑州第四初级中学”,1958年更名为“郑州市第八中学”，1962年成为郑州市重点中学，1978年成为首批省重点中学，也是当时唯一的一所省级重点初级中学。1996年，在国家施行全民义务教育的政策背景下，学校招生实施就近划片入学。" />
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href="/content/web/images/favo.ico" type="image/x-icon">
+    @*pc端首页*@
+    <link rel="stylesheet" href="@Url.Content("~/Content/pcWeb/css/reset.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/pcWeb/css/swiper.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/pcWeb/css/jquery.vm-carousel.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/pcWeb/css/style.1.3.css")">
+    <script src="@Url.Content("~/Content/pcWeb/js/modernizr.js")"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?ce683a20487cc5c304f17afc1a64ba86";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+
+<body style="min-width:1180px;margin: 0 auto;">
+    <div class="index-header container">
+        <!--logo-->
+        <div class="header-left">
+            <div class="index-logo">
+                <img src="/Content/PcWeb/images/log_03.png" alt="">
+            </div>
+            <div class="school-motto"><img src="/Content/PcWeb/images/school-motto_06.png" alt=""></div>
+        </div>
+        <div class="header-right">
+            <ul class="header-right-list" style="margin-top:20px;">
+                <li class="header-right-item"><a href="http://192.168.18.106:8002">登录</a></li>
+                <li class="header-right-item pr weChat">
+                    <a href="#">微信公众号</a>
+                    <div class="QR-img">
+                        <img src="/Content/PcWeb/images/QRcode-_32.png" alt="">
+                    </div>
+                </li>
+                <li class="header-right-item pr weChat">
+                    <a href="#" class="border-rightNo">微信官网地址</a>
+                    <div class="QR-img">
+                        <img src="/Content/PcWeb/images/wgw.png" alt="">
+                    </div>
+                </li>
+            </ul>
+            <div class="time-box">
+                   <p class="time-box-tit1 header-time"></p>
+                @* <p class="time-box-tit1 header-time2"><span>农历丁酉年</span><span>七月十四</span></p>*@
+				<p class="time-box-tit1"><input type="text" value="" style="padding:2px;" id="headerSearchText"/><a id="headersearch" style="padding:3.5px 5px; height: 24px;width:30px;display: inline;"><img src="/Content/PcWeb/images/headerSearch.png" alt="" style="width:25px;height:25px;vertical-align:-7px;"></a></p>
+            </div>
+        </div>
+    </div>
+    <!--导航栏-->
+    <div class="index-nav container">
+        <ul class="index-nav-list">
+            <li class="index-nav-item fl"><a href="/" class="index-nav-tit">首页</a></li>
+            @{
+                foreach (NavInfo navinfo in (WorkContext.NavList.Where(p => p.Pid == WorkContext.Type).ToList()))
+                {
+            <li class="index-nav-item fl">
+                @{
+                    List<NavInfo> sublist = WorkContext.NavList.Where(p => p.Pid == @navinfo.Id).ToList();
+                    if (sublist.Count > 0)
+                    {
+                        <a class="index-nav-tit ">@navinfo.Name</a>
+                        <ul class="index-nav-tit-list index-nav-tit-list2">
+                            @foreach (NavInfo subinfo in sublist)
+                            {
+                                if (subinfo.Target.Equals(1))
+                                {
+                                    <li class="index-nav-tit-item"><a href="@subinfo.Url" target="_blank">@subinfo.Name</a></li>
+
+                                }
+                                else
+                                {
+                                    if (subinfo.Url.Contains("http"))
+                                    {
+                                        <li class="index-nav-tit-item"><a href="@subinfo.Url" target="_blank">@subinfo.Name</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li class="index-nav-tit-item"><a href="@subinfo.Url.Insert(subinfo.Url.LastIndexOf('/'), "Pc")">@subinfo.Name</a></li>
+                                    }
+
+                                }
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        if (navinfo.Url.Contains("/"))
+                        {
+                            if (navinfo.Target.Equals(1))
+                            {
+                                <a class="index-nav-tit " href="@navinfo.Url.Insert(navinfo.Url.LastIndexOf('/'), "Pc")" target="_blank">@navinfo.Name</a>
+                            }
+                            else
+                            {
+                                <a class="index-nav-tit " href="@navinfo.Url.Insert(navinfo.Url.LastIndexOf('/'), "Pc")">@navinfo.Name</a>
+                            }
+                        }
+
+                    }
+                }
+            </li>
+                }
+            }
+        </ul>
+        <div style="clear:both;height:0;padding:0;margin:0;"></div>
+
+    </div>
+    @RenderBody()
+    <!--友情链接-->
+    @*<ul class="friend-link-list container">
+            <li><h3><i class="friend-linkIcon"></i> 友情链接:</h3></li>
+            @{
+                foreach (BonSite.Core.FriendLinkInfo info in WorkContext.FriendLinkList)
+                {
+                    <li><a href="@info.Url" target="@info.Target" title="@info.Title">@info.Name</a></li>
+                }
+            }
+        </ul>*@
+    <!--友情链接-->
+    <div class="container" style="overflow:hidden;">
+        <div class="fl friend-link-tit"><h3><i class="friend-linkIcon"></i> 友情链接:</h3></div>
+        <div class="friend-link-wrap">
+            <ul class="friend-link-list">
+                @{
+                    foreach (BonSite.Core.FriendLinkInfo info in WorkContext.FriendLinkList)
+                    {
+                        <li><a href="@info.Url" target="@info.Target" title="@info.Title"><img src="/upload/friendlink/thumb150_120/@info.Logo" alt="@info.Name"></a></li>
+                    }
+                }
+                @*<li><a href="http://www.zzedu.net.cn/"><img src="/Content/PcWeb/images/friendLink/link1.jpg" alt="郑州教育信息网"></a></li>
+                    <li><a href="http://www.haedu.gov.cn/"><img src="/Content/PcWeb/images/friendLink/link2.jpg" alt="河南省教育厅"></a></li>
+                    <li><a href="http://www.chinaedu.edu.cn/"><img src="/Content/PcWeb/images/friendLink/link3.jpg" alt="中国教育信息网"></a></li>
+                    <li><a href="http://www.zzjy.gov.cn/"><img src="/Content/PcWeb/images/friendLink/link4.jpg" alt="郑州市教育局"></a></li>
+                    <li><a href="http://www.zxxk.com/"><img src="/Content/PcWeb/images/friendLink/link5.jpg" alt="学科网"></a></li>
+                    <li><a href=""><img src="/Content/PcWeb/images/friendLink/link6.jpg" alt="中国教育和科研计算机网"></a></li>
+                    <li><a href=""><img src="/Content/PcWeb/images/friendLink/link7.jpg" alt="哈弗大学"></a></li>
+                    <li><a href=""><img src="/Content/PcWeb/images/friendLink/link8.jpg" alt="河南省招生办公室"></a></li>
+                    <li><a href=""><img src="/Content/PcWeb/images/friendLink/link9.jpg" alt="中国教育新闻网"></a></li>
+                    <li><a href=""><img src="/Content/PcWeb/images/friendLink/link10.jpg" alt="网易公开课"></a></li>
+                    <li><a href=""><img src="/Content/PcWeb/images/friendLink/link11.jpg" alt="学堂在线"></a></li>
+                    <li><a href=""><img src="/Content/PcWeb/images/friendLink/link12.jpg" alt="新浪教育"></a></li>*@
+
+            </ul>
+        </div>
+
+
+
+
+    </div>
+
+
+
+    <!--底部-->
+    <div class="container">
+        <div class="footer">
+            <p class="footer-address"> <span>邮编：450003</span><span>电子邮箱：admin@zzbz.net</span><span>电话：0371-65952299</span></p>
+            <p class="footer-email">
+                <span>版权所有：郑州第八中学</span><span>地址：河南省郑州市金水区经五路七号</span><span>备案信息：<span class="colorO">豫ICP备05012843号-1</span></span>
+            </p>
+            </p >
+
+
+            <div class="link11">
+                <script src="http://dcs.conac.cn/js/17/251/0000/40901089/CA172510000409010890002.js" type="text/javascript"></script>
+            </div>
+        </div>
+    </div>
+    <script src="@Url.Content("~/Content/pcWeb/js/jquery-1.11.0.min.js")"></script>
+    <script src="@Url.Content("~/Content/pcWeb/js/jquery.vm-carousel.js")"></script>
+    <script>
+        /*$('.vmcarousel-centered-infitine').vmcarousel({
+            centered: true,
+            start_item: 1,
+            autoplay: true,
+            infinite: true,
+            items_to_show: 5,
+            speed:500,
+        });*/
+        /*头部搜索栏*/
+
+        $("#headersearch").click(function () {
+            var txt = $("#headerSearchText").val();
+           
+            window.location.href = "http://192.168.18.106:8005/News/search?search=" + txt;
+        })
+        $("body").keydown(function () {
+            if (event.keyCode == "13") {//keyCode=13是回车键；数字不同代表监听的按键不同
+                var txt = $("#headerSearchText").val();
+
+                window.location.href = "http://192.168.18.106:8005/News/search?search=" + txt;
+            }
+        });
+
+        var timer = null;
+        var x = 0;
+        var imgL = $('.vmc-centered1 li').length;
+        var imgW = $('.vmc-centered1 li').outerWidth() * imgL;
+        function run() {
+            timer = setInterval(function () {
+                x++;
+                if (x >= imgW - 1108) {
+                    x = 0;
+                    $('.schoolView-wrap').scrollLeft(x)
+
+                }
+                $('.schoolView-wrap').scrollLeft(x)
+            }, 15)
+        }
+        run()
+
+        $('.schoolView-wrap').mouseover(function () {
+            clearInterval(timer)
+        });
+        $('.schoolView-wrap').mouseout(function () {
+            run()
+        })
+
+        var timer1 = null, x1 = 0;
+
+        var imgL1 = $('.vmc-centered li').length;
+        var imgW1 = $('.vmc-centered li').outerWidth() * imgL1;
+        function run1() {
+            timer1 = setInterval(function () {
+                x1++;
+                if (x1 > imgW1 - 1108) {
+                    $('.Teacher-elegant-wrap').scrollLeft(0);
+                    x1 = 0;
+                }
+                $('.Teacher-elegant-wrap').scrollLeft(x1);
+            }, 20)
+        }
+        run1()
+        $('.Teacher-elegant-wrap').mouseover(function () {
+            clearInterval(timer1)
+        });
+        $('.Teacher-elegant-wrap').mouseout(function () {
+            run1()
+        })
+
+            /*$('.vmcarousel-centered').vmcarousel({
+                centered: true,
+                start_item: 2,
+                autoplay: true,
+                infinite: true,
+                items_to_show: 7,
+                speed:600,
+                delay:2000,// delay in ms
+
+                // min number of items
+                min_items_to_show: 2,
+                // items to slide at a time
+                items_to_slide: 1,
+                dont_cut: false,
+                // start item
+                start_item_centered: true,
+                // callback
+                changed_slide: $.noop()
+
+            });
+        */
+
+    </script>
+    <script src="@Url.Content("~/Content/pcWeb/js/swiper.jquery.min.js")"></script>
+    <script src="@Url.Content("~/Content/pcWeb/js/Common.1.5.js")"></script>
+</body>
+</html>

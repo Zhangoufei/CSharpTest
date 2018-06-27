@@ -1,0 +1,250 @@
+﻿@model BonSite.Web.Admin.Models.ArticleClassModel
+@{
+    ViewBag.Title = "Add";
+}
+@section header{
+               
+<link href="/administration/content/css/uploadify.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/administration/content/ueditor/themes/default/css/ueditor.css"/> 
+    <script type="text/javascript" src="/administration/scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/administration/scripts/jquery.validate.js"></script>
+    <script type="text/javascript" src="/administration/scripts/jquery.validate.unobtrusive.js"></script>
+<script language="javascript" type="text/javascript">
+    //防止客户端缓存文件，造成uploadify.js不更新，而引起的“喔唷，崩溃啦”
+    document.write("<script type='text/javascript' "
+            + "src='/administration/scripts/jquery.uploadify.js?" + new Date()
+            + "'></s" + "cript>");
+</script>
+
+    <script type="text/javascript">
+        $(function () {
+            var selval = $("input:radio[name='ClassType']:checked").val()
+            if ((selval == "0") || (selval == "1") || (selval == "2") || (selval == "3")) {
+                $(".trout").show();
+                $(".tradminurl").show();
+            }
+            else if (selval == "-1") {
+                $(".trout").hide();
+                $(".tradminurl").show();
+            }
+            else {
+                $(".trout").hide();
+                $(".tradminurl").hide();
+            }
+
+          
+
+
+            $("input:radio[name='ClassType']").click(function () {
+                if (($(this).val() == "0") || ($(this).val() == "1")||($(this).val() == "2") || ($(this).val() == "3")) {
+                    $(".trout").show();
+                    $(".tradminurl").show();
+                   
+                }
+                else if ($(this).val() == "-1") {
+                    $(".trout").hide();
+                    $(".tradminurl").show();
+                }
+                else {
+                    $(".trout").hide();
+                    $(".tradminurl").hide();
+                }
+            })
+        })
+
+       
+
+        $(function () {
+            $("#uploadify").uploadify({
+                'formData': { 'uid': '@WorkContext.Uid', 'password': '@WorkContext.EncryptPwd' },
+                'swf': '/administration/content/flashes/uploadify.swf',
+                'uploader': '/admin/tool/uploadarticleclasslogo',
+                'buttonText': '上传图片',
+                'height': 24,
+                'width': 80,
+                'fileTypeDesc': 'Image Files',
+                'fileTypeExts': '@ViewData["allowImgType"]',
+                'fileSizeLimit': '@ViewData["maxImgSize"]',
+                'fileObjName': 'articleClassLogo',
+                'auto': true,
+                'multi': false,
+                'removeTimeout': 2,
+                'onUploadSuccess': function (file, data, response) {
+                    if (data == "-1")
+                        alert('上传图片不能为空');
+                    else if (data == "-2")
+                        alert('上传图片的类型不允许');
+                    else if (data == "-3")
+                        alert('上传图片超过系统允许的最大大小');
+                    else {
+                        $(".uploadPreview").empty().append("<img width=\"88\" height=\"88\" src=\"/upload/articleclass/thumb@{@ViewData["size"].ToString()}/" + data + "\"  />");
+                        $("#ImgUrl").val(data);
+                        $(".upload span[htmlFor='ArticleClassLogo']").empty();
+                    }
+                }
+            });
+        });
+
+
+
+    </script>
+
+               }
+@section body{
+<div class="main">
+        <div class="nav">当前位置：<a href="Home.aspx">首页</a> <span> &rsaquo; </span> <a href="List.aspx">栏目管理</a> <span> &rsaquo; </span> 栏目信息编辑 </div>
+        
+        <ul class="submenu">
+        	<li class="sel"><a href="#">栏目信息编辑</a></li>
+        </ul>
+
+       @using (Html.BeginForm())
+       { 
+           <div class="top15">
+        <table width="100%" class="tbstyle1" cellpadding="5" cellspacing="1">
+            <tr>
+                <th style="width:80px;">所属分类：</th>
+                <td>@Html.DropDownListFor(x =>x.ParentArticleClassID,ViewData["ArticleClassList"] as List<SelectListItem>)</td>
+            </tr>
+            <tr>
+                <th>分类名称：</th>
+                <td>@Html.TextBoxFor(x => x.ClassName, new {size="50" }) </td>
+            </tr>
+
+
+
+            <tr>
+                <th>副标题：</th>
+                <td>@Html.TextBoxFor(x => x.Subhead, new { size = "50" }) </td>
+            </tr>
+            <tr>
+                <th>分类代码：</th>
+                <td>@Html.TextBoxFor(x=>x.Code, new { size="30"})</td>
+            </tr>
+            <tr>
+                <th>类型：</th>
+                <td>
+                    <label>@Html.RadioButtonFor(x => x.ClassType, 0)链接</label>
+                    <label>@Html.RadioButtonFor(x => x.ClassType, 1)单页</label>
+                    <label>@Html.RadioButtonFor(x => x.ClassType, 2)文章列表</label>
+                    <label>@Html.RadioButtonFor(x => x.ClassType, 3)图片列表</label>
+                    <label>@Html.RadioButtonFor(x => x.ClassType, -1)管理菜单</label>
+                    <label>@Html.RadioButtonFor(x => x.ClassType, 4)微视频</label>
+                </td>
+            </tr>
+            <tr class="trout">
+                <th>外部地址：</th>
+                <td>@Html.TextBoxFor(x => x.WebUrl, new { size="60"})</td>
+            </tr>
+            
+            <tr>
+                <th>接受投稿：</th>
+                <td>
+                    <label>@Html.RadioButtonFor(x => x.IsOpen, 1)是</label>
+                    <label>@Html.RadioButtonFor(x => x.IsOpen, 0)否</label>
+                </td>
+            </tr>
+            
+            <tr>
+                <th>导航：</th>
+                <td>
+                    <label>@Html.RadioButtonFor(x => x.IsNav, 1)是</label>
+                    <label>@Html.RadioButtonFor(x => x.IsNav, 0)否</label>
+                </td>
+            </tr>
+            <tr>
+                <th>前台显示：</th>
+                <td>
+                    <label>@Html.RadioButtonFor(x => x.IsWeb, 1)是</label>
+                    <label>@Html.RadioButtonFor(x => x.IsWeb, 0)否</label>
+                </td>
+            </tr>
+            <tr>
+                <th>后台显示：</th>
+                <td>
+                    <label>@Html.RadioButtonFor(x => x.IsAdmin, 1)是</label>
+                    <label>@Html.RadioButtonFor(x => x.IsAdmin, 0)否</label>
+                </td>
+            </tr>
+            <tr>
+                <th>新闻显示：</th>
+                <td>
+                    <label>@Html.RadioButtonFor(x => x.IsShowNews, 1)是</label>
+                    <label>@Html.RadioButtonFor(x => x.IsShowNews, 0)否</label>
+                </td>
+            </tr>
+                <tr>
+                <th>班牌专栏显示：</th>
+                <td>
+                    <label>@Html.RadioButtonFor(x => x.IsClassBrand, 1)是</label>
+                    <label>@Html.RadioButtonFor(x => x.IsClassBrand, 0)否</label>
+                </td>
+            </tr>
+           
+            <tr class="tradminurl">
+                <th>后台地址：</th>
+                <td>@Html.TextBoxFor(x => x.AdminUrl, new { size="60"})</td>
+            </tr>
+           
+            <tr>
+                <th>列表模板：</th>
+                <td>@Html.TextBoxFor(x => x.ListView, new { size="30"})</td>
+            </tr>
+            <tr>
+                <th>内容模板：</th>
+                <td>@Html.TextBoxFor(x => x.ContentView, new { size="30"})</td>
+            </tr>
+            <tr>
+                <th>排序：</th>
+                <td>@Html.TextBoxFor(x => x.DisplayOrder, new {size = "3"})</td>
+            </tr>
+            <tr class="imgurl">
+                <th>图片URL：</th>
+                <td>
+                   <div class="upload">
+                      <div class="uploadPreview">
+                         @{
+                               if (!string.IsNullOrEmpty(Model.ImgUrl))
+                               {
+                                   <img width="88" height="88" src="/upload/articleclass/thumb@{@ViewData["size"].ToString() } /@Model.ImgUrl" />
+                                }
+                               else
+                               {
+                                @:暂无图片
+                                }
+                           }
+                        </div>
+                        <div class="uploadProgressBar" id="uploadify-queue"></div>
+                        <div class="uploadBut"><input type="file" name="uploadify" id="uploadify" /></div>
+                        @Html.TextBoxFor(x => x.ImgUrl, new { @class = "hide" })
+                        <div style="position:absolute; top:30px; left:180px;">@Html.ValidationMessageFor(x => x.ImgUrl)</div>
+                    </div>
+
+                </td>
+            </tr>
+            @if (WorkContext.SiteConfig.ShowSEO.Equals(1)){
+            <tr>
+                <td colspan="2">
+                    SEO信息
+                </td>
+            </tr>
+            <tr>
+                <th>Keywords</th>
+                <td>@Html.TextAreaFor(x=>x.Keyword,new {row="3",style="width:500px;"})
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>@Html.TextAreaFor(x=>x.Description,new {row="3",style="width:500px;"})
+                </td>
+            </tr>
+            }
+            <tr>
+                <th></th>
+                <td><input id="btnSubmit" type="submit" value="提交" /></td>
+            </tr>
+        </table>
+
+           </div>
+       }
+</div>

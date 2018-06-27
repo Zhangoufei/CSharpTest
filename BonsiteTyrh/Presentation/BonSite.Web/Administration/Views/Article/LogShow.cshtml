@@ -1,0 +1,59 @@
+﻿@model BonSite.Web.Admin.Models.ArticleListModel
+@using System.Data;
+@{
+    ViewBag.Title = "ArticleListLog";
+    int content = 1;
+}
+@section header{
+    <script type="text/javascript" src="/administration/scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/administration/scripts/showlist.js"></script>
+}
+
+@section body{
+    @using (Html.BeginForm("List", "Article"))
+    {
+        <div class="main">
+            <div class="nav">
+                当前位置：<a href="@Url.Action("SiteRunInfo","Home")">管理后台</a>
+                @*@foreach (ArticleClassInfo info in (ViewData["classPath"] as List<ArticleClassInfo>))
+                    {
+                        <span> &rsaquo; </span> <a href="@Url.Action("List","Article",new {articleClassID=@info.ArticleClassID})">@info.ClassName</a>
+                    }*@
+
+            </div>
+
+            <ul class="submenu">
+                <li class="sel"><a href="#">@(Model.ClassInfo.ClassName)列表</a></li>
+            </ul>
+            <div class="top15">
+                <input type="hidden" value="@Model.SortColumn" id="sortColumn" name="sortColumn" />
+                <input type="hidden" value="@Model.SortDirection" id="sortDirection" name="sortDirection" />
+                <table width="100%" cellpadding="5" cellspacing="0" class="tblist">
+                    <tr>
+                        <th style="min-width:20px;width:2.44%">序号</th>
+                        <th style="min-width: 30px; width: 4.44%; ">标题</th>
+                        <th style="min-width: 20px; width: 2.96%; ">操作</th>
+                        <th style="min-width: 30px; width: 4.44%; ">操作人</th>
+                        <th style="min-width: 30px; width: 4.44%; ">ip地址</th>
+                        <th style="min-width: 30px; width: 4.44%; ">创建时间</th>
+                    </tr>
+                    @foreach (DataRow row in Model.DataList.Rows)
+                    {
+                    <tr>
+                        <td align="center">@content</td>
+                        <td align="center">@row["title"]</td>
+                        <td align="center">@row["content"]</td>
+                        <td align="center">@row["userName"]</td>
+                        <td align="center">@row["ip"]</td>
+                        <td align="center">@row["createTime"]</td>
+                    </tr>
+                        content++;
+                    }
+                </table>
+                <div class="pagelist">
+                    @Html.AdminPager(Model.PageModel)
+                </div>
+            </div>
+        </div>
+    }
+}

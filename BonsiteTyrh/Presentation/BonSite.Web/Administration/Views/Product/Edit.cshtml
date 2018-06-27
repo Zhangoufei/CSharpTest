@@ -1,0 +1,197 @@
+﻿@model BonSite.Web.Admin.Models.ProductModel
+@section header{
+               
+    <link rel="stylesheet" href="/administration/content/ueditor/themes/default/css/ueditor.css"/> 
+    <script type="text/javascript" src="/administration/scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/administration/content/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="/administration/content/ueditor/ueditor.all.js"></script>
+    <script type="text/javascript" src="/administration/scripts/jquery.validate.js"></script>
+    <script type="text/javascript" src="/administration/scripts/jquery.validate.unobtrusive.js"></script>
+    <link href="/administration/content/css/uploadify.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/administration/content/my97datepicker/WdatePicker.js"></script>
+    @*<script type="text/javascript" src="/administration/scripts/jquery.uploadify.js"></script>*@
+    <script language="javascript" type="text/javascript">
+        //防止客户端缓存文件，造成uploadify.js不更新，而引起的“喔唷，崩溃啦”  
+        document.write("<script type='text/javascript' "
+                + "src='/administration/scripts/jquery.uploadify.js?" + new Date()
+                + "'></s" + "cript>");
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            
+            $("#uploadify").uploadify({
+                'formData': { 'uid': '@WorkContext.Uid', 'password': '@WorkContext.EncryptPwd' },
+                'swf': '/administration/content/flashes/uploadify.swf',
+                'uploader': '/admin/tool/uploadarticleimage',
+                'buttonText': '上传图片',
+                'height': 24,
+                'width': 80,
+                'fileTypeDesc': 'Image Files',
+                'fileTypeExts': '@ViewData["allowImgType"]',
+                'fileSizeLimit': '@ViewData["maxImgSize"]',
+                'fileObjName': 'articleImage',
+                'auto': true,
+                'multi': false,
+                'removeTimeout': 2,
+                'onUploadSuccess': function (file, data, response) {
+                    if (data == "-1")
+                        alert('上传图片不能为空');
+                    else if (data == "-2")
+                        alert('上传图片的类型不允许');
+                    else if (data == "-3")
+                        alert('上传图片超过系统允许的最大大小');
+                    else {
+                        $(".uploadPreview").empty().append("<img width=\"88\" height=\"88\" src=\"/upload/article/show/thumb@{@ViewData["size"].ToString()}/" + data + "\"  />");
+                        $("#ImgUrl").val(data);
+                        $(".upload span[htmlFor='ShowImg']").empty();
+                    }
+                }
+            });
+        })
+    </script>
+               }
+@section body{
+<div class="main">
+        <div class="nav">当前位置：<a href="@Url.Action("SiteRunInfo","Home")">管理后台</a>
+    @foreach (ArticleClassInfo info in (ViewData["classPath"] as List<ArticleClassInfo>))
+    {
+     <span> &rsaquo; </span> <a href="@Url.Action("List","Product",new {productClassID=@info.ArticleClassID})">@info.ClassName</a> 
+    }
+    <span> &rsaquo; </span> 编辑内容
+</div>
+        <ul class="submenu">
+        	<li class="sel"><a href="#">编辑内容</a></li>
+        </ul>
+
+       @using (Html.BeginForm())
+       { 
+           <div class="top15">
+        <table width="100%" class="tbstyle1" cellpadding="5" cellspacing="1">
+            <tr>
+                <th style="width:80px;">分类：</th>
+                <td>@Html.DropDownListFor(x =>x.ProductClassID,ViewData["ProductClassList"] as List<SelectListItem>)</td>
+            </tr>
+            <tr>
+                <th>产品名称：</th>
+                <td>@Html.TextBoxFor(x => x.Title, new {size="100" }) @Html.ValidationMessageFor(x=>x.Title)</td>
+            </tr>
+            <tr>
+                <th>编号：</th>
+                <td>@Html.TextBoxFor(x=>x.Code)</td>
+            </tr>
+            <tr>
+                <th>介质：</th>
+                <td>@Html.DropDownListFor(x =>x.Type,ViewData["typelist"] as List<SelectListItem>)</td>
+            </tr>
+
+            <tr>
+                <th>出版商：</th>
+                <td>@Html.TextBoxFor(x=>x.Provider)</td>
+            </tr>
+           
+          
+            <tr class="trBody">
+                <th style="vertical-align:top;">介绍：</th>
+                <td>
+                    <textarea name="Body" id="bsEditor">@Model.Body</textarea>
+         <script type="text/javascript">
+             UE.getEditor('bsEditor', {
+                 imageUrl: "/admin/tool/uploadarticleeditorimage",
+                 fileUrl: "/admin/tool/uplaodarticleeditorfile"
+             });
+        </script>
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="height:5px; padding:0px;"></td>
+            </tr>
+            <tr>
+                <th>摘要：</th>
+                <td>@Html.TextAreaFor(x =>x.Digest ,new { cols = "100", rows = "6" })</td>
+            </tr>
+            <tr>
+                <th>图片：</th>
+                <td>
+                     <div class="upload">
+        <div class="uploadPreview">
+         @{
+           if (!string.IsNullOrEmpty(Model.ImgUrl))
+    {
+            <img width="88" height="88" src="/upload/article/show/thumb@{@ViewData["size"].ToString()}/@Model.ImgUrl" /> 
+    }
+    else
+    {
+                                @:暂无图片
+        }
+}
+        </div>
+        <div class="uploadProgressBar" id="uploadify-queue"></div>
+        <div class="uploadBut"><input type="file" name="uploadify" id="uploadify" /></div>
+        <input type="hidden" name="ShowImg" id="ShowImg" value=""/>
+        @Html.TextBoxFor(x => x.ImgUrl, new { @class = "hide" })
+        <div style="position:absolute;top:30px; left:180px;"></div>
+      </div>
+
+                </td>
+            </tr>
+           
+            <tr>
+                <td colspan="2" style="height:5px; padding:0px;"></td>
+            </tr>
+            <tr>
+                <th>是否显示：</th>
+                <td>
+                    <label>@Html.RadioButtonFor(x => x.IsShow, 1)是</label>
+                    <label>@Html.RadioButtonFor(x => x.IsShow, 0)否</label>
+                </td>
+            </tr>
+            <tr>
+                <th>置顶：</th>
+                <td>
+                    <label>@Html.RadioButtonFor(x => x.IsTop, 1)是</label>
+                    <label>@Html.RadioButtonFor(x => x.IsTop, 0)否</label>
+                </td>
+            </tr>
+           
+            <tr>
+                <th>推荐：</th>
+                <td>
+                    <label>@Html.RadioButtonFor(x => x.IsBest, 1)是</label>
+                    <label>@Html.RadioButtonFor(x => x.IsBest, 0)否</label>
+                </td>
+            </tr>
+            <tr>
+                <th>创建时间：</th>
+                <td>
+                    @Html.TextBoxFor(x=>x.AddTime, new { size = "18", onfocus = "WdatePicker({el:'AddTime'})" })
+                </td>
+            </tr>
+            @if (WorkContext.SiteConfig.ShowSEO.Equals(1)){
+            <tr>
+                <td colspan="2">
+                    SEO信息
+                </td>
+            </tr>
+            <tr>
+                <th>Keywords</th>
+                <td>@Html.TextAreaFor(x=>x.Keyword,new {row="3",style="width:500px;"})
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>@Html.TextAreaFor(x=>x.Description,new {row="3",style="width:500px;"})
+                </td>
+            </tr>
+            }
+            <tr>
+                <th></th>
+                <td><input type="submit" value="提交" /></td>
+            </tr>
+        </table>
+
+           </div>
+       }
+</div>
+}

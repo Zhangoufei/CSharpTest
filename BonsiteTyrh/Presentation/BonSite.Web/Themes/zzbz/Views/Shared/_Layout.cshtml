@@ -1,0 +1,457 @@
+﻿@using BonSite.Core
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="Keywords" content="郑州八中、郑州八中官网">
+    <meta name="description" content="郑州市第八中学，位于郑州市金水区经五路七号，是一所全日制公办初级中学，创建于1952年7月，原名为“河南省立郑州第四初级中学”,1958年更名为“郑州市第八中学”，1962年成为郑州市重点中学，1978年成为首批省重点中学，也是当时唯一的一所省级重点初级中学。1996年，在国家施行全民义务教育的政策背景下，学校招生实施就近划片入学。" />
+    <title>@ViewBag.Title</title>
+    @*<link rel="icon" href="/content/web/images/32X32.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/content/web/images/32X32.ico" type="image/x-icon" />*@
+    <link rel="shortcut icon" href="/content/web/images/favo.ico" type="image/x-icon">
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/Web/css/reset.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/Web/fonts/iconfont.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/Web/css/mui.min.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/Web/css/swiper.min.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/Web/css/animate.min.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/Web/css/bootstrap.min.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/Web/css/style.css")" />
+    <script src="@Url.Content("~/Content/Web/js/jquery-1.9.1.min.js")" type="text/javascript" charset="utf-8"></script>
+    <script src="@Url.Content("~/Content/Web/js/mui.min.js")" type="text/javascript" charset="utf-8"></script>
+    <script src="@Url.Content("~/Content/Web/js/swiper.min.js")" type="text/javascript" charset="utf-8"></script>
+    <script src="@Url.Content("~/Content/Web/js/swiper.animate.min.js")" type="text/javascript" charset="utf-8"></script>
+    <script src="@Url.Content("~/Content/Web/js/bootstrap.min.js")" type="text/javascript" charset="utf-8"></script>
+  <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?0002ed7756059b1c19d69c8a19633f7e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<style>
+        .friend_link_wrap {
+            background-color: #a24a49;
+            padding: 25px 0;
+            margin-top: 40px;
+        }
+
+        .friend_link_list {
+            margin: 0 auto;
+        }
+
+            .friend_link_list li {
+                float:left;
+                width:50%;
+            }
+
+                .friend_link_list li a {
+                    font-size: 14px;
+                    color: #ffffff;
+                }
+
+        .footer {
+            margin-top: 0 !important;
+        }
+        .wrapper-img {
+            height: 100px;
+            /*background-color: #982439;*/
+            background-color: #e9efef;
+            text-align: center;
+            /*background-image: url(../content/web/images/bgpic.png);
+            background-position: top right;
+            background-size: contain;
+            background-repeat: no-repeat;*/
+        }
+
+        .wrapper-img-box {
+            margin-top:5px;
+            height: 88px;
+            float:left;
+            width:280px;
+        }
+
+        .wrapper-img img {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .wrapper-img .container {
+            height: 100px;
+
+        }
+        /*#982439*/
+            .wrapper-img .container h1 {
+                float: left;
+                margin-left: 20px;
+                margin-top: 30px;
+                display: inline-block;
+                font-size: 30px;
+                color: #982439;
+                /*color:#ffffff;*/
+                filter: alpha(opacity=70);
+                font-family: 'Microsoft Sans Serif';
+            }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="wrapper-img">
+        <div class="container">
+            <div class="wrapper-img-box"><img src="/content/web/images/logo24.png" alt="Alternate Text" /></div>
+            <h1>尚德 博雅 笃行 致远</h1>
+        </div>
+    </div>
+    <div class="body-main mui-off-canvas-wrap  mui-slide-in">
+        <aside id="offCanvasSide" class=" ">
+            <div class="index-nav container" style="top:35px">
+                <ul>
+                    <li><a href="/home/index">首页</a></li>
+                    @{foreach (NavInfo navinfo in (WorkContext.NavList.Where(p => p.Pid == WorkContext.Type).ToList()))
+                    {
+                        <li>
+                            @{
+                        List<NavInfo> sublist = WorkContext.NavList.Where(p => p.Pid == @navinfo.Id).ToList();
+                        if (sublist.Count > 0)
+                        {
+                            <a>@navinfo.Name</a>
+                                <div class="sidebar">
+                                    @foreach (NavInfo subinfo in sublist)
+                                    {
+                                        if (subinfo.Target.Equals(1))
+                                        {
+                                            <a href="@subinfo.Url" target="_blank">@subinfo.Name</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="@subinfo.Url">@subinfo.Name</a>
+                                        }
+
+                                    }
+                                </div>
+                        }
+                        else
+                        {
+
+                            if (navinfo.Target.Equals(1))
+                            {
+                                <a href="@navinfo.Url" target="_blank">@navinfo.Name</a>
+                            }
+                            else
+                            {
+                                <a href="@navinfo.Url">@navinfo.Name</a>
+                            }
+                        }
+
+                            }
+
+                        </li>
+                    }
+                    }
+                </ul>
+                <div class="clear"></div>
+            </div>
+        </aside>
+        <a href="javascript:;" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
+        <div class="mui-inner-wrap">
+            @*<div class="index-banner">
+                <div class="index-header container">
+                    <div class="user-header">
+                        <a href=" http://218.28.141.90:8007" target="_blank" class="exit-btn" style="top:0">登录</a>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>*@
+            @RenderBody()
+            <div class="friend_link_wrap" style="overflow:hidden;">
+                <div style="color:#fff;font-size:14px;width:20%;float:left;">友情链接：</div>
+                <ul class="friend_link_list  container" style="float:left;width:80%;">
+                    
+                    @{
+                        foreach (BonSite.Core.FriendLinkInfo info in WorkContext.FriendLinkList)
+                        {
+                            <li><a href="@info.Url" target="@info.Target" title="@info.Title">@info.Name</a></li>
+                        }
+                    }
+
+                </ul>
+            </div>
+
+
+            <div class="footer">
+                <p>Copyright 2017 郑州市第八中学</p>
+                <p>地址：郑州市金水区经五路七号 电话：0371-65952299</p>
+                <p>豫ICP备05012843</p>
+            </div>
+            <div class="top-box">
+                <img src="/Content/Web/images/top.png" onclick="topimg()" />
+            </div>
+            <div class="mui-off-canvas-backdrop"></div>
+        </div>
+    </div>
+    <script>
+      
+
+        //首页头部轮播
+        $(window).on('load resize', function () {
+                var swiper = new Swiper('.index-banner .swiper-container', {
+                    pagination: '.index-banner .swiper-pagination',
+                    nextButton: '.index-banner .swiper-button-next',
+                    prevButton: '.index-banner .swiper-button-prev',
+                    paginationClickable: true,
+                    //spaceBetween: 30,
+                    centeredSlides: true,
+                    autoplay: 4000,
+                    autoplayDisableOnInteraction: false,
+                    loop: true,
+                    //slidesPerView: 1.4,
+                    loopedSlides: 3,
+                    slidesPerView: 'auto',//解决第三张图最右侧不显示
+                    onInit: function (swiper) { //Swiper2.x的初始化是onFirstInit
+                        swiperAnimateCache(swiper);
+                        swiperAnimate(swiper);
+                    },
+                    onSlideChangeEnd: function (swiper) {
+                        swiperAnimate(swiper);
+                    }
+                });
+        })
+
+    var swiper = new Swiper('.scenery-content .swiper-container', {
+        pagination: '.scenery-content .swiper-pagination',
+        nextButton: '.scenery-content .swiper-button-next',
+        prevButton: '.scenery-content .swiper-button-prev',
+        paginationClickable: true,
+        slidesPerView: 'auto'
+
+    });
+
+    function topimg() {
+        $('body').animate({
+            scrollTop: 0
+        }, 300);
+        return false;
+    }
+
+    $(window).scroll(
+        function () {
+            var scrollTop = $(this).scrollTop();
+            //console.log(scrollTop)
+            var scrollHeight = $(document).height();
+            var windowHeight = $(this).height();
+            if (scrollTop + windowHeight == scrollHeight) {
+                // 此处是滚动条到底部时候触发的事件，在这里写要加载的数据，或者是拉动滚动条的操作
+                $(".top-box").show(500);
+            } else {
+                $(".top-box").hide();
+            }
+        });
+
+    $(window).resize(function () {
+        var windowwid = $(window).width();
+
+        if (windowwid < 992) {
+            $("#offCanvasSide").removeClass("pc");
+            $("#offCanvasSide").removeClass("wap");
+            $("#offCanvasSide").addClass("pad");
+        };
+        if (windowwid < 768) {
+            mui.init({
+                gestureConfig: {
+                    tap: true, //默认为true
+                    doubletap: true, //默认为false
+                    longtap: true, //默认为false
+                    swipe: true, //默认为true   禁止滑动
+                    drag: true, //默认为true  禁止拖动
+                    hold: false, //默认为false，不监听
+                    release: false //默认为false，不监听
+                }
+            });
+
+            $(".body-main aside").addClass("mui-off-canvas-left");
+            $("#offCanvasSide").removeClass("pc");
+            $("#offCanvasSide").removeClass("pad");
+            $("#offCanvasSide").addClass("wap");
+            $(".mui-action-menu").attr("href", "#offCanvasSide");
+
+        };
+
+        if (windowwid > 768) {
+            $(".body-main aside").removeClass("mui-off-canvas-left");
+            $(".body-main aside").attr("style", "");
+            $(".mui-action-menu").attr("href", "javascript:;");
+        }
+        if (windowwid > 992) {
+            $("#offCanvasSide").addClass("pc");
+            $("#offCanvasSide").removeClass("wap");
+            $("#offCanvasSide").removeClass("pad");
+
+        }
+
+    });
+        //修改
+    $(window).on("ready resize",function () {
+        var windowW = $(window).width();
+        console.log('windowW'+windowW)
+        if (windowW >=1200) {
+            $('.list-nav-right ').css({
+                height:355+'px' ,
+                overflowY:'scroll'
+            })
+        }
+        else if (windowW >=992 && windowW < 1200) {
+            $('.list-nav-right ').css({
+                height: 286 + 'px',
+                overflowY: 'scroll'
+            })
+        } else if (windowW <992 && windowW >=768) {
+            $('.list-nav-right ').css({
+                height: 216 + 'px',
+                overflowY: 'scroll'
+            })
+        }
+        if (windowW < 768) {
+            $('.list-nav-right ').addClass('swiper-container');
+            $('.list-nav-box ').addClass('swiper-wrapper');
+            $('.list-nav-box li').addClass('swiper-slide');
+            $(document).ready(function () {
+                var swiper = new Swiper('.list-content .swiper-container', {
+                    pagination: '.list-content  .swiper-pagination',
+                    nextButton: '.list-content .swiper-button-next',
+                    prevButton: '.list-content .swiper-button-prev',
+                    paginationClickable: true,
+                    spaceBetween: 30,
+                    centeredSlides: true,
+                    //autoplay: 2500,
+                    autoplayDisableOnInteraction: false
+                });
+            })
+        }
+    })
+        
+    var windowwid = $(window).width();
+
+    if (windowwid < 992) {
+        $("#offCanvasSide").removeClass("pc");
+        $("#offCanvasSide").removeClass("wap");
+        $("#offCanvasSide").addClass("pad");
+    };
+    if (windowwid < 768) {
+        mui.init({
+            gestureConfig: {
+                tap: true, //默认为true
+                doubletap: true, //默认为false
+                longtap: true, //默认为false
+                swipe: true, //默认为true   禁止滑动
+                drag: true, //默认为true  禁止拖动
+                hold: false, //默认为false，不监听
+                release: false //默认为false，不监听
+            }
+        });
+
+        $(".body-main aside").addClass("mui-off-canvas-left");
+        $("#offCanvasSide").removeClass("pc");
+        $("#offCanvasSide").removeClass("pad");
+        $("#offCanvasSide").addClass("wap");
+        $(".mui-action-menu").attr("href", "#offCanvasSide");
+    };
+
+    if (windowwid > 768) {
+        $(".body-main aside").removeClass("mui-off-canvas-left");
+        $(".body-main aside").attr("style", "");
+        $(".mui-action-menu").attr("href", "javascript:;").addClass("down-nav");
+     
+    }
+    if (windowwid > 992) {
+        $("#offCanvasSide").addClass("pc");
+        $("#offCanvasSide").removeClass("wap");
+        $("#offCanvasSide").removeClass("pad");
+        
+    }
+
+    mui.init({
+        gestureConfig: {
+            tap: true, //默认为true
+            doubletap: true, //默认为false
+            longtap: true, //默认为false
+            swipe: false, //默认为true   禁止滑动
+            drag: false, //默认为true  禁止拖动
+            hold: false, //默认为false，不监听
+            release: false //默认为false，不监听
+        }
+    });
+    //禁止手势右滑
+
+    //实现ios平台原生侧滑关闭页面；
+    if (mui.os.plus && mui.os.ios) {
+        mui.plusReady(function () { //5+ iOS暂时无法屏蔽popGesture时传递touch事件，故该demo直接屏蔽popGesture功能
+            plus.webview.currentWebview().setStyle({
+                'popGesture': 'none'
+            });
+        });
+    }
+
+    //导航二级下拉
+    $('.pc .index-nav li').hover(function () {
+        $(this).find('.sidebar').animate({
+            opacity: '1',
+            height: 'show'
+        }, 200);
+    }, function () {
+        $('.pc .sidebar').stop(true, true).hide();
+    });
+
+    $(".pad .index-nav li").click(function () {
+        $(".pad .sidebar").hide();
+        $(this).find(".sidebar").show();
+    })
+
+    $(".wap .index-nav li").click(function () {
+        $(".wap .sidebar").hide();
+        $(this).find(".sidebar").show();
+    })
+
+    $(".down-nav").click(function () {
+        if ($(this).hasClass("up-nav")) {
+            $(".index-nav").slideUp();
+            $(".mui-off-canvas-backdrop").hide();
+            $(this).addClass("down-nav");
+            $(this).removeClass("up-nav");
+        } else {
+            $(".index-nav").slideDown();
+            $(".mui-off-canvas-backdrop").css({
+                "background": "#000",
+                "opacity": ".8",
+                "position": "absolute",
+                "top": "0",
+                "left": "0",
+                "width": "100%",
+                "height": "100%",
+                "z-index": "100"
+            }).show();
+            $(this).removeClass("down-nav");
+            $(this).addClass("up-nav");
+        }
+
+    });    
+    </script>
+ <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?0002ed7756059b1c19d69c8a19633f7e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</body>
+</html>

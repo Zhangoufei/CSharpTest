@@ -1,0 +1,137 @@
+﻿@model BonSite.Web.Admin.Models.SpecialModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+@section header{
+    
+   
+    <script type="text/javascript" src="/administration/scripts/jquery-1.7.1.min.js"></script>
+    <link href="/administration/content/css/uploadify.css" rel="stylesheet" type="text/css" />
+        @*<script type="text/javascript" src="/administration/scripts/jquery.uploadify.js"></script>*@
+    <script language="javascript" type="text/javascript">
+        //防止客户端缓存文件，造成uploadify.js不更新，而引起的“喔唷，崩溃啦”  
+        document.write("<script type='text/javascript' "
+                + "src='/administration/scripts/jquery.uploadify.js?" + new Date()
+                + "'></s" + "cript>");
+    </script>
+    <script type="text/javascript" src="/administration/scripts/jquery.validate.js"></script>
+    <script type="text/javascript" src="/administration/scripts/jquery.validate.unobtrusive.js"></script>
+     <script type="text/javascript">
+    $(function () {
+        $("#uploadify").uploadify({
+            'formData': { 'uid': '@WorkContext.Uid', 'password': '@WorkContext.EncryptPwd' },
+            'swf': '/administration/content/flashes/uploadify.swf',
+            'uploader': '/admin/tool/uploadspecialimg',
+            'buttonText': '上传图片',
+            'height': 24,
+            'width': 80,
+            'fileTypeDesc': 'Image Files',
+            'fileTypeExts': '@ViewData["allowImgType"]',
+            'fileSizeLimit': '@ViewData["maxImgSize"]',
+                 'fileObjName': 'specialimg',
+                 'auto': true,
+                 'multi': false,
+                 'removeTimeout': 2,
+                 'onUploadSuccess': function (file, data, response) {
+                     if (data == "-1")
+                         alert('上传图片不能为空');
+                     else if (data == "-2")
+                         alert('上传图片的类型不允许');
+                     else if (data == "-3")
+                         alert('上传图片超过系统允许的最大大小');
+                     else {
+                         $(".uploadPreview").empty().append("<img width=\"88\" height=\"88\" src=\"upload/special/thumb200_160/" + data + "\"  />");
+                         $("#ImgUrl").val(data);
+                         $(".upload span[htmlFor='SpecialImg']").empty();
+                     }
+                 }
+             });
+         });
+
+    </script>
+    
+    </script>
+    }
+
+@section body{
+<div class="main">
+        <div class="nav">当前位置：<a href="@Url.Action("SiteRunInfo","Home")">管理后台</a>
+     <span> &rsaquo; </span> <a href="#">系统管理</a> 
+     <span> &rsaquo; </span> <a href="#">专题管理</a> 
+    <span> &rsaquo; </span> 编辑内容
+
+</div>
+        <ul class="submenu">
+        	<li class="sel"><a href="#">编辑内容</a></li>
+        </ul>
+
+       @using (Html.BeginForm())
+       { 
+           <div class="top15">
+        <table width="100%" class="tbstyle1" cellpadding="5" cellspacing="1">
+            <tr>
+    <th width="80px" align="right">专题名称：</th>
+    <td>@Html.TextBoxFor(x => x.Name, new { size = "35" })</td>
+    </tr>
+          <tr>
+    <th align="right">全称：</th>
+    <td>@Html.TextBoxFor(x => x.Title, new { size = "35" })</td>
+    </tr>
+        <tr>
+    <th align="right">图片地址：</th>
+    <td>
+ <div class="upload">
+        <div class="uploadPreview">
+         @{
+           if (!string.IsNullOrEmpty(Model.ImgUrl))
+           {
+            <img width="88" height="88" src="/upload/special/thumb200_160/@Model.ImgUrl" />
+           }
+           else
+           {
+                                @:暂无图片
+        }
+}
+        </div>
+        <div class="uploadProgressBar" id="uploadify-queue"></div>
+        <div class="uploadBut"><input type="file" name="uploadify" id="uploadify" /></div>
+        @Html.TextBoxFor(x => x.ImgUrl, new { @class = "hide" })
+        <div style="position:absolute; top:30px; left:180px;">@Html.ValidationMessageFor(x => x.ImgUrl)</div>
+      </div>
+
+
+    </td>
+    </tr>
+                <tr>
+                    <th align="right">
+                        外部链接：
+                    </th>
+                    <td>
+                        <p>
+                            <label>@Html.RadioButtonFor(x => x.IsOut, 0)否</label>
+                            <label>@Html.RadioButtonFor(x => x.IsOut, 1)是</label>
+                            <br />
+                        </p>
+                    </td>
+                </tr>
+          <tr>
+    <th align="right">链接地址：</th>
+    <td>@Html.TextBoxFor(x => x.OutUrl, new { @class = "input", size = "35" })@Html.ValidationMessageFor(x => x.OutUrl)</td>
+    </tr>
+
+      <tr>
+    <th align="right">排序：</th>
+    <td>@Html.TextBoxFor(x => x.DisplayOrder, new { @class = "input", size = "3" })@Html.ValidationMessageFor(x => x.DisplayOrder)</td>
+    </tr>
+  <tr>
+            <tr>
+                <th></th>
+                <td><input id="btnSubmit" type="submit" value="提交" /></td>
+            </tr>
+        </table>
+
+           </div>
+       }
+    </div>
+    }

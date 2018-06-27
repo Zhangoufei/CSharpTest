@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "List";
+}
+
+@section body{
+    @using (Html.BeginForm("List", "FriendLink"))
+{
+     <div class="main">
+<div class="nav">当前位置：
+     <span> &rsaquo; </span> <a href="#">系统管理</a> 
+     <span> &rsaquo; </span> <a href="#">招聘信息管理</a> 
+</div>
+
+        <ul class="submenu">
+        	<li class="sel"><a href="#">招聘信息列表</a></li>
+        	<li ><a href="@Url.Action("Add")">新加新内容</a></li>
+        </ul>
+
+
+    <div class="top15">
+        	<table width="100%" cellpadding="5" cellspacing="0" class="tblist">
+            	<tr>
+                    <th width="40" align="center"><input type="checkbox" id="allSelect"/></th>
+                    <th align="left" >职位</th>
+                    <th width="90" align="left" >发布时间</th>
+                    <th  width="90" align="left" >结束时间</th>
+                    <th width="60" align="left" >人数</th>  
+	                <th width="90" align="left">城市</th>  
+                    <th width="60" align="left" >状态</th>  
+                    <th width="90" align="left">管理操作</th>
+                </tr>
+                @foreach (DataRow row in Model.DataList.Rows)
+  {
+  <tr>
+    <td align="center"><input type="checkbox" value="@row["JobID"]" selectItem="true" name="idList" /></td>
+    <td>@row["JobTitle"]</td>
+    <td>@TypeHelper.ObjectToDateTime(row["PubDate"].ToString()).ToString("yyyy-MM-dd") </td>
+    <td>@TypeHelper.ObjectToDateTime(row["EndDate"].ToString()).ToString("yyyy-MM-dd")</td>
+    <td>@row["Number"]</td>
+    <td>@row["City"]</td>
+    <td>
+        @{
+      if (@row["State"].ToString().Equals("1"))
+        {
+            @:启用
+            }
+            else
+            {
+            @:禁用
+            }
+            }
+            </td>
+    <td>
+        @Html.ActionLink("编辑", "edit", new { JobID = row["JobID"] }, new { @class = "editOperate" })
+        @Html.ActionLink("删除", "del", new { jobidList = row["JobID"] }, new { @class = "deleteOperate" })
+    </td>
+    </tr>
+  }
+  
+                </table>
+        <div class="dataListEdit">
+<a href="#" delUrl="@Url.Action("del")" class="batch batchDel">批量删除</a>
+</div>
+</div>
+         
+         </div>
+    
+    }
+}

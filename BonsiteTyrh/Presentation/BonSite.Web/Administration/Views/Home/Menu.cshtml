@@ -1,0 +1,156 @@
+﻿@model BonSite.Web.Admin.Models.MenuModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Menu</title>
+    <link href="/administration/Content/Css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/administration/Content/Css/Menu.css" rel="stylesheet" />
+    <script type="text/javascript" src="/administration/scripts/jquery-1.7.1.min.js"></script>
+
+   <!-- <style type="text/css">
+
+
+body, form, ul, li, dl, dt, dd {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+	font-size: 14px;
+	line-height: 140%;
+}
+
+
+a {
+	color: #333333;
+}
+
+.leftmenu {
+	color: #333333;
+	width: 160px;
+	margin-right: auto;
+	margin-left: auto;
+	padding-top:０px;
+	padding-bottom:０px;
+    display:none;
+}
+.leftmenu li {
+}
+.leftmenu li a {
+	font-size: 12px;
+	line-height: 25px;
+	text-decoration: none;
+	display: block;
+	padding-left: 30px;
+}
+.leftmenu li a:hover {
+	background-color: #EEE;
+}
+.leftmenusel {
+	background-image: url(Images/menubg.png);
+	background-repeat: no-repeat;
+	background-position: 140px;
+	color: #06C;
+	font-weight: bold;
+}
+.menutopbar {
+	font-family: "微软雅黑", "宋体";
+	font-size: 14px;
+	line-height: 28px;
+	background-image: url(Images/menu_ico.png);
+	background-repeat: no-repeat;
+	height: 25px;
+	width: auto;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top:5px;
+	color: #333;
+	background-position: 5px center;
+	background-color: #D7D7D2;
+	padding-left: 25px;
+    margin-left:10px; 
+    margin-right:10px;
+    cursor:pointer;
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+
+
+    </style>-->
+
+<script language="javascript">
+    // 树状菜单
+    $(document).ready(function () {
+        $(".menutopbar").toggle(function () {
+            $(".leftmenu").animate({ height: 'toggle', opacity: 'hide' }, "slow");
+            $(this).next(".leftmenu").animate({ height: 'toggle', opacity: 'toggle' }, "slow");
+        }, function () {
+            $(".leftmenu").animate({ height: 'toggle', opacity: 'hide' }, "slow");
+            $(this).next(".leftmenu").animate({ height: 'toggle', opacity: 'toggle' }, "slow");
+        });
+
+        $(".close").toggle(function () {
+            $(".leftmenu").animate({ height: 'toggle', opacity: 'hide' }, "fast");
+            //$(".sslist").animate({ height: 'toggle', opacity: 'hide' }, "fast");
+        }, function () {
+            $(".leftmenu").animate({ height: 'toggle', opacity: 'show' }, "fast");
+            //$(".sslist").animate({ height: 'toggle', opacity: 'show' }, "fast");
+        });
+    });
+
+    //主导航
+    function Golink(n) {
+
+        var li = document.getElementById("leftmenu").getElementsByTagName("a");
+        for (i = 0; i < li.length; i++) {
+            //            if (i == n)
+            //                li[i].className = "leftmenusel";
+            //            else
+            li[i].className = "";
+
+        }
+        n.className = "leftmenusel";
+    }
+
+</script>
+
+</head>
+<body>
+    <div id="leftmenu">
+        @{int i=1;}
+    @*@foreach (ArticleClassInfo info in Model.MenuList.Where(p => p.ParentArticleClassID == 0))*@
+    @foreach (ArticleClassInfo info in Model.MenuList.Where(p => p.ParentArticleClassID <= 0))
+    {
+        if (BonSite.Services.ArticleClass.HaveChild(info.ArticleClassID))
+        {
+            <div class="menutopbar">@info.ClassName</div>
+            <ul class="leftmenu" @if(i==1) {<text>style="display:none;"</text>}else{<text>style="display:none;"</text>}>
+                @*@foreach (ArticleClassInfo subinfo in Model.MenuList.Where(p => p.ArticleClassID == info.ArticleClassID))
+                {
+                    <li> <a href="@Url.Action("List", "Article", new { articleClassID=@subinfo.ArticleClassID})" target="frmmain" onclick="Golink(this)">@subinfo.ClassName</a></li>
+                }*@
+            @foreach(ArticleClassInfo subinfo in Model.MenuList.Where(p=>p.ParentArticleClassID==info.ArticleClassID))
+            {
+            <li> <a href="@Url.Action("List", "Article", new { articleClassID=@subinfo.ArticleClassID})" target="frmmain" onclick="Golink(this)">@subinfo.ClassName</a></li>
+            }
+        @{i++;}
+    </ul>
+        }
+        else
+        {
+            <div class="menutopbar">@info.ClassName</div>
+    <ul class="leftmenu"><li><a href="@Url.Action("List", "Article", new { articleClassID = @info.ArticleClassID })" target="frmmain" onclick="Golink(this)">@info.ClassName</a></li></ul>
+
+
+        }
+
+    }
+@* class="leftmenusel"*@
+
+    
+</body>
+</html>

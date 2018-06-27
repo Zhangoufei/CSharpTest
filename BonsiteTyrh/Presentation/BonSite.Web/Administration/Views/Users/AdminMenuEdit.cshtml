@@ -1,0 +1,54 @@
+﻿@model BonSite.Web.Admin.Models.AdminMenuModel
+@section header{
+               
+    
+               }
+@section body{
+<div class="main">
+        <div class="nav">当前位置：<a href="@Url.Action("SiteRunInfo","Home")">管理后台</a>
+    
+     <span> &rsaquo; </span> <a href="@Url.Action("AdminList","Users")">管理员管理</a> 
+    
+    <span> &rsaquo; </span> 编辑管理员权限
+</div>
+        <ul class="submenu">
+        	<li class="sel"><a href="#">编辑管理员权限</a></li>
+        </ul>
+
+       @using (Html.BeginForm())
+       { 
+           <div class="top15">
+        <table width="100%" class="tbstyle1" cellpadding="5" cellspacing="1">
+            
+            <tr>
+                <th>用户名：</th>
+                <td>@Model.PartUserInfo.UserName </td>
+            </tr> 
+           
+            <tr>
+                <th>权限：</th>
+                <td>
+                   
+                    @foreach (var item in Model.AdminMenuList)
+                    {
+                        if (item.isSel)
+                    {
+                        <input type="checkbox" id="checkboxRole" name="checkboxRole" value="@item.MenuID" checked="checked" /><span> @item.MenuName</span>
+                    }
+                    else
+                    {
+                       <input type="checkbox" id="checkboxRole" name="checkboxRole" value="@item.MenuID" /><span> @item.MenuName</span>
+                    }       
+                    
+                       <br/>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" value="提交" /></td>
+            </tr>
+        </table>
+
+           </div>
+       }

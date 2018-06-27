@@ -1,0 +1,231 @@
+﻿@using System.Data
+@model BonSite.Web.Models.ArticleListModel
+@{
+    ViewBag.Title = @Model.ArticleClassInfo.ClassName + " - " + @WorkContext.SiteConfig.SiteTitle;
+    Layout = "~/Themes/zzbz/Views/Shared/_LayoutPc.cshtml";
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="@Url.Content("~/Content/pcWeb/css/reset.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/pcWeb/css/style.css")">
+    <title>Document</title>
+    @*分页*@
+    <link rel="stylesheet" href="@Url.Content("~/Content/layui/css/layui.css")" media="all" />
+    <style type="text/css">
+        .video-row {
+            width: 100%;
+            overflow: hidden;
+            height: 320px;
+        }
+
+        .video-left {
+            width:;
+        }
+
+        .video-left {
+            width: 480px;
+            float: left;
+        }
+
+        .video-con {
+            display: block;
+            text-align: left;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .video-pic {
+            width: 480;
+            height: 270px;
+            background-color: green;
+            position: relative;
+        }
+
+            .video-pic img {
+                width: 100%;
+                height: 100%;
+            }
+
+        .video-right {
+            width: 700px;
+            float: right;
+            overflow: hidden;
+        }
+
+        .video-mask {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            background-image: url("../images/player.png");
+            background-size: 32px 32px;
+            background-repeat: no-repeat;
+            background-origin: 0 0;
+            background-position: center center;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+        }
+
+        .video-pic:hover .video-img-meng {
+            display: block;
+        }
+
+        .video-list {
+            overflow: hidden;
+        }
+
+            .video-list .video-con {
+                width: 195px;
+                margin: 0 auto;
+            }
+
+            .video-list li {
+                float: left;
+                width: 33.33%;
+                margin-bottom: 10px;
+            }
+
+            .video-list .video-pic {
+                width: 100%;
+                height: 110px;
+                background-color: pink;
+            }
+
+        .video-tit {
+            height: 40px;
+        }
+
+        .video-tit1, .video-tit2 {
+            line-height: 20px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .video-tit1 {
+            text-align: left;
+            font-size: 14px;
+            color: #333333;
+        }
+
+        .video-tit2 {
+            text-align: left;
+            color: #999999;
+            font-size: 12px;
+        }
+
+        .video-head {
+            font-size: 16px;
+            overflow: hidden;
+            line-height: 40px;
+            color: #8f000b;
+        }
+
+        .video-head-tit {
+            float: left;
+        }
+
+        .more {
+            text-decoration: none;
+            float: right;
+            color: #333333;
+            font-size: 14px;
+        }
+
+            .more:hover {
+                color: #8f000b;
+            }
+    </style>
+</head>
+
+<body style="background:#d3cab8">
+    <div class="content container">
+        <div class="content-wrap1 content-wrap">
+            <div class="content-wrap-header">
+                <div class="fl" style="margin-top: 5px;">
+                    <a href="/">首页</a><span></span><a>>@ViewData["ClassArticleIdName0"]</a><a style="@ViewData["HaveChild2"]" href="/ListPc/@ViewData["ClassArticleId2"]-1.html">>@ViewData["ClassArticleIdName2"]</a><a style="@ViewData["HaveChild3"]" href="/ListPc/@ViewData["ClassArticleId3"]-1.html">>@ViewData["ClassArticleIdName3"]</a>
+                    @*<a href="/">首页</a><span></span><a>>@ViewData["ClassArticleIdName1"]</a>*@
+                </div>
+                <!--三级导航栏-->
+                <div class="secound-nav fr">
+                    <ul class="secound-nav-list">
+                        @{
+                            DataTable list = (DataTable)ViewData["list"];
+                            if (list != null && list.Rows.Count > 0)
+                            {
+
+                                foreach (DataRow dr in list.Rows)
+                                {
+                                    <li class="secound-nav-item"><a href="/ListPc/@(dr["ArticleClassID"].ToString())-1.html">@dr["ClassName"].ToString()</a></li>
+                                }
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--内容部分-->
+        <div class="container">
+            <div class="video-head">
+                <h4 class="video-head-tit">最新视频</h4>
+                <a href="/ListPc/@ViewData["ClassArticleId2"]-1.html?ClassArticleId=297" class="more">更多>></a>
+            </div>
+
+            <div class="video-row">
+                <div class="video-left">
+                    @{
+                        if (BonSite.Services.Article.GetArticleList(1, 1, " [ArticleClassID] = 297 and IsShow=1 and IsHome=1 ", " [AddTime] DESC ") != null && BonSite.Services.Article.GetArticleList(1, 1, "  [ArticleClassID] = 297 and IsShow=1 and IsHome=1 ", "  [AddTime] DESC ").Rows.Count > 0)
+                        {
+                            foreach (System.Data.DataRow dr in BonSite.Services.Article.GetArticleList(5, 1, " [ArticleClassID] = 297 and IsShow=1 and IsHome=1 ", " [AddTime] DESC ").Rows)
+                            {
+                                <a href="/ViewPc/@(dr["ArticleID"].ToString()).html?ClassArticleId=@(dr["ArticleClassID"].ToString())" class="video-con">
+                                    <div class="video-pic">
+                                        <img src="/Upload/Article/Show/thumb640_480/@(dr["ImgUrl"].ToString())" onerror="this.src = '/Content/PcWeb/images/t3.jpg'" alt="">
+                                        <div class="video-img-meng"></div>
+                                    </div>
+                                    <div class="video-tit" >
+                                        <p class="video-tit1" style="text-align:center">@dr["Title"]</p>
+                                        @*<p class="video-tit2">迎国庆庆中秋经典诵读暨学生文艺汇演</p>*@
+                                    </div>
+                                </a>
+                            }
+                        }
+                    }
+                </div>
+                <div class="video-right">
+                    <ul class="video-list" style="margin-left: 14px;">
+                        @{
+                            for (int i = 0; i < Model.ArticleList.Rows.Count; i++)
+                            {
+                               <li>
+                                   <a href="/ViewPc/@(Model.ArticleList.Rows[i]["ArticleID"]).html" class="video-con">
+                                       <div class="video-pic">
+                                           <img src="/upload/article/show/thumb640_480/@(Model.ArticleList.Rows[i]["ImgUrl"])" onerror="this.src = '@(Model.ArticleList.Rows[i]["ImgUrl"])'" alt="">
+                                           <div class="video-img-meng"></div>
+                                       </div>
+                                       <div class="video-tit">
+                                           <p class="video-tit1" style="text-align:center">@Model.ArticleList.Rows[i]["Title"]</p>
+                                           @*<p class="video-tit2">播放次数:<span>111</span></p>*@
+                                       </div>
+                                   </a>
+                        </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <!--页码-->
+            @*<div class="pagelist">
+                @Html.WebPager(Model.PageModel)
+            </div>*@
+        </div>
+    </div>
+
+</body>
+</html>

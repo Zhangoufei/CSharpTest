@@ -1,0 +1,103 @@
+﻿@model BonSite.Web.Admin.Models.FeedBackModel
+@{
+    ViewBag.Title = "EditFeedBack";
+}
+@section body{
+    
+     <div class="main">
+<div class="nav">当前位置：
+     <span> &rsaquo; </span> <a href="#">系统管理</a> 
+     <span> &rsaquo; </span> <a href="@Url.Action("FeedBackList")">信息反馈管理</a> 
+     <span> &rsaquo; </span> <a href="#">编辑信息反馈</a> 
+
+</div>
+
+        <ul class="submenu">
+        	<li><a href="@Url.Action("FeedBackList")">信息反馈列表</a></li>
+        	<li class="sel"><a href="#">编辑信息反馈</a></li>
+        </ul>
+
+
+    @using (Html.BeginForm())
+       { 
+           <div class="top15">
+        <table width="100%" class="tbstyle1" cellpadding="5" cellspacing="1">
+            <tr>
+    <th width="80px" align="right">标题：</th>
+    <td>@Html.TextBoxFor(x => x.Title, new { @class = "input", size = "50" })</td>
+    </tr>
+    <tr>
+    <th align="right">标签：</th>
+    <td>@Html.TextBoxFor(x => x.Tag, new { @class = "input", size = "20" })</td>
+    </tr>
+    <tr>
+    <th align="right">正文：</th>
+    <td>
+        @Html.TextAreaFor(x => x.Body, new { @class = "input", cols = "50", rows = "8"})
+    </td>
+    </tr>
+    <tr>
+    <th align="right">回复：</th>
+    <td>
+        @Html.TextAreaFor(x => x.Reply, new { @class = "input", cols = "50", rows = "8"})
+    </td>
+    </tr>
+    <tr>
+    <th align="right">联系人：</th>
+    <td>@Html.TextBoxFor(x => x.LinkMan, new { @class = "input", size = "20" })</td>
+    </tr>
+    <tr>
+    <th align="right">联系电话：</th>
+    <td>@Html.TextBoxFor(x => x.Tel, new { @class = "input", size = "20" })</td>
+    </tr>
+    <tr>
+    <th align="right">手机：</th>
+    <td>@Html.TextBoxFor(x => x.Mobile, new { @class = "input", size = "20" })</td>
+    </tr>
+    <tr>
+    <th align="right">邮箱：</th>
+    <td>@Html.TextBoxFor(x => x.Email, new { @class = "input", size = "20" })</td>
+    </tr>
+            
+    <tr>
+        <th>对外公开：</th>
+        <td>  
+        <label>@Html.RadioButtonFor(x => x.IsOut, 1, new { @class = "checkbox" }) 允许</label>
+        <label>@Html.RadioButtonFor(x => x.IsOut, 0, new { @class = "checkbox" }) 不允许</label>
+        </td>
+    </tr>
+    <tr>
+        <th>状态：</th>
+        <td>  
+        <label>@Html.RadioButtonFor(x => x.State, 1, new { @class = "checkbox" }) 已回复</label>
+        <label>@Html.RadioButtonFor(x => x.State, 0, new { @class = "checkbox" }) 未回复</label>
+        </td>
+    </tr>
+            <tr>
+                <th>发布时间:</th>
+                <td>@Html.DisplayTextFor(x =>x.AddTime)</td>
+            </tr>
+            <tr>
+                <th>IP:</th>
+                <td>@Html.DisplayTextFor(x =>x.Ip)</td>
+            </tr>
+            <tr>
+                <th>查询码:</th>
+                <td>@Html.DisplayTextFor(x =>x.SearchKey)</td>
+            </tr>
+   
+  
+    
+            <tr>
+                <th></th>
+                <td><input type="submit" value="提交" /></td>
+            </tr>
+        </table>
+
+           </div>
+       }
+
+         
+         </div>
+    }
+

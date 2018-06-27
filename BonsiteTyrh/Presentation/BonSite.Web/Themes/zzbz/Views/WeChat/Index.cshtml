@@ -1,0 +1,182 @@
+﻿@model BonSite.Web.Models.ArticleModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <script type="text/javascript" src="/administration/scripts/jquery-2.1.0.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .oDiv {
+            width: 100%;
+            overflow: hidden;
+            line-height: 30px;
+            text-align: left;
+        }
+
+        .cont_page_main_title {
+            line-height: 45px;
+            font-family: 微软雅黑, 黑体;
+            font-size: 24px;
+            padding-top: 15px;
+            padding-right: 15px;
+            padding-bottom: 15px;
+            padding-left: 0px;
+            text-align: left;
+            margin-right: 5px;
+            margin-bottom: 0px;
+            margin-left: 5px;
+            border-bottom-width: 1px;
+            border-bottom-style: dotted;
+            border-bottom-color: rgb(204, 204, 204);
+        }
+
+        .cont_page_main_info {
+            margin: 5px;
+            line-height: 35px;
+            font-size: 14px;
+            text-align: left;
+            padding-right: 20px;
+            padding-left: 0px;
+            color: #666;
+            font-family:'Microsoft YaHei'
+
+        }
+
+        .cont_page_main_body {
+            padding: 15px 20px;
+            line-height: 180%;
+        }
+
+        .cont_page_main_img {
+            width: 100%;
+        }
+        .time{
+            padding-right:20px;
+        }
+        .author{
+            padding-right:20px;
+        }
+        .cont_page_main_body img{
+            width:100%;
+            display:block;
+            height:auto;
+        }
+
+        /*阅读 点赞*/
+        .list-xq-box {
+            line-height: 24px;
+            overflow: hidden;
+        }
+
+        .list-xq-read {
+            float: left;
+            margin-right: 10px;
+        }
+
+        .list-xq-cusor {
+            float: left;
+            padding-left: 24px;
+            background: url("../Content/Web/images/zan.png")0 0 no-repeat;
+            background-size: 20px 20px;
+            background-position: left center;
+            height: 24px;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <div class="cont_page_main">
+
+        <div class="cont_page_main_title">
+            @Model.ArticleInfo.Title
+        </div>
+        <div class="cont_page_main_info">
+            @*作者：@Model.ArticleInfo.Author 来源：@Model.ArticleInfo.ComeForm 时间：@Model.ArticleInfo.AddTime*@
+            <span class="time">@Model.ArticleInfo.AddTime.ToString("yyyy-MM-dd")</span>
+            <span class="author">@Model.ArticleInfo.Author </span>
+            @*<span class="source">@Model.ArticleInfo.ComeForm </span>*@
+
+
+        </div>
+        @*@if (Model.ArticleInfo.ImgUrl.Length > 0)
+        {
+            <div class="cont_page_main_img">
+                <img width="100%" height="100%" src="/Upload/Article/Show/thumb640_480/@Model.ArticleInfo.ImgUrl" />
+            </div>
+        }*@
+        <div class="cont_page_main_body" >
+            <div class="oDiv">
+                <ul class="ul-cut">
+                    <li>
+                        @Html.Raw(Model.ArticleInfo.Body)
+                    </li>
+                    <div class="list-xq-box">
+                        <input id="ArticleID" type="hidden" value="@Model.ArticleInfo.ArticleID" style="display:none" />
+                        <input type="hidden" id="Praise" value="@Model.ArticleInfo.Praise" style="display:none" />
+                        <span class="list-xq-read">阅读：<span>@Model.ArticleInfo.Hits</span></span>
+                        <div class="praise-wrap list-xq-cusor "> <span class="praise-num">@Model.ArticleInfo.Praise</span></div>
+                    </div>
+                    @*点赞*@
+                    <script>
+                        $(function () {
+
+                            //点赞交互
+                            function Praise(num) {
+                                var ArticleID = $("#ArticleID").val();
+                                $.ajax({
+                                    url: '/Article/JsonPraise',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data: { "num": num, "ArticleID": ArticleID },
+                                    //timeout: 20000,
+                                    success: function (data) {
+
+                                    }
+                                })
+                            }
+
+                            var x = $("#Praise").val(), y = true;
+                            $('.praise-wrap').click(function () {
+                                if (y) {
+                                    x++;
+                                    $(this).css({
+                                        backgroundImage: 'url("../Content/Web/images/zan1.png")'
+                                    });
+                                    y = false;
+                                } else {
+                                    x--;
+                                    $(this).css({
+                                        backgroundImage: 'url("../Content/Web/images/zan.png")'
+                                    });
+                                    y = true;
+                                }
+                                Praise(x)
+                                $('.praise-num').text(x);
+                            })
+
+                        })
+                    </script>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</body>
+</html>

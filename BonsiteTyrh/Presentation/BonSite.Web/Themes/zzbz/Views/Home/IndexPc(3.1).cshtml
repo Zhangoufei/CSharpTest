@@ -1,0 +1,595 @@
+﻿@{
+    ViewBag.Title = "首页 - " + WorkContext.SiteConfig.SiteTitle;
+    Layout = "~/Themes/zzbz/Views/Shared/_LayoutPc.cshtml";
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+          "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+    <title>郑州八中官网首页</title>
+</head>
+<body>
+    <!--图片轮播-->
+    @*<div class="swiper-container container" id="banner">
+        <div class="swiper-wrapper">
+            @{
+                List<BonSite.Core.BannerInfo> info1=BonSite.Services.Banners.GetBannerList(1);
+                int tt = info1.Count;
+                if (tt > 5)
+                {
+                    tt = 5;
+                }
+                for (int j = 0; j < tt; j++)
+                {
+                     <div class="swiper-slide">
+                        <a href="@info1[j].Url">
+                            <img src="/upload/banner/@info1[j].Img" onerror='this.src = "/Content/PcWeb/images/bn_1708311450387333125.jpg"' alt="">
+                            <p class="swiper-slide-tit">@info1[j].Title</p>
+                        </a>
+                    </div>
+                }
+            }
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination swiper-pagination-white"></div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next swiper-button-white"></div>
+        <div class="swiper-button-prev swiper-button-white"></div>
+    </div>*@
+    <div class="container banner">
+        <ul class="con">
+            @{
+                int num22 = 1;
+                foreach(BonSite.Core.BannerInfo info in BonSite.Services.Banners.GetBannerList(1))
+                {
+                    if (num22 == 1)
+                    {
+                        <li class="show"><img src="/upload/banner/@info.Img" onerror='this.src = "/Content/PcWeb/images/bn_1708311450387333125.jpg"' alt="" /></li>
+                    }
+                    else
+                    {
+                        <li><img src="/upload/banner/@info.Img" onerror='this.src = "/Content/PcWeb/images/bn_1708311450387333125.jpg"' alt="" /></li>
+                    }
+                    num22++;
+                    if (num22 >5)
+                    {
+                        break;
+                    }
+                }
+                 
+            }
+            @*<li class="show"><img src="http://zzbz.net/upload/banner/bn_1710231841396826172.jpg" /></li>
+            <li><img src="http://zzbz.net/upload/banner/bn_1710231841396826172.jpg" /></li>
+            <li><img src="http://zzbz.net/upload/banner/bn_1710231841396826172.jpg" /></li>
+            <li><img src="http://zzbz.net/upload/banner/bn_1710231841396826172.jpg" /></li>
+            <li><img src="http://zzbz.net/upload/banner/bn_1710231841396826172.jpg" /></li>*@
+        </ul>
+        <ol class="nav">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ol>
+        <p class="left"></p>
+        <p class="right"></p>
+    </div>
+    <!--新闻模块-->
+    <div class="new-box container">
+        <div class="new-box-left fl">
+            <div class="new-box-container">
+                <!--新闻标题-->
+                <div class="new-box-tit-box" id="newsList" style="    border-bottom: 2px #a2a1a1 solid;">
+                    <h2 class="new-box-tit_a onFocus new-box-tit5">
+                    
+                    <p>
+                        <i class="icon icon-news"></i>
+                        <a href="/ListPc/228-1.html" style="color:inherit">校园新闻</a>
+                        <span style="color:#a2a1a1;font-size:16px;font-weight:500">School News</span>
+                        </p>
+                    </h2>
+                    <h2 class="new-box-tit_b new-box-tit5" >
+                        <p>
+                            <i class="icon icon-con"></i>
+                            <a href="/ListPc/229-1.html" style="color:inherit">美文美篇</a>
+                            <span style="color:#a2a1a1;font-size:16px;font-weight:500">Beautiful Article</span>
+                        </p>
+                    </h2>
+                    <div class="clearBoth"></div>
+                </div>
+                <div id="news1" class="news11">
+                    <!--图片新闻-->
+                    <div class="pic-news">
+                        <div class="pic-news-img swiper-container">
+                            <div class="swiper-wrapper">
+                                @{
+                        if (BonSite.Services.Article.GetArticleList(5, 1, " [DisplayType] in (0,2) and [ArticleClassID] <>227 and [ArticleClassID] <>242 and IsShow=1 and IsHome=1 ", " [AddTime] DESC ") != null && BonSite.Services.Article.GetArticleList(5, 1, " [DisplayType] in (0,2) and  [ArticleClassID] <>227 and [ArticleClassID] <>242 and IsShow=1 and IsHome=1 ", "  [AddTime] DESC ").Rows.Count > 0)
+                        {
+                            foreach (System.Data.DataRow dr in BonSite.Services.Article.GetArticleList(5, 1, " [DisplayType] in (0,2) and [ArticleClassID] <>227 and [ArticleClassID] <>242 and IsShow=1 and IsHome=1 ", " [AddTime] DESC ").Rows)
+                            {
+                                <div class="swiper-slide">
+                                    <a href="/ViewPc/@(dr["ArticleID"].ToString()).html?ClassArticleId=@dr["ArticleClassID"].ToString()">
+                                        <img src="/Upload/Article/Show/thumb640_480/@dr["ImgUrl"].ToString()" onerror='this.src="@dr["ImgUrl"].ToString()"' alt="" />
+
+                                        <p class="pic-news-p">@(dr["Title"].ToString())</p>
+                                    </a>
+                                </div>
+                }
+            }
+
+            @*foreach (BonSite.Core.ArticleInfo info in BonSite.Services.Article.GetArticleList(228, 7))
+    {
+        <div class="swiper-slide"><img src="/Upload/Article/Show/thumb136_100/@info.ImgUrl" onerror='this.src="/Content/Web/images/img7.jpg"' alt="" /></div>
+    }*@
+                                }
+                            </div>
+                            <div class="swiper-pagination swiper-pagination-white"></div>
+                        </div>
+                        @*@{
+                    foreach (BonSite.Core.ArticleInfo info in BonSite.Services.Article.GetArticleList(228, 1))
+                    {
+                        <div class="pic-news-tit" style="display:none">
+                            <a href="/ViewPc/@(info.ArticleID).html?ClassArticleId=@info.ArticleClassID"><h3>@info.Title</h3></a>
+                            <p class="pic-news-con">@info.Digest</p>
+                            <span class="new-box-time">@info.AddTime.ToString("MM-dd")</span>
+                        </div>
+                    }
+                }*@
+
+                    </div>
+                    <div class="clearBoth"></div>
+                    <!--新闻列表-->
+                    <ul class="new-box-list">
+                        @{
+                //if (BonSite.Services.Article.GetArticleList(5, 1, " [DisplayType] in (0,2) and [ArticleClassID] <>227 and IsShow=1 and IsHome=1 ", " [AddTime] DESC ") != null && BonSite.Services.Article.GetArticleList(5, 1, " [DisplayType] in (0,2) and  [ArticleClassID] <>227 and IsShow=1 and IsHome=1 ", "  [AddTime] DESC ").Rows.Count > 0)
+                //       {
+                //           string str = "";
+                //           foreach (System.Data.DataRow dr1 in BonSite.Services.Article.GetArticleList(5, 1, " [DisplayType] in (0,2) and [ArticleClassID] <>227 and IsShow=1 and IsHome=1 ", " [AddTime] DESC ").Rows)
+                //           {
+                //               str += dr1["ArticleID"].ToString() + ",";
+                //           }
+                //           ///str = str.SubString(0, str.Length - 1);
+                //       }
+                string str = "";
+                if (BonSite.Services.Article.GetArticleList(5, 1, " [DisplayType] in (0,2) and [ArticleClassID] <>227 and [ArticleClassID] <>242 and IsShow=1 and IsHome=1 ", " [AddTime] DESC ") != null && BonSite.Services.Article.GetArticleList(5, 1, " [DisplayType] in (0,2) and  [ArticleClassID] <>227 and [ArticleClassID] <>242 and IsShow=1 and IsHome=1 ", "  [AddTime] DESC ").Rows.Count > 0)
+                {
+
+                    foreach (System.Data.DataRow dr1 in BonSite.Services.Article.GetArticleList(5, 1, " [DisplayType] in (0,2) and [ArticleClassID] <>227 and [ArticleClassID] <>242 and IsShow=1 and IsHome=1 ", " [AddTime] DESC ").Rows)
+                    {
+                        str += dr1["ArticleID"].ToString() + ",";
+                    }
+                    str = str.Substring(0, str.Length - 1);
+                }
+                if (BonSite.Services.Article.GetArticleList(7, 1, " [DisplayType] in (0,2) and ArticleClassID <>227 and [ArticleClassID] <>242 and IsShow=1 and IsHome=1 and  ArticleID not in (" + str + ") ", " [AddTime] DESC ") != null && BonSite.Services.Article.GetArticleList(7, 1, "  [DisplayType] in (0,2) and ArticleClassID <>227 and [ArticleClassID] <>242 and IsShow=1 and IsHome=1  and  ArticleID not in (" + str + ")", "  [AddTime] DESC ").Rows.Count > 0)
+                {
+                    foreach (System.Data.DataRow dr in BonSite.Services.Article.GetArticleList(7, 1, " [DisplayType] in (0,2) and ArticleClassID <>227 and [ArticleClassID] <>242 and IsShow=1 and IsHome=1  and  ArticleID not in (" + str + ")", " [AddTime] DESC ").Rows)
+                    {
+                        <li class="new-box-item"><a href="/ViewPc/@(dr["ArticleID"]).html?ClassArticleId=@dr["ArticleClassID"]" class="new-box-item-con"><span class="pointer"></span> @dr["Title"]</a> <span class="new-box-time">@BonSite.Core.TypeHelper.StringToDateTime(dr["AddTime"].ToString()).ToString("MM-dd")</span></li>
+
+        }
+    }
+            @*foreach (BonSite.Core.ArticleInfo info in BonSite.Services.Article.GetArticleList(228, 8))
+    {
+        if (count == 0)
+        {
+            count++;
+        }
+        else
+        {
+            <li class="new-box-item"><a href="/ViewPc/@(info.ArticleID).html?ClassArticleId=@info.ArticleClassID" class="new-box-item-con"><span class="pointer"></span> @info.Title</a> <span class="new-box-time">@info.AddTime.ToString("MM-dd")</span></li>
+        }
+    }*@
+                        }
+                    </ul>
+
+
+
+
+                </div>
+
+
+                <!--美文美篇列表部分-->
+                <div id="news" class="news11" style="display:none">
+                    <!--图片新闻-->
+                    <ul class="new-box-list">
+                       @{
+                            
+                              string articleClasss0001 = (string)ViewData["ArticleClassIDList"];
+
+                                foreach (BonSite.Core.ArticleInfo info in BonSite.Services.Article.GetArticleList(articleClasss0001, 15))
+                            {
+                                    
+                                                       <li class="new-box-item"><a href="/ViewPc/@(info.ArticleID).html?ClassArticleId=@articleClasss0001" class="new-box-item-con"><span class="pointer"></span> @info.Title</a> <span class="new-box-time">@BonSite.Core.TypeHelper.StringToDateTime(info.AddTime.ToString()).ToString("MM-dd")</span></li>
+
+                            }                                       
+                            }
+
+
+                    </ul>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+        <div class="new-box-center fl">
+            <div class="new-box-container">
+                <!--通知公告-->
+                <!--新闻标题-->
+                <div class="new-box-tit-box">
+                    <h2 class="new-box-tit"><i class="icon icon-message"></i> 通知公告</h2>
+                    <div class="small-txt">
+                        <span>School Notice</span>
+                        <a href="/ListPc/227-1.html" class="more">更多 >></a>
+                    </div>
+                    <div class="clearBoth"></div>
+                </div>
+                <!--新闻列表-->
+                <ul class="new-box-list">
+
+                    @{
+                        string str001 = "";
+                        int count001 = 0;
+                        int num001 = 0;
+                        System.Data.DataTable dataTable = BonSite.Services.Article.GetArticleList(15, 1, " [DisplayType] in (0,2) and [ArticleClassID] <>228 and [ArticleClassID] <>242 and IsShow=1 and IsHome=2 ", " [AddTime] DESC ");
+                        if (dataTable != null && dataTable.Rows.Count > 0)
+                        {
+                            count001=dataTable.Rows.Count;
+                            foreach (System.Data.DataRow dr001 in dataTable.Rows)
+                            {
+                                if (num001 > 15)
+                                {
+                                    break;
+                                }
+                                num001++;
+                                <li class="new-box-item"><a href="/ViewPc/@(dr001["ArticleID"]).html?ClassArticleId=@dr001["ArticleClassID"]" class="new-box-item-con"><span class="pointer"></span> @dr001["Title"]</a> <span class="new-box-time">@BonSite.Core.TypeHelper.StringToDateTime(dr001["AddTime"].ToString()).ToString("MM-dd")</span></li>
+                                str001 += dr001["ArticleID"].ToString() + ",";
+                            }
+                            str001 = str001.Substring(0, str001.Length - 1);
+                        }
+
+                        dataTable = BonSite.Services.Article.GetArticleList(15 - count001, 1, "  [ArticleClassID] = 227  and IsShow=1 and IsHome=0 ", " [AddTime] DESC ");
+                        if (dataTable != null && dataTable.Rows.Count > 0)
+                        {
+                            count001 = dataTable.Rows.Count;
+                            foreach (System.Data.DataRow dr001 in dataTable.Rows)
+                            {
+                                <li class="new-box-item"><a href="/ViewPc/@(dr001["ArticleID"]).html?ClassArticleId=@dr001["ArticleClassID"]" class="new-box-item-con"><span class="pointer"></span> @dr001["Title"]</a> <span class="new-box-time">@BonSite.Core.TypeHelper.StringToDateTime(dr001["AddTime"].ToString()).ToString("MM-dd")</span></li>
+                            }
+                        }
+                    }
+
+                    @*@{
+                        foreach (BonSite.Core.ArticleInfo info in BonSite.Services.Article.GetArticleList(227, 15))
+                        {
+                            <li class="new-box-item"><a href="/ViewPc/@(info.ArticleID).html?ClassArticleId=@info.ArticleClassID" class="new-box-item-con"><span class="pointer"></span> @info.Title</a> <span class="new-box-time">@info.AddTime.ToString("MM-dd")</span></li>
+
+                        }
+                    }*@
+                </ul>
+            </div>
+        </div>
+        <!--微视频-->
+        <div class="new-box-right fl">
+            <div class="">
+                <!--新闻标题-->
+                <div class="new-box-tit-box">
+                    <h2 class="new-box-tit" style=""><i class="icon icon-video"></i> 视频八中</h2>
+                    <div class="small-txt" style="">
+                        <span>Cool Videos</span>
+                        <a href="/ListPc/297-1.html" class="more">更多 >></a>
+                    </div>
+                    <div class="clearBoth"></div>
+                </div>
+                <!--视频列表-->
+                <div class="video-wrap">
+                    @{
+                        if (BonSite.Services.Article.GetArticleList(1, 1, " [ArticleClassID] = 297 and IsShow=1 and IsHome=1 ", " [AddTime] DESC ") != null && BonSite.Services.Article.GetArticleList(1, 1, "  [ArticleClassID] = 297 and IsShow=1 and IsHome=1 ", "  [AddTime] DESC ").Rows.Count > 0)
+                        {
+                            foreach (System.Data.DataRow dr in BonSite.Services.Article.GetArticleList(5, 1, " [ArticleClassID] = 297 and IsShow=1 and IsHome=1 ", " [AddTime] DESC ").Rows)
+                            {
+                                <div class=" video-img">
+                                    <a href="/ViewPc/@(dr["ArticleID"].ToString()).html?ClassArticleId=@(dr["ArticleClassID"].ToString())" class="video-img-wrap">
+                                        <img src="/Upload/Article/Show/thumb640_480/@(dr["ImgUrl"].ToString())" onerror="this.src = '/Content/PcWeb/images/t3.jpg'" alt="">
+                                        <div class="video-img-meng"></div>
+                                    </a>
+
+                                </div>
+                                <p class="video-result">@dr["Title"]</p>
+                            }
+                        }
+                        @*foreach (BonSite.Core.ArticleInfo info in BonSite.Services.Article.GetArticleList(297, 1))
+                            {
+                                <div class=" video-img">
+                                    <a href="/ViewPc/@(info.ArticleID).html?ClassArticleId=@info.ArticleClassID" class="video-img-wrap">
+                                        <img src="/Upload/Article/Show/thumb640_480/@info.ImgUrl" onerror="this.src = '/Content/PcWeb/images/t3.jpg'" alt="">
+                                        <div class="video-img-meng"></div>
+                                    </a>
+
+                                </div>
+                                <p class="video-result">@info.Title</p>
+                            }*@
+                    }
+
+                </div>
+
+
+                <!--专题推荐-->
+                <!--新闻标题-->
+                <div class="new-box-tit-box" style="margin-top: 30px;">
+                    <h2 class="new-box-tit"><i class="icon icon-video"></i> 专题推荐</h2>
+                    <div class="small-txt">
+                        <span>Seminar</span>
+
+                    </div>
+                    <div class="clearBoth"></div>
+                </div>
+                <!--专题列表-->
+                <div class="Seminar-wrap">
+                    <div class="Seminar-img">
+                        @{
+                            foreach (BonSite.Core.SpecialInfo info in BonSite.Services.Special.GetTopSpecialList(2))
+                            {
+                                if (info.IsOut == 1)
+                                {
+                                    <a href="@info.OutUrl" target="_blank"><img src="/upload/special/thumb200_160/@info.ImgUrl" onerror="this.src = '/Content/PcWeb/images/special-img2_22.png'" alt=""></a>
+                                }
+                                else
+                                {
+                                    string SpecialID = " IsShow >0 AND[SpecialID] = " + info.SpecialID + " ";
+                                    foreach (System.Data.DataRow dr in BonSite.Services.Article.GetArticleList(1, 1, SpecialID, " [AddTime] DESC").Rows)
+                                    {
+                                        <a href="/ViewPc/@(dr["articleid"].ToString()).html"><img src="/upload/special/thumb200_160/@info.ImgUrl" alt=""></a>
+                                    }
+
+                                }
+                            }
+                        }
+
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <div class="clearBoth"></div>
+    <!--核心价值观-->
+    <div class="container Core-value">
+        @{
+            foreach (BonSite.Core.BannerInfo info in BonSite.Services.Banners.GetBannerList(2))
+            {
+                <a href="@info.Url">
+                    <img src="/upload/banner/@info.Img" onerror='this.src = "/Content/PcWeb/images/bn_1708311450387333125.jpg"' alt="">
+                </a>
+            }
+            @*foreach (System.Data.DataRow drs in BonSite.Services.Adverts.AdminGetAdvertList(1, 1, 0).Rows)
+                {
+                    <img src="upload/advert/@(drs["body"].ToString())" onerror="this.src = '/Content/PcWeb/images/Social.jpg'" alt="" />
+                }*@
+
+        }
+    </div>
+
+    <!--专栏资讯-->
+    <div class="container" style="margin-top: 12px;">
+        <div class="new-box-container">
+            <!--新闻标题-->
+            <div class="new-box-tit-box">
+                <h2 class="new-box-tit"><i class="icon icon-Column"></i> 专栏资讯</h2>
+                <div class="small-txt">
+                    <span>Column Information</span>
+                    @*<a href="#" class="more">更多 >></a>*@
+                </div>
+                <div class="clearBoth"></div>
+            </div>
+        </div>
+        <div class="Column-con">
+            <!--专题左侧-->
+            @*ajax替换当前元素*@
+            <div class="Column-left">
+                <ul class="Column-bg-img">
+                    <li style="display: block;"><img src="/Content/PcWeb/images/dybz.png" alt="img3"></listyle>
+                    <li><img src="/Content/PcWeb/images/jyjx.png" alt="img1"></li>
+                    <li><img src="/Content/PcWeb/images/dtzz.png" alt="img2"></li>
+                    <li><img src="/Content/PcWeb/images/jgzj.png" alt="img4"></li>
+                </ul>
+
+                <div class="Column-left-picwrap">
+                    <div class="pr">
+                        <ul class="Column-left-pic">
+                            <li style="display: block;"><img src="/Content/PcWeb/images/Column3.png" alt=""></li>
+                            <li><img src="/Content/PcWeb/images/Column1.jpg" alt=""></li>
+                            <li><img src="/Content/PcWeb/images/Column2.png" alt=""></li>
+                            <li><img src="/Content/PcWeb/images/Column4.png" alt=""></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="Column-left-tit">
+                    <dl class="Column-left-dl">
+
+                        <dt class="Column-left-tit1">
+                            <img style="display: block;" src="/Content/PcWeb/images/Column-pic3.png" alt="">
+                            <img src="/Content/PcWeb/images/Column-pic1.png" alt="">
+                            <img src="/Content/PcWeb/images/Column-pic2.png" alt="">
+                            <img src="/Content/PcWeb/images/Column-pic4.png" alt="">
+                        </dt>
+                        <dd>
+                            <div class="Column-left-tit-ddwrap">
+                                <div class="line fl"><div class="line1"></div></div>
+                                <p class="Column-left-tit-ddcon fl">一切为了人的发展</p>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <!--专题右侧-->
+            <div class="Column-right">
+                <ul class="Column-right-tit ">
+                    <li><p class="active1">德育八中</p></li>
+                    <li><p>教育教学</p></li>
+                    <li><p>党团专栏</p></li>
+                    <li><p>教工之家</p></li>
+                </ul>
+
+                <div class="Column-right-con">
+                    <ul class="new-box-list" style="display: none;">
+                        @{
+                            foreach (BonSite.Core.ArticleInfo info in BonSite.Services.Article.GetArticleList("198,199,200,219,220,221,222", 6))
+                            {
+                                <li class="new-box-item1 new-box-item"><a href="/ViewPc/@(info.ArticleID).html?ClassArticleId=198,199,200,219,220,221,222" class="new-box-item-con"><span class="pointer"></span> @info.Title</a> <span class="new-box-time">@info.AddTime.ToString("MM-dd")</span></li>
+                            }
+                        }
+                        <li class="more11">
+                            <a href="/ListPc/220-1.html">更多>></a>
+                        </li>
+                    </ul>
+                    <ul class="new-box-list" style="display: block;" id="tabList">
+                        @{
+                            foreach (BonSite.Core.ArticleInfo info in BonSite.Services.Article.GetArticleList("186,187,188,189", 6))
+                            {
+                                <li class="new-box-item1 new-box-item"><a href="/ViewPc/@(info.ArticleID).html?ClassArticleId=186,187,188,189" class="new-box-item-con"><span class="pointer"></span> @info.Title</a> <span class="new-box-time">@info.AddTime.ToString("MM-dd")</span></li>
+                            }
+                        }
+                        <li class="more11">
+                            <a href="/ListPc/186-1.html">更多>></a>
+                        </li>
+                    </ul>
+                    <ul class="new-box-list" style="display: none;">
+                        @{
+                            foreach (BonSite.Core.ArticleInfo info in BonSite.Services.Article.GetArticleList(290, 6))
+                            {
+                                <li class="new-box-item1 new-box-item"><a href="/ViewPc/@(info.ArticleID).html?ClassArticleId=290" class="new-box-item-con"><span class="pointer"></span> @info.Title</a> <span class="new-box-time">@info.AddTime.ToString("MM-dd")</span></li>
+                            }
+                        }
+                        <li class="more11">
+                            <a href="/ListPc/290.html">更多>></a>
+                        </li>
+                    </ul>
+                    <ul class="new-box-list" style="display: none;">
+                        @{
+                            foreach (BonSite.Core.ArticleInfo info in BonSite.Services.Article.GetArticleList("201,202,203", 6))
+                            {
+                                <li class="new-box-item1 new-box-item"><a href="/ViewPc/@(info.ArticleID).html?ClassArticleId=201,202,203" class="new-box-item-con"><span class="pointer"></span> @info.Title</a> <span class="new-box-time">@info.AddTime.ToString("MM-dd")</span></li>
+                            }
+                        }
+                        <li class="more11">
+                            <a href="/ListPc/203-1.html">更多>></a>
+                        </li>
+                    </ul>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--名师风采-->
+    <div class="Teacher-elegant container">
+        <div class="new-box-container">
+            <div class="new-box-tit-box">
+                <h2 class="new-box-tit"><i class="icon icon-Teacher"></i> 名师风采</h2>
+                <div class="small-txt">
+                    <span>Teacher Elegant</span>
+                    <a href="/ListPc/178-1.html" class="more">更多 >></a>
+                </div>
+                <div class="clearBoth"></div>
+            </div>
+        </div>
+        <div class="Teacher-elegant-con">
+            <div class="Teacher-elegant-wrap">
+                <ul class="vmcarousel-centered vmc-centered">
+                    @{
+                        foreach (BonSite.Core.ArticleInfo info in BonSite.Services.Article.GetArticleList(178, 12))
+                        {
+                            <li><a href="/ViewPc/@(info.ArticleID).html?ClassArticleId=178"><img src="/Upload/Article/Show/thumb640_480/@info.ImgUrl" onerror='this.src = "@info.ImgUrl"' alt=""><p>@info.Title</p></a></li>
+
+                        }
+                    }
+                </ul>
+
+            </div>
+
+
+        </div>
+    </div>
+    <div class="clearBoth"></div>
+    <!--智慧校园-->
+    <div class="container">
+        <ul class="Wisdom-Campus">
+            <li>
+                <a href="http://user.zzbz.net:8007/?module=user">
+                    <i class="WisdomIcon WisdomIcon1"></i>
+                    <span class="WisdomIconTxt">统一认证</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://user.zzbz.net:8007/?module=pub">
+                    <i class="WisdomIcon WisdomIcon2"></i>
+                    <span class="WisdomIconTxt">新闻发布</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://office.zzbz.net">
+                    <i class="WisdomIcon WisdomIcon3"></i>
+                    <span class="WisdomIconTxt">Office365</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://user.zzbz.net:8007/?module=online">
+                    <i class="WisdomIcon WisdomIcon4"></i>
+                    <span class="WisdomIconTxt">在线学习</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://user.zzbz.net:8007/?module=pan">
+                    <i class="WisdomIcon WisdomIcon5"></i>
+                    <span class="WisdomIconTxt">个人网盘</span>
+                </a>
+            </li>
+        </ul>
+        <div class="clearBoth"></div>
+
+
+    </div>
+    <div class="clearBoth"></div>
+
+
+
+
+    <!--校园风光-->
+    <div class="Teacher-elegant container">
+        <div class="new-box-container">
+            <div class="new-box-tit-box">
+                <h2 class="new-box-tit"><i class="icon icon-view"></i> 校园风光</h2>
+                <div class="small-txt">
+                    <span>Teacher Elegant</span>
+                    <a href="/ListVideo/179-1.html" class="more">更多 >></a>
+                </div>
+                <div class="clearBoth"></div>
+            </div>
+        </div>
+        <div class="schoolView-con">
+            <div class="schoolView-wrap">
+                <ul class="vmcarousel-centered-infitine vmc-centered1">
+                    @{
+                        foreach (BonSite.Core.ArticleInfo info in BonSite.Services.Article.GetArticleList(179, 7))
+                        {
+                            <li><a href=""><img src="/Upload/Article/Show/thumb640_480/@info.ImgUrl" onerror='this.src = "@info.ImgUrl"' alt=""></a></li>
+
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

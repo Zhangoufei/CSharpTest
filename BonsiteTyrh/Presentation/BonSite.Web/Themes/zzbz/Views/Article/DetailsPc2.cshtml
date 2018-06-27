@@ -1,0 +1,212 @@
+﻿@model BonSite.Web.Models.ArticleModel
+@{
+    ViewBag.Title = Model.ArticleInfo.Title + " - " + WorkContext.SiteConfig.SiteTitle;
+    Layout = "~/Themes/zzbz/Views/Shared/_LayoutPc.cshtml";
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>郑州八中详情</title>
+</head>
+
+<body style="background:#d3cab8">
+    <div class="content container">
+        <!--面包屑-->
+        <div class="content-wrap1 content-wrap">
+            <div class="content-wrap-header">
+                <div class="fl" style="margin-top: 5px;">
+                    @*<a href="">首页</a><span>&gt;</span><a href="">品质八中</a>*@
+                    <a href="/">首页</a><span></span><a>>@ViewData["ClassArticleIdName1"]</a><a style="@ViewData["HaveChild2"]" href="/ListPc/@ViewData["ClassArticleId2"]-1.html">>@ViewData["ClassArticleIdName2"]</a><a style="@ViewData["HaveChild3"]" href="/ListPc/@ViewData["ClassArticleId3"]-1.html">>@ViewData["ClassArticleIdName3"]</a>
+                </div>
+            </div>
+        </div>
+        <!--内容部分-->
+        <div class="content-wrap-con">
+            <div class="content-wrap-left">
+                <div class="content-con">
+                    <div class="content-con-tit">
+                        <input id="ArticleID" type="hidden" value="@Model.ArticleInfo.ArticleID" />
+                        <h1>@Model.ArticleInfo.Title </h1>
+                        <div class="titime" style="overflow:hidden;">作者：<span>@Model.ArticleInfo.Author</span>&nbsp; 来源：<span>@Model.ArticleInfo.ComeForm</span>&nbsp;&nbsp; &nbsp;  时间：<span>@Model.ArticleInfo.AddTime.ToString("yyyy-MM-dd")</span> <span style="float:right;">阅读数：<span>@Model.ArticleInfo.Hits</span> 次</span></div>
+                    </div>
+                    <div class="content-content">
+                        <div class="video-wrap" style="@ViewData["video"]">
+                            <div id="a1"></div>
+                        </div>
+                        <div style="@ViewData["actlcle"]">
+                            @*<p style="text-align:center">
+                                <img src="/Upload/Article/Show/thumb640_480/@Model.ArticleInfo.ImgUrl" style="@ViewData["articleimg"]" onerror="this.src='@(@Model.ArticleInfo.ImgUrl)' " />
+                            </p>*@
+                            @Html.Raw(Model.ArticleInfo.Body)
+                        </div>
+                        <!--点赞-->
+                        <input type="hidden" id="Praise" value="@Model.ArticleInfo.Praise" />
+                        <div class="praise-wrap">点赞(<span class="praise-num">@Model.ArticleInfo.Praise</span>)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-wrap-right">
+                <div class="content-wrap-right-list1">
+                    <div class="content-wrap-right-tit1"><h2>最新资讯<span class="h3-small"><span style="padding:0 6px;">/</span>Latest information</span> </h2></div>
+                    <ul class="content-wrap-list2">
+                        @{
+                            foreach (System.Data.DataRow dr in BonSite.Services.Article.GetArticleList(10, 1, " [DisplayType] in (0,2)  ", "[AddTime] DESC").Rows)
+                            {
+                                <li class="new-box-item"><a href="/ViewPc/@(dr["ArticleID"].ToString()).html" class="new-box-item-con">@dr["Title"].ToString()</a></li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <div class="content-wrap-right-list1">
+                    <div class="content-wrap-right-tit1"><h2>推荐视频<span class="h3-small"><span style="padding:0 6px;">/</span>Recommend video</span></h2></div>
+                    <ul class="content-wrap-list2">
+                        @{
+                            foreach (BonSite.Core.ArticleInfo info in BonSite.Services.Article.GetArticleList(297, 4))
+                            {
+                                <li class="content-wrap-item2">
+                                    <a href="/ViewPc/@(info.ArticleID).html">
+                                        <div class="video-img-wrap content-wrap-img">
+                                            <img src="/Upload/Article/Show/thumb640_480/@info.ImgUrl" onerror="this.src = '/Content/PcWeb/images/t3.jpg'" alt="">
+                                            <div class="video-img-meng"></div>
+                                        </div>
+                                        <span>@info.Title</span>
+
+                                    </a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="@Url.Content("~/Content/pcWeb/js/jquery-1.11.0.min.js")"></script>
+    <script src="@Url.Content("~/Content/pcWeb/js/Common.js")"></script>
+    <script src="@Url.Content("~/Content/pcWeb/js/ckplayer/ckplayer.js")"></script>
+    <script type="text/javascript">
+        $(function () {
+           
+            //点赞交互
+            function Praise(num) {
+                var ArticleID = $("#ArticleID").val();
+                $.ajax({
+                    url: '/Article/JsonPraise',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: { "num": num, "ArticleID": ArticleID },
+                    //timeout: 20000,
+                    success: function (data) {
+
+                    }
+                })
+            } 
+           
+            var x = $("#Praise").val(), y = true;
+            $('.praise-wrap').on('click', function () {
+                if (y) {
+                    x++;
+                    $(this).css({
+                        color: '#fff',
+                        backgroundColor: '#8f000b',
+                        backgroundImage: 'url("../Content/PcWeb/images/zan1.png")'
+                    });                   
+                    y = false;
+                } else {
+                    x--;
+                    $(this).css({
+                        color: '#8f000b',
+                        backgroundColor: '#fff',
+                        backgroundImage: 'url("../Content/PcWeb/images/zan.png")'
+                    });
+                    y = true;
+                }
+                Praise(x)
+                $('.praise-num').text(x);
+            })
+
+        })
+       
+
+
+
+        var flashvars = {
+            f: '@ViewData["videoUrl"]',
+            c: 0,
+            p: 2,
+            b: 0,
+            wh: '16:9',
+            i: '/static/images/letitgo.jpg',
+            my_url: encodeURIComponent(window.location.href)
+        };
+        var video = ['@ViewData["videoUrl"]->video/mp4'];
+        CKobject.embed('@ViewData["ckPlayer"]', 'a1', 'ckplayer_a1', '100%', '100%', true, flashvars, video);
+
+
+        var video1 = document.getElementById("ckplayer_a1");
+
+        video1.onclick = function () {
+            if (video1.paused) {
+                video1.play();
+            } else {
+                video1.pause();
+            }
+        }        
+    </script>
+    <script>
+        //判断当前设备是pc 还是手机，打开对应设备的页面
+        window.onload = function () {
+            var ArticleID = $("ArticleID").val();
+            var lianjie = String(window.location);
+            var dangqianshebei = browserRedirect();
+            var lianjiedizhi = "";
+            if (isContains(lianjie, "Pc")) {
+                lianjiedizhi = "Pc";
+            }
+            if (lianjiedizhi == dangqianshebei) {
+
+            } else {
+                if (dangqianshebei == "Pc") {
+                    var ddPc = lianjie.replace("View", "ViewPc")
+                    window.location.href = ddPc;
+                } else {
+                    var dd= lianjie.replace("Pc", "")
+                    window.location.href = dd;
+                }
+            }
+            //true
+            //console.log(isContains(lianjie, "Pc"));
+            //alert(lianjie)
+            //alert(isContains(lianjie, "Pc"))
+        };
+        function browserRedirect() {
+            var sUserAgent = navigator.userAgent.toLowerCase();
+            /* var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";*/
+            var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+            var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+            var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+            var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+            var bIsAndroid = sUserAgent.match(/android/i) == "android";
+            var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+            var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+            if (!(bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM)) {
+                //window.location.href = "/home/indexpc"
+                return "Pc";
+            } else {
+                //window.location.href = "/home/index"
+                return "";
+            }
+        }
+        function isContains(str, substr) {
+            return new RegExp(substr).test(str);
+        }
+
+       
+    </script>
+</body>
+
+</html>

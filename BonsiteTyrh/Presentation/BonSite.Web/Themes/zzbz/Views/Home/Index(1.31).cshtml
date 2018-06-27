@@ -1,0 +1,483 @@
+﻿@{
+    ViewBag.Title = "首页 - " + WorkContext.SiteConfig.SiteTitle;
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>郑州八中官网首页</title>
+
+
+
+    <style>
+        .index-banner .swiper-container {
+            /*height: 450px;*/
+            margin-top: 0;
+            overflow: inherit;
+            max-width: 1360px;
+        }
+
+        .index-banner .index-banner-title-wrap {
+            opacity: 0.7;
+            filter: alpha(opacity=70);
+            background: none repeat scroll 0 0 #000000;
+            position: absolute;
+            bottom: 12%;
+            padding: 18px 12px;
+            text-align: left;
+        }
+
+        .index-banner .index-banner-title {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+            font-family: "Microsoft Yahei";
+            margin-bottom: 0;
+        }
+
+        .scenery-text {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="mui-inner-wrap">
+        <div class="index-banner">
+            <div class="swiper-container location-content1">
+                <div class="swiper-wrapper">
+
+                    @{
+                        foreach (BonSite.Core.BannerInfo info in BonSite.Services.Banners.GetBannerList(1))
+                        {
+                            <div class="swiper-slide" style="background: url('/upload/banner/@info.Img')no-repeat; background-size:  100% auto; background-position: center center;">
+                                <a href="@info.Url">
+                                    @*<img src="/upload/banner/@info.Img" style="" onerror='this.src = "/Content/Web/images/banner1.jpg"' alt="" />*@
+                                    <div style="position:absolute;left:0;top:0;width:100%;height:100%;">
+                                        <div class="container" style="position:relative;height:100%;">
+                                            @*<div class="index-banner-title-wrap ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="0.8s" swiper-animate-delay="0.3s">
+                                                <p class=" index-banner-title">@info.Title</p>
+                                            </div>*@
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </div>
+                        }
+                    }
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+                <!-- Add Arrows -->
+
+            </div>
+
+        </div>
+    </div>
+    <div class="situation-main container">
+        @*<h2 class="plate-title-eng">DEPARTMENT SITUTATION</h2>
+            <h4 class="plate-title-china">——学校概况——</h4>
+            <div class="situation-text">
+                <a href="/View/3065.html?ClassArticleId=176"><p>郑州市第八中学是一所全日制公办初级中学，学校创建于1952年7月，原名为"河南省立郑州第四初级中学"，1958年学校更名为"郑州市第八中学"。1978年，郑州市第八中学成为首批省重点中学。</p></a>
+            </div>
+            <a href="/View/3065.html?ClassArticleId=176"><img src="/Content/Web/images/down-jt.png" class="down-jt" /></a>*@
+        <div class="news-box">
+            <div class="row">
+                <div class="news-left col-md-6 ">
+                    <h3 class="news-name">校园新闻 <a href="/List/228-1.html">更多>></a></h3>
+                    <div class="news-list">
+                        <ul>
+                            <li class="news-listli1 swiper-container" id="newsHead">
+                                <div class="swiper-wrapper">
+                                    @{
+                                        if (BonSite.Services.Article.GetArticleList(5, 1, " [DisplayType] in (0,2) and [ArticleClassID] <>227 and [ArticleClassID] <>242 and IsShow=1 and IsHome=1 ", " [AddTime] DESC ") != null && BonSite.Services.Article.GetArticleList(5, 1, " [DisplayType] in (0,2) and  [ArticleClassID] <>227 and [ArticleClassID] <>242 and IsShow=1 and IsHome=1 ", "  [AddTime] DESC ").Rows.Count > 0)
+                                        {
+                                            foreach (System.Data.DataRow dr in BonSite.Services.Article.GetArticleList(5, 1, " [DisplayType] in (0,2) and [ArticleClassID] <>227 and [ArticleClassID] <>242 and IsShow=1 and IsHome=1 ", " [AddTime] DESC ").Rows)
+                                            {
+                                                <a class="swiper-slide" href="/View/@(dr["ArticleID"].ToString()).html?ClassArticleId=@dr["ArticleClassID"].ToString()">
+                                                    <div class="news-img">
+                                                        <img src="/Upload/Article/Show/thumb640_480/@dr["ImgUrl"].ToString()" onerror="this.src = '@dr["ImgUrl"].ToString()'" alt="">
+                                                    </div>
+                                                    <div class="news-text">
+                                                        <h4 title="@(dr["Title"].ToString())">@(dr["Title"].ToString())</h4>
+
+                                                        <p class="news-title" title="@(dr["Digest"].ToString())">@(dr["Digest"].ToString())</p>
+                                                    </div>
+
+                                                </a>
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </li>
+                            @*轮播图下边的列表*@
+                            @{
+                                string str = "";
+                                if (BonSite.Services.Article.GetArticleList(5, 1, " [DisplayType] in (0,2) and [ArticleClassID] <>227 and [ArticleClassID] <>242 and IsShow=1 and IsHome=1 ", " [AddTime] DESC ") != null && BonSite.Services.Article.GetArticleList(5, 1, " [DisplayType] in (0,2) and  [ArticleClassID] <>227 and [ArticleClassID] <>242 and IsShow=1 and IsHome=1 ", "  [AddTime] DESC ").Rows.Count > 0)
+                                {
+
+                                    foreach (System.Data.DataRow dr1 in BonSite.Services.Article.GetArticleList(5, 1, " [DisplayType] in (0,2) and [ArticleClassID] <>227 and [ArticleClassID] <>242 and IsShow=1 and IsHome=1 ", " [AddTime] DESC ").Rows)
+                                    {
+                                        str += dr1["ArticleID"].ToString() + ",";
+                                    }
+                                    str = str.Substring(0, str.Length - 1);
+                                }
+                                if (BonSite.Services.Article.GetArticleList(7, 1, " [DisplayType] in (0,2) and ArticleClassID <>227 and [ArticleClassID] <>242 and IsShow=1 and IsHome=1 and  ArticleID not in (" + str + ") ", " [AddTime] DESC ") != null && BonSite.Services.Article.GetArticleList(7, 1, "  [DisplayType] in (0,2) and ArticleClassID <>227 and [ArticleClassID] <>242 and IsShow=1 and IsHome=1  and  ArticleID not in (" + str + ")", "  [AddTime] DESC ").Rows.Count > 0)
+                                {
+                                    foreach (System.Data.DataRow dr in BonSite.Services.Article.GetArticleList(7, 1, " [DisplayType] in (0,2) and ArticleClassID <>227 and [ArticleClassID] <>242 and IsShow=1 and IsHome=1  and  ArticleID not in (" + str + ")", " [AddTime] DESC ").Rows)
+                                    {
+                                        <li>
+                                            <p class="news-title">
+                                                <a href="/View/@(dr["ArticleID"]).html?ClassArticleId=@(dr["ArticleClassID"])" title="@(dr["Title"])">@(dr["Title"])</a>
+                                            </p>
+                                            <span class="date-box iconfont">
+                                                @BonSite.Core.TypeHelper.StringToDateTime(dr["AddTime"].ToString()).ToString("yyyy-MM-dd")
+                                            </span>
+                                            <div class="clear"></div>
+                                        </li>
+
+                                    }
+                                }
+                            }
+
+                        </ul>
+                        @*<a href="/List/228-1.html"><img src="/Content/Web/images/down-jt.png" class="down-jt" /></a>*@
+                    </div>
+                </div>
+                <div class="news-right col-md-6 ">
+                    <h3 class="news-name">通知公告 <a href="/List/227-1.html">更多>></a></h3>
+                    <div class="news-list">
+                        <ul>
+                            @*@{
+                                int count2 = 0;
+                                foreach (BonSite.Core.ArticleInfo info in BonSite.Services.Article.GetArticleList(227, 7))
+                                {
+
+                                    if (count2 == 0)
+                                        {
+                                            <li>
+                                                <div class="news-img">
+
+                                                    <img src="/Upload/Article/Show/thumb136_100/@info.ImgUrl" onerror='this.src="/Content/Web/images/img7.jpg"' alt="" />
+                                                </div>
+                                                <div class="news-text">
+                                                    <h4 title="@info.Title">@info.Title</h4>
+                                                    <div class="details-btn">
+                                                        <a href="/View/@(info.ArticleID).html?ClassArticleId=@info.ArticleClassID">
+                                                            <span>详情</span>
+                                                            <i class="iconfont"></i>
+                                                        </a>
+                                                    </div>
+                                                    <p class="news-title" title="@info.Digest">@info.Digest</p>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                    <li>
+                                        <p class="news-title">
+                                            <a href="/View/@(info.ArticleID).html?ClassArticleId=@info.ArticleClassID" title="@info.Title">@info.Title</a>
+                                        </p>
+                                        <span class="date-box iconfont">
+                                            @info.AddTime.ToString("yyyy-MM-dd")
+                                        </span>
+                                        <div class="clear"></div>
+                                    </li>
+
+                                    //}
+                                    //count2++;
+                                }
+                            }*@
+                            @{
+                                string str001 = "";
+                                int count001 = 0;
+                                int num001 = 0;
+                                System.Data.DataTable dataTable = BonSite.Services.Article.GetArticleList(7, 1, " [DisplayType] in (0,2) and [ArticleClassID] <>228 and [ArticleClassID] <>242 and IsShow=1 and IsHome=2 ", " [AddTime] DESC ");
+                                if (dataTable != null && dataTable.Rows.Count > 0)
+                                {
+                                    count001 = dataTable.Rows.Count;
+                                    foreach (System.Data.DataRow dr001 in dataTable.Rows)
+                                    {
+                                        if (num001 > 7)
+                                        {
+                                            break;
+                                        }
+                                        num001++;
+                                        <li>
+                                            <p class="news-title">
+                                                <a href="/View/@(dr001["ArticleID"]).html?ClassArticleId=@dr001["ArticleClassID"]" title="@dr001["Title"]">@dr001["Title"]</a>
+                                            </p>
+                                            <span class="date-box iconfont">
+                                               @BonSite.Core.TypeHelper.StringToDateTime(dr001["AddTime"].ToString()).ToString("yyyy-MM-dd")
+                                            </span>
+                                            <div class="clear"></div>
+                                        </li>
+                                        str001 += dr001["ArticleID"].ToString() + ",";
+                                    }
+                                    str001 = str001.Substring(0, str001.Length - 1);
+                                }
+
+                                dataTable = BonSite.Services.Article.GetArticleList(7 - count001, 1, "  [ArticleClassID] = 227  and IsShow=1 and IsHome=0 ", " [AddTime] DESC ");
+                                if (dataTable != null && dataTable.Rows.Count > 0)
+                                {
+                                    count001 = dataTable.Rows.Count;
+                                    foreach (System.Data.DataRow dr001 in dataTable.Rows)
+                                    {
+                                        <li>
+                                            <p class="news-title">
+                                                <a href="/View/@(dr001["ArticleID"]).html?ClassArticleId=@dr001["ArticleClassID"]" title="@dr001["Title"]">@dr001["Title"]</a>
+                                            </p>
+                                            <span class="date-box iconfont">
+                                                @BonSite.Core.TypeHelper.StringToDateTime(dr001["AddTime"].ToString()).ToString("yyyy-MM-dd")
+                                            </span>
+                                            <div class="clear"></div>
+                                        </li>
+                                    }
+                                }
+                            }
+                        </ul>
+                        @*<a href="/List/228-1.html"><img src="/Content/Web/images/down-jt.png" class="down-jt" /></a>*@
+                    </div>
+                </div>
+            </div>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="scenery-main ">
+        <h2 class="plate-title-eng">Teacher Elegant</h2>
+        <h4 class="plate-title-china">——名师风采——</h4>
+        <div class="scenery-content">
+            <div class="swiper-container ">
+                <div class="swiper-wrapper ">
+                    @{
+                        foreach (BonSite.Core.ArticleInfo info in BonSite.Services.Article.GetArticleList(178, 20))
+                        {
+                            <div class="swiper-slide col-sm-3 col-xs-6">
+                                <a href="/View/@(info.ArticleID).html?ClassArticleId=178">
+                                    <div class="scenery-img">
+                                        <img src="/Upload/Article/Show/thumb640_480/@info.ImgUrl" onerror='this.src = "@info.ImgUrl"' alt="" />
+                                    </div>
+                                </a>
+                                <p class="scenery-text" title="@info.Title">@StringHelper.CutStr(info.Title, 15)</p>
+                            </div>
+                        }
+                    }
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </div>
+    <div class="news-main container">
+        <h2 class="plate-title-eng">COLUMN INFORMATION</h2>
+        <h4 class="plate-title-china">——专栏资讯——</h4>
+        <div class="school-news-box">
+            <div class="school-news-this">
+                <div class="school-news-line">
+                    @*<img src="/Content/PcWeb/images/Column1.jpg" alt="" />*@
+                    <h2 class="school-news-name"><strong>教育教学</strong><span title="@BonSite.Services.ArticleClass.GetModelById(4).Subhead">@BonSite.Services.ArticleClass.GetModelById(4).Subhead</span></h2>
+                    @*<p title="@BonSite.Services.ArticleClass.GetModelById(4).Subhead">@BonSite.Services.ArticleClass.GetModelById(4).Subhead</p>*@
+                </div>
+                <div class="school-news-list">
+                    @{
+                        foreach (BonSite.Core.ArticleInfo info in BonSite.Services.Article.GetArticleList("186,187,188,189", 3))
+                        {
+                            <a href="/View/@(info.ArticleID).html?ClassArticleId=186,187,188,189">
+                                <p class="school-news-title" title="@info.Title">@info.Title</p>
+                                <p class="school-news-date">
+                                    <span class="date-box iconfont">
+                                        @info.AddTime.ToString("yyyy-MM-dd")
+                                    </span>
+                                </p>
+                            </a>
+                        }
+                    }
+                </div>
+                <a href="/List/4-1.html"><img src="/Content/Web/images/down-jt.png" class="down-jt" /></a>
+            </div>
+            <div class="school-news-this">
+                <div class="school-news-line">
+                    @*<img src="/Content/PcWeb/images/Column3.png" alt="" />*@
+                    <h2 class="school-news-name">
+                        德育八中
+                        <span title="@BonSite.Services.ArticleClass.GetModelById(6).Subhead">@BonSite.Services.ArticleClass.GetModelById(6).Subhead</span>
+                    </h2>
+                </div>
+                <div class="school-news-list">
+                    @{
+                        foreach (BonSite.Core.ArticleInfo info in BonSite.Services.Article.GetArticleList("198,199,200,219,220,221,222", 3))
+                        {
+                            <a href="/View/@(info.ArticleID).html?ClassArticleId=198,199,200,219,220,221,222">
+                                <p class="school-news-title" title="@info.Title">@info.Title</p>
+                                <p class="school-news-date">
+                                    <span class="date-box iconfont">
+                                        @info.AddTime.ToString("yyyy-MM-dd")
+                                    </span>
+                                </p>
+                            </a>
+                        }
+                    }
+                </div>
+                <a href="/List/12-1.html"><img src="/Content/Web/images/down-jt.png" class="down-jt" /></a>
+            </div>
+            <div class="school-news-this">
+                <div class="school-news-line">
+                    @*<img src="/Content/PcWeb/images/Column2.png" alt="" />*@
+                    <h2 class="school-news-name">党团专栏<span title="@BonSite.Services.ArticleClass.GetModelById(12).Subhead">@BonSite.Services.ArticleClass.GetModelById(12).Subhead</span></h2>
+                </div>
+                <div class="school-news-list">
+                    @{
+                        foreach (BonSite.Core.ArticleInfo info in BonSite.Services.Article.GetArticleList(290, 3))
+                        {
+                            <a href="/View/@(info.ArticleID).html?ClassArticleId=290">
+                                <p class="school-news-title" title="@info.Title">@info.Title</p>
+                                <p class="school-news-date">
+                                    <span class="date-box iconfont">
+                                        @info.AddTime.ToString("yyyy-MM-dd")
+                                    </span>
+                                </p>
+                            </a>
+                        }
+                    }
+                </div>
+                <a href="/List/290-1.html"><img src="/Content/Web/images/down-jt.png" class="down-jt" /></a>
+            </div>
+            <div class="school-news-this">
+                <div class="school-news-line">
+                    @*<img src="/Content/PcWeb/images/Column4.png" alt="" />*@
+                    <h2 class="school-news-name">教工之家<span title="@BonSite.Services.ArticleClass.GetModelById(13).Subhead">@BonSite.Services.ArticleClass.GetModelById(13).Subhead</span></h2>
+                </div>
+                <div class="school-news-list">
+                    @{
+                        foreach (BonSite.Core.ArticleInfo info in BonSite.Services.Article.GetArticleList("201,202,203", 3))
+                        {
+                            <a href="/View/@(info.ArticleID).html?ClassArticleId=201,202,203">
+                                <p class="school-news-title" title="@info.Title">@info.Title</p>
+                                <p class="school-news-date">
+                                    <span class="date-box iconfont">
+                                        @info.AddTime.ToString("yyyy-MM-dd")
+                                    </span>
+                                </p>
+                            </a>
+                        }
+                    }
+                </div>
+                <a href="/List/13-1.html"><img src="/Content/Web/images/down-jt.png" class="down-jt" /></a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <h2 class="plate-title-eng">OUR SCHOOL</h2>
+    <h4 class="plate-title-china">——硬件设施——</h4>
+    <div class="scenery-main ">
+        <div class="scenery-content famous-teacher-main">
+            <div class="swiper-container ">
+                <div class="swiper-wrapper">
+
+                    @{
+                        foreach (BonSite.Core.ArticleInfo info in BonSite.Services.Article.GetArticleList(179, 20))
+                        {
+                            <div class="swiper-slide col-sm-3 col-xs-6">
+                                <div class="scenery-img">
+                                    <img src="/Upload/Article/Show/thumb640_480/@info.ImgUrl" onerror='this.src = "/Content/Web/images/img2.jpg"' alt="" />
+                                </div>
+                                @*<p class="scenery-text">@info.Title</p>*@
+                            </div>
+                        }
+                    }
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </div>
+    <div class="location-main container">
+        <h2 class="plate-title-eng">RECOMMAND VIDEO</h2>
+        <h4 class="plate-title-china">——推荐视频——</h4>
+        <div class="location-content">
+
+            <div class="location-list">
+                @*<ul>
+                        <li>
+                            <div class="school-location-text">
+                                <h2 class="school-location-name iconfont">郑州市八中</h2>
+                                <p>河南省郑州市金水区经五路7号</p>
+                                <p>电话：0371-65952299</p>
+                            </div>
+                            <div class="school-location-img">
+                                <a href=""><img src="/Content/Web/images/img2.jpg" alt="" /></a>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <div class="school-location-text">
+                                <h2 class="school-location-name iconfont">郑州八中教育集团经纬中学</h2>
+                                <p>河南省郑州市金水区纬五路21号</p>
+                                <p>电话：0371-65682586</p>
+                            </div>
+                            <div class="school-location-img">
+                                <a href=""><img src="/Content/Web/images/img2.jpg" alt="" /></a>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                    </ul>*@
+                @{
+                    if (BonSite.Services.Article.GetArticleList(1, 1, " [ArticleClassID] = 297 and IsShow=1 and IsHome=1 ", " [AddTime] DESC ") != null && BonSite.Services.Article.GetArticleList(1, 1, "  [ArticleClassID] = 297 and IsShow=1 and IsHome=1 ", "  [AddTime] DESC ").Rows.Count > 0)
+                    {
+                        foreach (System.Data.DataRow dr in BonSite.Services.Article.GetArticleList(5, 1, " [ArticleClassID] = 297 and IsShow=1 and IsHome=1 ", " [AddTime] DESC ").Rows)
+                        {
+                            <a href="/View/@(dr["ArticleID"].ToString()).html?ClassArticleId=@(dr["ArticleClassID"].ToString())">
+                                <div class="video-wrap">
+
+                                    <img src="/Upload/Article/Show/thumb640_480/@(dr["ImgUrl"].ToString())" onerror="this.src = '/Content/PcWeb/images/t3.jpg'" alt="" style="display:block;margin:0 auto;width:100%;height:auto;" />
+                                    <div class="video-wrap-mask"></div>
+
+                                </div>
+                            </a>
+                            @*<div class=" video-img">
+                                <a href="/ViewPc/@(dr["ArticleID"].ToString()).html?ClassArticleId=@(dr["ArticleClassID"].ToString())" class="video-img-wrap">
+                                    <img src="/Upload/Article/Show/thumb640_480/@(dr["ImgUrl"].ToString())" onerror="this.src = '/Content/PcWeb/images/t3.jpg'" alt="">
+                                    <div class="video-img-meng"></div>
+                                </a>
+
+                            </div>
+                            <p class="video-result">@dr["Title"]</p>*@
+                        }
+                    }
+                }
+                @*<a href="#">
+                    <div class="video-wrap">
+
+                        <img src="/Content/Web/images/img2.jpg" style="display:block;margin:0 auto;width:100%;height:auto;" />
+                        <div class="video-wrap-mask"></div>
+
+                    </div>
+                </a>*@
+
+            </div>
+            @*<div class="location-map">
+                <img src="/Content/Web/images/map.jpg" />
+            </div>*@
+            <div class="clear"></div>
+        </div>
+    </div>
+    <script>
+        var mySwiper = new Swiper("#newsHead", {
+            //autoplay: true,
+            //loop: true,
+            //speed: 600
+            loop: true,
+            paginationClickable: true,
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: 2500,
+            autoplayDisableOnInteraction: false,
+            loopAdditionalSlides: 2,
+        })
+
+    </script>
+</body>
+</html>

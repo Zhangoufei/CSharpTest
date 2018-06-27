@@ -1,0 +1,1616 @@
+body {
+	background-color: #fff;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+
+/*banner*/
+
+.index-banner {
+	width: 100%;
+}
+
+.index-banner .swiper-slide {
+	text-align: center;
+	background: #ca392d;
+}
+
+.index-banner .swiper-slide img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	max-height: 450px;
+}
+.index-banner .swiper-slide{
+	/*max-height: 450px;*/
+}
+.index-banner .swiper-pagination-bullet {
+	width: 70px;
+	height: 10px;
+	border: 2px solid #fff;
+	background: #d7d8da;
+	border-radius: 5px;
+	opacity: 1;
+}
+
+.index-banner .swiper-pagination-bullet-active {
+	background: #ae4144;
+	border: 2px solid #ae4144;
+}
+
+.index-header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+.user-img img {
+	width: 40px;
+	height: 40px;
+}
+
+.user-text .user-name {
+	font-size: 14px;
+}
+
+.user-img {
+	float: left;
+}
+
+.user-text {
+	float: left;
+	margin-left: 5px;
+}
+
+.user-text p {
+	font-size: 12px;
+	margin: 0;
+	color: #fff;
+}
+
+.user-header {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	z-index: 100;
+}
+
+/*.exit-btn:before {
+	content: '\e64d';
+}*/
+
+.exit-btn {
+	float: left;
+	display: block;
+	font-size: 12px;
+	color: #fff;
+	background: #e77c76;
+	width: 55px;
+	height: 20px;
+	border-radius: 10px;
+	text-align: center;
+	cursor: pointer;
+	position: relative;
+	top: 16px;
+	left: 10px;
+	line-height: 20px;
+}
+
+
+/*导航*/
+
+.index-nav li>a {
+	display: block;
+	font-size: 16px;
+	color: #fff;
+	margin: 0 12px;
+}
+
+.index-nav li {
+	float: left;
+	padding: 15px 0;
+}
+
+.index-nav ul {
+	margin-bottom: 0;
+}
+
+.index-nav {
+	position: absolute;
+	top: 60px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	z-index: 10;
+	background: #982439;
+	
+	opacity: .9;
+}
+
+
+/*学校概况*/
+
+.plate-title-eng {
+	font-size: 24px;
+	color: #982439;
+	text-align: center;
+	font-weight: 700;
+}
+
+.situation-main {
+	margin: auto;
+    /*改*/
+	margin-top: 10px;
+}
+
+.plate-title-china {
+	font-size: 16px;
+	text-align: center;
+	font-weight: 700;
+	color: #4c4c4c;
+	margin-top: 10px;
+}
+
+.situation-text p {
+	font-size: 14px;
+	color: #666;
+}
+
+.situation-text {
+	margin-top: 30px;
+}
+
+.down-jt {
+	display: block;
+	width: 30px;
+	margin: auto;
+	margin-top: 10px;
+}
+
+.news-left {
+	float: left;
+}
+
+.news-right {
+	position: relative;
+	float: right;
+}
+
+.news-img {
+	width: 130px;
+	height: 80px;
+	float: left;
+}
+
+.news-img img {
+	width: 100%;
+	height: 100%;
+}
+
+.news-text {
+	float: left;
+	width: 60%;
+	position: relative;
+}
+
+.news-text h4 {
+	margin-left: 20px;
+	font-size: 14px;
+	width: 100%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.news-name {
+	font-size: 18px;
+    padding-bottom:20px;
+    border-bottom:2px #982439 solid;
+}
+.news-name a{
+    color:#333;
+}
+.news-name a:hover{
+    color:#9f0810;
+}
+
+.news-list {
+	margin-top: 20px;
+}
+
+.details-btn {
+	width: 90px;
+	height: 25px;
+	background: #000;
+	opacity: .8;
+	border-radius: 20px;
+	text-align: center;
+	cursor: pointer;
+	position: absolute;
+	right: 0;
+}
+
+.details-btn a {
+	color: #fff;
+}
+
+.details-btn i:before {
+	content: '\e64a';
+}
+
+.details-btn span {
+	font-size: 12px;
+	padding-right: 6px;
+	border-right: 1px solid #fff;
+}
+
+.news-text .news-title {
+	font-size: 12px;
+	color: #999;
+	margin-top: 10px;
+	margin-left: 20px;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	position: relative;
+	top: 20px;
+}
+
+.date-box:before {
+	content: '\e6f0';
+	font-size: 16px;
+}
+
+.date-box {
+	font-size: 12px;
+	color: #999;
+	float: right;
+}
+
+.news-title {
+	float: left;
+	width: 70%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.news-title a {
+	font-size: 14px;
+	color: #333;
+}
+.news-title a:hover{
+	color: #982439;
+}
+
+.news-list li:first-child {
+	padding-bottom: 20px;
+}
+/*改*/
+.news-box {
+	margin-top: 10px;
+}
+
+
+/*学校风景*/
+
+.scenery-main {
+	margin-top: 20px;
+}
+
+.scenery-content {
+	background: #a24a49;
+	padding: 20px 0;
+	margin-top: 30px;
+	overflow: hidden;
+}
+
+.scenery-img {
+	width: 185px;
+	height: 185px;
+	border-radius: 100%;
+	overflow: hidden;
+	margin: auto;
+}
+
+.scenery-img img {
+	width: 100%;
+	height: 100%;
+}
+
+.scenery-content .swiper-container {
+	margin: auto;
+	width: 1250px;
+}
+
+.scenery-content .swiper-wrapper {
+	margin: auto;
+}
+
+.scenery-text {
+	font-size: 16px;
+	text-align: center;
+	color: #fff;
+	margin-top: 10px;
+	margin-bottom: 0;
+}
+
+.scenery-content .swiper-button-prev {
+	background-image: url(../images/prev.png);
+	left: 0;
+	right: auto;
+}
+
+.scenery-content .swiper-button-next {
+	background-image: url(../images/next.png);
+	right: 0;
+	left: auto
+}
+
+
+/*学校新闻*/
+
+.news-main {
+	margin-top: 20px;
+}
+
+.school-news-box {
+	margin: auto;
+	margin-top: 30px;
+}
+
+.school-news-name {
+	font-size: 16px;
+	text-align: left;
+}
+
+.school-news-this {
+	width: 25%;
+	float: left;
+}
+.school-news-line{
+    padding-right:10px;
+}
+
+.school-news-line img {
+	display: block;
+	width: 100px;
+	height: 100px;
+	border-radius: 100%;
+	margin: auto;
+}
+
+.school-news-line p {
+	width: 50%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin: auto;
+	font-size: 12px;
+}
+
+.school-news-list a {
+	display: block;
+	margin-bottom: 5px;
+    position:relative;
+}
+
+.school-news-date .date-box {
+	float: initial;
+}
+
+.school-news-list p {
+	margin-bottom: 0;
+}
+
+.school-news-title {
+	font-size: 14px;
+	width: 100%;
+	margin: auto;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	color: #333;
+    padding-right:12px;
+}
+
+.school-news-date {
+	font-size: 14px;
+	
+}
+
+.school-news-list {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+
+/*名师风采*/
+
+.famous-teacher-main {
+	background: #e9efef;
+	padding-top: 30px;
+	margin-top: 60px;
+}
+
+.famous-teacher-main .scenery-content {
+	background: none;
+}
+
+.famous-teacher-main .scenery-text {
+	color: #666;
+}
+
+.famous-teacher-main .swiper-button-next {
+	background-image: url(../images/next2.png);
+}
+
+.famous-teacher-main .swiper-button-prev {
+	background-image: url(../images/prev2.png);
+}
+
+.famous-teacher-main .scenery-content {
+	margin-top: 10px;
+}
+
+
+/*学校地址*/
+
+.location-content {
+	margin: auto;
+	margin-top: 30px;
+}
+
+.school-location-name {
+	font-size: 12px;
+	color: #2e7eff;
+	margin-top: 7px;
+}
+
+.school-location-text p {
+	font-size: 12px;
+	color: #666;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.school-location-text {
+	float: left;
+}
+
+.school-location-img {
+	width: 120px;
+	height: 80px;
+	float: right;
+}
+
+.school-location-img img {
+	width: 100%;
+	height: 100%;
+}
+
+.school-location-name:before {
+	content: '\e651';
+	color: #f4433b;
+	font-size: 18px;
+	margin-right: 5px;
+}
+
+.location-list li {
+	margin-bottom: 30px;
+}
+
+.location-map {
+	float: right;
+}
+
+.location-list {
+	float: left;
+	margin-top: 40px;
+}
+
+.location-map img {
+	width: 100%;
+}
+
+.location-main {
+	margin-top: 60px;
+}
+
+
+/*底部*/
+
+.footer {
+	background: #575c60;
+	padding: 30px 0;
+	margin-top: 50px;
+}
+
+.footer p {
+	font-size: 12px;
+	color: #fff;
+	text-align: center;
+	margin-bottom: 5px;
+}
+
+.footer p:last-child {
+	margin-bottom: 0;
+}
+
+
+/*滚动到顶部*/
+
+.top-box {
+	position: fixed;
+	right: 0;
+	bottom: 170px;
+	z-index: 15;
+	display: none;
+}
+
+.top-box img {
+	width: 50px;
+	cursor: pointer;
+}
+
+.mui-icon-bars {
+	display: none;
+}
+
+.mui-off-canvas-wrap {
+	height: auto;
+}
+
+
+/*列表页*/
+
+.list-main {
+	background: #fff;
+	border-radius: 5px;
+	position: relative;
+	top: 135px;
+	margin-bottom: 180px
+}
+
+.list-header {
+	background: #eeeeee;
+	overflow: hidden;
+	border-radius: 5px;
+	padding: 15px 25px;
+	margin: 0 20px;
+	margin-top: 15px;
+}
+
+.list-title {
+	font-size: 16px;
+	float: left;
+	margin: 0;
+}
+
+.nav-link {
+	float: right;
+	margin: 0;
+	font-size: 14px;
+}
+
+.nav-link a {
+	color: #999;
+}
+
+.list-content {
+	margin: 0 20px;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
+.list-nav-show img {
+	height: 100%;
+	display: block;
+	float: left;
+}
+
+.list-nav-text {
+	float: right;
+	width: 63%;
+	margin-right: 10px;
+}
+
+.list-nav-img {
+	float: left;
+	width: 180px;
+	height: 104px;
+}
+
+.list-nav-img img {
+	width: 100%;
+	height: 100%;
+}
+
+.list-nav-right {
+	float: right;
+	width: 50%;
+}
+
+.list-nav-left {
+	float: left;
+	width: 48%;
+}
+
+.list-nav-box li {
+	background: #ededed;
+	margin-bottom: 10px;
+}
+
+.list-nav-text h3 {
+	font-size: 16px;
+	color: #333;
+}
+
+.list-nav-text p {
+	font-size: 12px;
+	color: #666;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+.list-nav-text a {
+	display: block;
+}
+
+.list-nav-box li:hover {
+	background: #ffd5d6;
+	color: #921815;
+}
+
+.list-nav-box li:hover .list-nav-text h3 {
+	color: #921815;
+}
+
+.list-nav-box li:hover .list-nav-text p {
+	color: #921815;
+}
+
+.list-nav-box li:last-child {
+	margin-bottom: 0;
+}
+
+.list-nav-box {
+	margin-bottom: 0;
+}
+
+.list-nav-show {
+	height: 100%;
+}
+
+.nav-third-list li {
+	float: left;
+	margin-bottom: 20px;
+}
+
+.nav-third-list li h3 {
+	font-size: 16px;
+	border-bottom: 1px solid #ececec;
+	padding-bottom: 10px;
+	text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.nav-third-list li p {
+	font-size: 12px;
+	margin-bottom: 0;
+}
+
+.nav-third-line {
+	padding: 20px 0;
+	min-height: 311px;
+	box-shadow: 0 0 5px #d5d5d5;
+}
+
+.nav-third-line img {
+	width: 100%;
+}
+
+.nav-third-box {
+	margin: 20px;
+}
+
+.nav-third-maging {
+	margin: 0 10px;
+}
+
+.nav-third-maging p {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 5;
+	-webkit-box-orient: vertical;
+}
+
+.page-box {
+	text-align: center;
+	margin-top: 30px;
+}
+
+.page-box .mui-pagination .mui-active a {
+	border-color: #8c130b;
+	background-color: #8c130b;
+}
+
+.page-box .mui-pagination a {
+	color: #8c130b;
+}
+
+.sidebar a:before {
+	content: '●';
+	color: #fff;
+	position: relative;
+	top: -2px;
+	margin-right: 5px;
+}
+
+.sidebar a {
+	color: #fff;
+	display: block;
+	margin-bottom: 10px;
+}
+
+.sidebar a:hover {
+	color: #fe7d6a;
+}
+
+.sidebar a:hover:before {
+	color: #fe7d6a;
+}
+
+.sidebar a:last-child {
+	margin-bottom: 0;
+}
+
+.sidebar {
+	position: absolute;
+	width: 160px;
+	background: #000;
+	opacity: .8;
+	padding: 15px 10px;
+	top: 52px;
+	display: none;
+}
+
+.block {
+	display: block !important;
+}
+
+.list-nav-img1 {
+	width: 76.9%;
+}
+
+.list-nav-img2 {
+	width: 23%;
+}
+
+a:focus,
+a:hover {
+	color: #fff;
+}
+
+.list-news-title h2:before {
+	content: '■';
+	font-size: 16px;
+	margin-right: 15px;
+	position: relative;
+	top: -3px;
+}
+
+.list-news-title h2 {
+	font-size: 18px;
+	float: left;
+	margin: 0;
+	border-right: 1px solid #ededed;
+	padding: 10px;
+	padding-right: 20px;
+	border-top: 1px solid #ededed;
+	color: #333;
+	position: relative;
+	top: 1px;
+	border-bottom: 1px solid #fff;
+}
+
+.list-news-title span {
+	float: left;
+	padding-left: 20px;
+	line-height: 40px;
+	color: #333;
+	font-size: 18px;
+}
+
+.list-news-content {
+	margin: 0 20px;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
+.list-news-text:before {
+	content: '■';
+	font-size: 10px;
+	position: relative;
+	top: -2px;
+	margin-right: 15px;
+	color: #999;
+}
+
+.list-news-text {
+	float: left;
+	color: #333;
+}
+
+.list-news-type {
+	float: left;
+	margin-right: 15px;
+	color: #333;
+}
+
+.list-news-date {
+	float: right;
+	color: #999;
+	font-size: 12px;
+	position: relative;
+	top: 5px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.list-news-box {
+	float: right;
+	width: 60%;
+	margin-top: 10px;
+}
+
+.list-news-img {
+	float: left;
+	width: 330px;
+}
+
+.list-news-img img {
+	width: 100%;
+	height: 100%;
+}
+
+.list-news-line {
+	margin-top: 20px;
+}
+
+.list-news-title {
+	border-bottom: 1px solid #ededed;
+}
+
+.list-news-text {
+	width: 80%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin-bottom: 0;
+}
+
+.list-news-text a {
+	color: #333;
+}
+
+.list-news-box li {
+	margin-bottom: 10px;
+}
+
+.list-news-box li:hover .list-news-text {
+	color: #982439;
+}
+
+.list-nav-right .swiper-button-next,
+.list-nav-right .swiper-button-prev {
+	display: none;
+}
+
+.list-news-list>li {
+	margin-bottom: 20px;
+}
+
+.list-news-list {
+	margin-bottom: 40px;
+}
+
+/*详情*/
+.list-xq-content{
+	 border-top: 1px solid #ececec;
+	 margin-top: 20px;
+	 padding-left: 30px;
+	 padding-right: 30px;
+}
+.list-xq-title h2{
+	font-size: 16px;
+}
+.list-xq-left{
+	width: 60%;
+	float: left;
+}
+.sub-msg .writer-name{
+	float: left;
+}
+.sub-msg .publish-date{
+	float: right;
+}
+.sub-msg p{
+	font-size: 12px;
+}
+.list-xq-title{
+	border-bottom: 1px solid #d9d9d9;
+}
+.list-xq-text img{
+	max-width: 100%;
+    height:auto;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+.list-xq-text{
+	margin-top: 20px;
+	padding-bottom: 20px;
+}
+.list-xq-text p{
+	margin-bottom: 0;
+	line-height: 25px;
+}
+.img-text{
+	text-align: center;
+	font-size: 12px;
+}
+.new-news-list li p{
+	font-size: 12px;
+	color: #333;
+}
+.new-news-list li span{
+	color: #999;
+	font-size: 12px;
+	margin-left: 10px;
+}
+.list-xq-right{
+	float: right;
+	width: 35%;
+}
+.list-xq-right h2{
+	font-size: 14px;
+}
+.new-news-list{
+	margin-top: 15px;
+}
+
+/*自适应适配*/
+@media screen and (min-width: 1360px){
+    .location-content {
+		width: 1360px !important;
+	}
+}
+
+
+
+
+@media screen and (min-width: 1200px) {
+
+
+
+	.container {
+		width: 1180px;
+	}
+	.scenery-content .swiper-slide {
+		width: 20%;
+	}
+	.location-list {
+		width: 36%;
+	}
+	.school-location-text {
+		width: 60%;
+	}
+	.location-map {
+		width: 60%;
+	}
+	.location-content1 {
+		width: 100% !important;
+	}
+	.scenery-content .swiper-container{
+		width: 1180px;
+	}
+
+
+	
+}
+@media only screen and (min-width:1300px ) {
+	.scenery-content .swiper-container{
+		width: 1250px;
+	}
+	.scenery-content .swiper-slide{
+		width: 20%;
+	}
+
+}
+
+@media only screen and (max-width:1200px) {
+	.location-content1{
+		width: 100%;
+	}
+    .location-content{
+		width: 992px;
+	}
+	.location-list {
+		width: 30%;
+		margin-top: 15px;
+	}
+	.location-map {
+		width: 60%;
+	}
+	.list-nav-text {
+		width: 55%;
+	}
+	.nav-third-line {
+		min-height: 280px;
+	}
+	.index-nav li>a{
+		font-size: 14px;
+	}
+	.scenery-content .swiper-container{
+		width: 100%;
+	}
+	.scenery-content .swiper-slide{
+		width: 25%;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+   
+	.index-nav li>a {
+		font-size: 14px;
+	}
+	.location-content1 {
+		width: 100% !important;
+	}
+	.location-list {
+		width: 35%;
+		margin-top: 0;
+	}
+	.school-location-text {
+		width: 60%;
+	}
+	.nav-third-line {
+		min-height: 280px;
+	}
+
+}
+
+@media only screen and (max-width: 992px) {
+	.news-left {
+		float: none;
+	}
+	.news-right {
+		float: none;
+		margin-top: 30px;
+	}
+	.news-text {
+		width: 79%;
+	}
+	.location-content {
+		width: 768px;
+	}
+	.school-location-text {
+		width: 50%;
+	}
+	.location-list li {
+		margin-bottom: 10px;
+	}
+	.list-nav-text {
+		width: 45%;
+	}
+	.list-nav-img {
+		width: 166px;
+	}
+	.nav-third-maging p {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-line-clamp: 4;
+		-webkit-box-orient: vertical;
+	}
+	.nav-third-line {
+		min-height: 265px;
+	}
+	.list-news-img {
+		width: 300px;
+	}
+	.list-news-box {
+		width: 50%;
+		margin-top: 0;
+	}
+	.list-news-text {
+		width: 70%;
+	}
+	.index-nav{
+		top: 0;
+		margin-left: 0;
+		width: 100%;
+		display: none;
+	}
+	.index-nav li{
+		float: none;
+		padding-bottom: 0;
+	}
+	.pad .sidebar{
+		position: relative;
+		width: 100%;
+		top: 10px;
+		background: none;
+		padding-bottom: 0;
+		padding-top: 0;
+	}
+	.pad .sidebar a{
+		padding-left: 20px;
+	}
+	.pad .index-nav ul{
+		padding-bottom: 20px;
+		padding-top: 40px;
+	}
+	.mui-icon-bars {
+		display: block;
+		position: absolute;
+		left: 10px;
+		top: 10px;
+		z-index: 10000;
+		background: #982439;
+		padding: 3px 5px;
+		border-radius: 3px;
+		color: #fff;
+	}
+	.list-main{
+		top: 60px;
+	}
+	.index-header{
+		width: 100%;
+	}
+	.user-header{
+		right: 20px;
+	}
+	.scenery-content .swiper-slide{
+		width: 33%;
+	}
+
+}
+@media only screen  and (max-width: 768px) {
+     /*.index-banner .swiper-container{
+        height:320px;
+    }*/
+    
+
+
+    .index-banner .index-banner-title{
+         font-size:12px !important;
+     }
+    .index-banner .index-banner-title-wrap{
+        padding:8px 10px !important;
+
+    }
+	.news-text {
+		width: 70%;
+	}
+	.school-news-this {
+		width: 50%;
+		margin-top: 20px;
+	}
+	.location-list {
+		float: none;
+		width: 100%;
+	}
+	.location-map {
+		float: none;
+		width: 100%;
+	}
+	.location-content {
+		width: 100%;
+	}
+	.school-location-text {
+		width: 60%;
+	}
+	.location-main {
+		margin: 0 20px;
+	}
+	
+	.mui-off-canvas-wrap {
+		height: auto;
+	}
+	.index-nav li {
+		float: none;
+		border-bottom: 1px solid #222;
+		padding: 10px 20px;
+	}
+	.index-nav {
+		background: none;
+		display: none;
+		top: 60px;
+	}
+	
+	.mui-active .index-nav {
+		display: block;
+		height: 95%;
+		overflow: auto;
+	}
+	.footer {
+		padding: 10px;
+	}
+	.index-banner .swiper-pagination-bullet {
+		width: 10px;
+		height: 10px;
+		border-radius: 100%;
+	}
+	.swiper-button-next,
+	.swiper-button-prev {
+		width: 20px;
+		height: 37px;
+		background-size: 20px 37px;
+		display: block;
+	}
+	.mui-off-canvas-left {
+		opacity: .95;
+	}
+	.sidebar {
+		top: 10px;
+		right: 0;
+		width: 200px;
+		position: relative;
+		background: inherit;
+		padding-top: 0;
+	}
+	.sidebar a{
+		padding-left: 20px;
+	}
+	.list-main {
+		top: 60px;
+		margin-bottom: 100px;
+	}
+	.list-nav-left {
+		display: none;
+	}
+	.list-nav-right {
+		float: none;
+		width: 100%;
+	}
+	.list-nav-box li {}
+	.list-nav-text {
+		width: 65%;
+	}
+	.list-nav-text p {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+	}
+	.list-nav-text h3 {
+		margin-top: 15px;
+	}
+	.nav-third-line {
+		min-height: 332px;
+	}
+	.list-nav-img {
+		width: 160px;
+		height: 90px;
+	}
+	.list-news-img{
+		width: 270px;
+		height: 165px;
+	}
+	.list-news-text{
+		width: 60%;
+	}
+	.index-nav ul{
+		height: 90%;
+		overflow: auto;
+	}
+	.scenery-content .swiper-slide{
+		width: 50%;
+	}
+
+	
+}
+
+@media only screen and (max-width:640px) {
+     .list-nav-right .swiper-button-next, .list-nav-right .swiper-button-prev{
+         display:block !important;
+     }
+
+	.nav-third-line {
+		min-height: 310px;
+	}
+	.list-nav-text {
+		width: 60%;
+	}
+	.nav-third-list li p {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-line-clamp: 5;
+		-webkit-box-orient: vertical;
+	}
+	.list-nav-img {
+		width: 155px;
+		height: 90px;
+	}
+	.list-nav-right .swiper-button-next,
+	.list-nav-right .swiper-button-prev {
+		display: block;
+	}
+	.list-news-img{
+		float: none;
+	}
+	.list-news-box{
+		float: none;
+		width: 100%;
+		margin-top: 20px;
+	}
+	.list-xq-right{
+		float: none;
+		width: 100%;
+		margin-top: 20px;
+		border-top: 1px solid #ececec;
+	}
+	.list-xq-left{
+		float: none;
+		width: 100%;
+	}
+
+}
+
+@media only screen and (max-width:500px) {
+       .wrapper-img{
+        display:none;
+    }
+
+     .index-banner .swiper-container{
+        height: 200px;
+    }
+     .index-banner .index-banner-title{
+         font-size:12px !important;
+     }
+	.school-news-this {
+		width: 100%;
+		margin-top: 20px;
+	}
+	.news-text {
+		width: 65%;
+	}
+	.situation-main {
+		margin-top: 10px;
+	}
+	.situation-text {
+		margin-top: 20px;
+	}
+	.news-text {
+		width: 55%;
+	}
+	.news-text h4 {
+		padding-top: 2px;
+		margin-top: 5px;
+	}
+	.news-box {
+		margin-top: 10px;
+	}
+	.news-list {
+		margin-top: 10px;
+	}
+	.news-main {
+		margin-top: 20px;
+	}
+	.school-news-box {
+		margin-top: 10px;
+	}
+	.school-news-title {
+		float: left;
+		position: relative;
+		top: 4px;
+		width: 65%;
+	}
+	.school-news-date {
+		float: right;
+		width: 30%;
+		text-align: right;
+	}
+	.school-news-list a {
+		overflow: hidden;
+	}
+	.famous-teacher-main {
+		margin-top: 30px;
+	}
+	.location-main {
+		margin-top: 30px;
+	}
+	.user-img img {
+		width: 35px;
+		height: 35px;
+	}
+	.index-nav {
+		overflow: auto;
+		padding-top: 0;
+		top: 50px;
+	}
+	.sidebar a:before {
+		font-size: 12px;
+		top: 0px;
+	}
+	.list-nav-text {
+		width: 53%;
+	}
+	.list-nav-text h3 {
+		margin-top: 10px;
+	}
+	.list-nav-text p {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+	}
+	.nav-third-list li {
+		width: 100%;
+		padding: 0;
+	}
+	.list-header {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.list-content {
+		margin-left: 0;
+		margin-right: 0;
+		margin-bottom: 20px;
+	}
+	.list-nav-img {
+		width: 120px;
+		height: 70px;
+	}
+	.exit-btn {
+		margin-right: 10px;
+	}
+	.nav-link {
+		position: relative;
+		top: 5px;
+	}
+	.nav-third-box {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.nav-third-list li p {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+	}
+	.list-news-img{
+		width: 100%;
+		height: 100%;
+	}
+	.list-news-title span{
+		display: none;
+	}
+	.list-news-text:before{
+		font-size: 6px;
+		margin-left: 5px;
+		margin-right: 5px;
+		top: -4px;
+	}
+	.list-news-type{
+		margin-right: 5px;
+	}
+	.list-news-date{
+		top: 2px;
+	}
+	.list-news-content{
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.list-news-title h2:before{
+		font-size: 12px;
+	}
+	.user-header{
+		top: 8px;
+	}
+	.list-main{
+		top: 55px;
+	}
+	.list-nav-text h3{
+		margin-top: 5px;
+	}
+	.list-nav-text p{
+		margin-bottom: 0;
+	}
+	.list-xq-content{
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	.new-news-list{
+		margin-top: 0;
+	}
+	.footer{
+		margin-top: 20px;
+	}
+	.swiper-button-next,
+	.swiper-button-prev {
+		width: 15px;
+		height: 32px;
+		background-size: 15px 32px;
+		display: block;
+	}
+	.user-header{
+		right: 10px;
+	}
+	.school-location-text{
+		width: 50%;
+	}
+	.scenery-content .swiper-slide{
+		width: 100%;
+	}
+					
+					
+	
+}
+
+@media only screen and (max-width: 325px) {
+
+.index-banner .swiper-container {
+    height: 170px;
+}
+
+
+	.list-nav-text h3 {
+		margin-bottom: 4px;
+		margin-top: 3px;
+	}
+	.list-nav-img {
+		width: 100px;
+		height: 60px;
+	}
+	.list-nav-text p {
+		margin-bottom: 0;
+	}
+	.list-title {
+		font-size: 16px;
+	}
+	.list-nav-text h3 {
+		font-size: 14px;
+	}
+	.list-news-type{
+		margin-right: 5px;
+	}
+	.list-news-text:before{
+		margin-right: 5px;
+	}
+	.school-news-title{
+		width:50%;
+	}
+	.school-news-date{
+		width: 40%;
+	}
+	.user-header{
+		right: 10px;
+	}
+ 
+	
+}
+
+/* */
+
+
+
+

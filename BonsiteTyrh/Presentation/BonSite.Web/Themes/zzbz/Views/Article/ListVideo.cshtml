@@ -1,0 +1,92 @@
+﻿@using System.Data
+@model BonSite.Web.Models.ArticleListModel
+@{
+    ViewBag.Title = @Model.ArticleClassInfo.ClassName + " - " + @WorkContext.SiteConfig.SiteTitle;
+    Layout = "~/Themes/zzbz/Views/Shared/_LayoutPc.cshtml";
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="@Url.Content("~/Content/pcWeb/css/reset.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/pcWeb/css/style.css")">
+    <title>Document</title>
+    @*分页*@
+    <link rel="stylesheet" href="@Url.Content("~/Content/layui/css/layui.css")" media="all" />
+    
+</head>
+
+<body style="background:#d3cab8">
+    <div class="content container">
+        <div class="content-wrap1 content-wrap">
+            <div class="content-wrap-header">
+                <div class="fl" style="margin-top: 5px;">
+                    <a href="/">首页</a><span></span><a>>@ViewData["ClassArticleIdName0"]</a><a style="@ViewData["HaveChild2"]" href="/ListPc/@ViewData["ClassArticleId2"]-1.html">>@ViewData["ClassArticleIdName2"]</a><a style="@ViewData["HaveChild3"]" href="/ListPc/@ViewData["ClassArticleId3"]-1.html">>@ViewData["ClassArticleIdName3"]</a>
+                    @*<a href="/">首页</a><span></span><a>>@ViewData["ClassArticleIdName1"]</a>*@
+                </div>
+                <!--三级导航栏-->
+                <div class="secound-nav fr">
+                    <ul class="secound-nav-list">
+                        @{
+                            DataTable list = (DataTable)ViewData["list"];
+                            if (list != null && list.Rows.Count > 0)
+                            {
+
+                                foreach (DataRow dr in list.Rows)
+                                {
+                                    <li class="secound-nav-item"><a href="/ListPc/@(dr["ArticleClassID"].ToString())-1.html">@dr["ClassName"].ToString()</a></li>
+                                }
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--内容部分-->
+        <div class="content-wrap-con">
+            <ul class="content-video-list clearfix">
+                @{
+                    for (int i = 0; i < Model.ArticleList.Rows.Count; i++)
+                    {
+                    <li class="content-video fl">
+                    <div class="content-video-box">
+                        <a href="/ViewPc/@(Model.ArticleList.Rows[i]["ArticleID"]).html" target="_blank" class="new-box-item-con">
+                            <div class="content-video-wrap">
+                                <img src="/upload/article/show/thumb640_480/@(Model.ArticleList.Rows[i]["ImgUrl"])" onerror="this.src = '@(Model.ArticleList.Rows[i]["ImgUrl"])'" alt="">
+                                <div class="@ViewData["content-video-meng"]"></div>
+                            </div>
+                            <span>@Model.ArticleList.Rows[i]["Title"]</span>
+                        </a>
+                    </div>
+                </li>
+                    }
+                }
+            </ul>
+
+
+            <!--页码-->
+            <div class="pagelist">
+                @Html.WebPager(Model.PageModel)
+            </div>
+            @*<div class="page-con">
+                <ul class="page-con-list">
+                    <li><a href="#">上一页</a></li>
+                    <li><a href="#">1</a></li>
+                    <li class="page-active"><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">......</a></li>
+                    <li><a href="#">19</a></li>
+                    <li><a href="#">20</a></li>
+                    <li><a href="#">下一页</a></li>
+                </ul>
+            </div>*@
+        </div>
+    </div>
+
+</body>
+</html>

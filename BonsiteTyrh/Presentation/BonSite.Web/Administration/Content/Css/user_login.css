@@ -1,0 +1,176 @@
+﻿body {
+	font-size: 12px;
+	line-height: 180%;
+	background-color: #d6dedf;
+	margin: 0px;
+}
+.loginPageBody{
+	display: block;	
+	background-image: url(/Administration/Content/Images/user_loginbodybg.gif);
+	background-repeat: repeat-x;
+	background-position: left center;
+	position: absolute;
+	top:0px;
+	bottom:0px;
+	left:0px;
+	right:0px;
+	}
+.LoginWrapbg {
+	background-image: url(/Administration/Content/Images/user_loginimgbg.jpg);
+	background-repeat: no-repeat;
+	background-position: center center;
+	height: 100%;
+	position: absolute;
+	top:0px;
+	bottom:0px;
+	left:0px;
+	right:0px;
+}
+.loginpart
+{
+	width: 500px;
+	height: 440px;
+	margin: 0 auto;
+	margin-top: -260px;
+}
+
+.loginLogo {
+	width: 500px;
+	height: 40px;
+
+	font-family: "微软雅黑", "黑体";
+	font-size: 28px;
+	text-align: center;
+	margin-top: 0;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+	line-height: 40px;
+	color: #2477b3;
+}
+
+.welcome {
+	color: #2477b3;
+	font-family: "微软雅黑", Tahoma, sans-serif;
+	font-size: 20px;
+	padding-top: 20px;
+	padding-left: 0px;
+	letter-spacing: 1px;
+	text-align:center;
+	padding-right: 0;
+	padding-bottom: 6px;
+}
+
+.loginBar {
+	font-size:14px;
+	margin-top: 60px;
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+.fieldWrap {
+	text-align: left;
+	height: 35px;
+	overflow: hidden;
+	margin-top: 10px;
+}
+
+.lable {
+	padding-top: 5px;
+	width: 90px;
+	float: left;
+	color: #333333;
+	font-size: 14px;
+	text-align: right;
+}
+
+.inputWrap {
+	background: url(/Administration/Content/Images/loginInputWrapbg.gif) no-repeat left top;
+	height: 28px;
+	line-height: 16px;
+	border: none;
+	width: 200px;
+	float: left;
+}
+.msgWrap {
+	display: block;
+	float: left;
+	width: 100px;
+	padding-top: 2px;
+	font-size: 12px;
+	padding-left: 10px;
+}
+
+.selectWrap {
+	background: url(/Administration/Content/Images/loginSelectWrapbg.gif) no-repeat left top;
+}
+
+.verifyCodeWrap {
+	display: none;
+}
+
+.verifyCode {
+	float: left;
+}
+
+.verifyCodeWrap .inputWrap {
+	
+}
+
+.copyright {
+	padding-top: 10px;
+	text-align: center;
+}
+
+img {
+	vertical-align: middle;
+}
+
+input.inputText {
+	background: transparent none;
+	border: none;
+	margin-top: 3px;
+	_margin-top: 1px;
+}
+
+.inputWrap .inputText {
+	width: 192px;
+	height: 20px;
+	font-size: 14px;
+	padding-left: 6px;
+	margin-top: 0px;
+	padding-top: 4px;
+}
+
+
+
+.loginBtnWrap {
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 10px;
+	padding-left: 110px;
+}
+.loginbtn {
+	width: 100px;
+	height: 34px;
+	color: #ffffff;
+	font-size: 14px;
+	line-height: 32px;
+	text-align: center;
+	word-spacing: 1px;
+	letter-spacing: 6px;
+	background-image: url(/Administration/Content/Images/loginbtn.gif);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	display: block;
+	text-decoration: none;
+	float: left;
+}
+.btnGetpassword {
+	color: #333;
+	text-decoration: none;
+	display: block;
+	padding-left: 10px;
+	margin-top: 10px;
+	float: left;
+}

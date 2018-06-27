@@ -1,0 +1,77 @@
+﻿1.信息反馈调用方式
+
+	前台：
+	获取反馈列表
+	FeedBack/List?typeid=1
+
+	后台：
+
+	反馈列表：
+	/admin/FeedBack/FeedBackList?typeid=1
+	反馈分类列表：
+	/admin/FeedBack/FeedBackTypeList
+
+2.在线投稿调用方式
+	前台：
+	/article/Deliver
+
+	后台：
+	无
+
+3.投票调用方式
+	前台：
+
+	
+	后台：
+	/admin/Vote/VoteList
+
+4.专题
+
+	前台：
+	/special/1.html	
+
+	后台：
+	/admin/Special/List
+
+5.友情连接
+
+	前台：
+	无
+
+	后台：
+	/admin/FriendLink/List
+
+6.栏目
+
+	前台：
+	无
+
+	后台：
+	/admin/ArticleClass/List
+
+8.网站设置
+	前台：
+	无
+
+	后台：
+	/admin/set/Site
+
+9.Banner设置
+	前台：
+	无
+
+	后台：
+	/admin/Banner/BannerList
+
+10.广告管理
+	前台：
+	无
+
+	后台：
+	/admin/Advert/AdvertList
+11.产品调用
+	前台：
+	/Product/List?classid=1
+
+	后台：
+	/admin/Product/list?Productclassid=1

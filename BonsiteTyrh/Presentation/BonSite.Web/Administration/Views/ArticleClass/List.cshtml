@@ -1,0 +1,76 @@
+﻿@model BonSite.Web.Admin.Models.ArticleClassListmodel
+@{
+    ViewBag.Title = "List";
+}
+@section header{
+    <script type="text/javascript" src="/administration/scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/administration/scripts/showlist.js"></script>
+}
+@section body{
+    @using (Html.BeginForm("List", "ArticleClass"))
+{
+     <div class="main">
+<div class="nav">当前位置：<a href="@Url.Action("SiteRunInfo","Home")">首页</a>
+    栏目管理
+
+</div>
+
+        <ul class="submenu">
+        	<li class="sel"><a href="#">栏目管理</a></li>
+        	<li><a href="@Url.Action("Add")">新加栏目</a></li>
+        </ul>
+         
+
+
+    <div class="top15">
+        
+        	<table width="100%" cellpadding="5" cellspacing="0" class="tblist">
+            	<tr>
+                    <th >ID</th>
+                    <th>栏目名称</th>
+                    <th style="width:60px;">类型</th>
+                    <th style="width:30px;">投稿</th>
+                    <th style="width:30px;">导航</th>
+                    <th style="width:60px;">前台显示</th>
+                    <th style="width:60px;">后台显示</th>
+                    <th>外部链接</th>
+                    <th style="width:60px;">列表模板</th>
+                    <th style="width:60px;">内容模板</th>
+                    <th style="width:60px;">新窗打开</th>
+                    <th style="width:60px;">操作人</th>
+                    <th style="width:30px;">排序</th>
+                    <th style="width:60px;">操作</th>
+                </tr>
+                @foreach (ArticleClassInfo info in Model.DataInfoList)
+  {
+                <tr>
+                    <td align="center">@info.ArticleClassID</td>
+                    <td align="center">@info.ClassName</td>
+                   
+                    <td align="center">@BonSite.Services.ArticleClass.GetClassTypeName(info.ClassType)</td>
+                    <td align="center">@{if (info.IsOpen == 1) {<span>是</span>}else{<span>否</span>}}</td>
+                    <td align="center">@{if (info.IsNav == 1) {<span>是</span>}else{<span>否</span>}}</td>
+                    <td align="center">@{if (info.IsWeb == 1) {<span>是</span>}else{<span>否</span>}}</td>
+                    <td align="center">@{if (info.IsAdmin == 1) {<span>是</span>}else{<span>否</span>}}</td>
+                    <td align="center">@info.WebUrl</td>
+                    <td align="left">@info.ListView</td>
+                    <td align="left">@info.ContentView</td>
+                    <td align="center">@{if (info.Target == 1)
+                                                     {<span>是</span>}else{<span>否</span>}}</td>
+                    <td align="center"> @info.Auditor</td>
+                    <td align="center">@info.DisplayOrder</td>
+                    <td>
+                        @Html.ActionLink("编辑", "Edit", new { id = info.ArticleClassID })
+                        @Html.ActionLink("删除", "Del", new { id = info.ArticleClassID }, new { @class = "deleteOperate" })
+                    </td>
+                </tr>
+                }
+                </table>
+
+</div>
+         <div class="pagelist">
+             @Html.AdminPager(Model.PageModel)
+         </div>
+         </div>
+    }
+    }

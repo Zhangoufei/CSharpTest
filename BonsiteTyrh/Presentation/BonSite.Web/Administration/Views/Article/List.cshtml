@@ -1,0 +1,347 @@
+﻿@model BonSite.Web.Admin.Models.ArticleListModel
+@using System.Data;
+@{
+    ViewBag.Title = "ArticleList";
+    int content = 1;
+}
+@section header{
+    <script type="text/javascript" src="/administration/scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/administration/scripts/showlist.js"></script>
+}
+
+@section body{
+    @using (Html.BeginForm("List", "Article"))
+    {
+        <div class="main">
+            <div class="nav">
+                当前位置：<a href="@Url.Action("SiteRunInfo","Home")">管理后台</a>
+                @foreach (ArticleClassInfo info in (ViewData["classPath"] as List<ArticleClassInfo>))
+                {
+                    <span> &rsaquo; </span> <a href="@Url.Action("List","Article",new {articleClassID=@info.ArticleClassID})">@info.ClassName</a>
+                }
+
+            </div>
+
+            <ul class="submenu">
+                <li class="sel"><a href="#">@(Model.ClassInfo.ClassName)列表</a></li>
+                <li><a href="@Url.Action("Add", "Article", new { articleClassID = @Model.ArticleClassID, keyWord = "0"})">新加新内容</a></li>
+            </ul>
+            <div class="btnbar top15" style="display:none;">
+                搜索 标题：@Html.TextBox("NewsTitle", Model.ArticleTitle, new { height = "18" })
+
+                <input type="hidden" value="@Model.ArticleClassID" id="articleClassID" name="sortDirection" />
+                <input type="submit" name="btnSearch" value="搜索" id="btnSearch" />
+
+                <a href="#" delurl="@Url.Action("del")">批量删除</a>
+            </div>
+
+
+
+            <div class="top15">
+                <input type="hidden" value="@Model.SortColumn" id="sortColumn" name="sortColumn" />
+                <input type="hidden" value="@Model.SortDirection" id="sortDirection" name="sortDirection" />
+                <table width="100%" cellpadding="5" cellspacing="0" class="tblist">
+                    <tr>
+                        @if (@Model.ArticleClassID == 262)
+                        {
+
+                            <th style="min-width:20px;width:2.44%">序号</th>
+
+                            <th style="min-width: 30px; width: 4.44%; ">标题</th>
+                            <th style="min-width: 20px; width: 2.96%; ">通知类型</th>
+                            <th style="min-width: 30px; width: 4.44%; ">通知分组</th>
+                            <th style="min-width: 30px; width: 4.44%; ">作者</th>
+                            <th style="min-width: 60px; width: 8.88%; ">结束时间</th>
+                            <th style="min-width: 30px; width: 4.44%; ">推送状态</th>
+                            <th style="min-width: 30px; width: 4.44%; ">操作</th>
+                        }
+                        else if (@Model.ArticleClassID == 263)
+                        {
+                            <th style="min-width:30px;width:2.44%">序号</th>
+                            <th style="min-width: 30px; width: 4.44%; ">标题</th>
+                             <th style="min-width: 60px; width: 4.44%">所属栏目</th>
+                            <th style="min-width: 60px; width: 4.44%; ">审核状态</th>
+                            <th style="min-width: 60px; width: 4.44%; ">是否推送</th>
+                            <th style="max-width: 60px; width: 4.44%; ">通知分组</th>
+                            <th style="min-width: 60px; width: 8.88%">添加人</th>
+                            <th style="min-width: 30px; width: 4.44%">时间</th>
+                            <th>推送状态</th>
+                            <th style="min-width: 60px; width: 8.88%; ">操作</th>
+                        }
+                        else
+                        {
+                            <th style="min-width:30px;width:4.44%">序号</th>
+                            <th style="min-width:425px;width:36%">标题</th>
+                             <th style="min-width: 60px; width: 4.44%">所属栏目</th>
+                            <th style="min-width: 60px; width: 8.44%">审核状态</th>
+                            <th style="min-width: 30px; width: 4.44%">显示</th>
+                            <th style="min-width: 30px; width: 4.44%">首页</th>
+                            <th style="min-width: 30px; width: 4.44%; ">推荐</th>
+                            <th style="min-width: 30px; width: 4.44%">置顶</th>
+                            <th style="min-width: 30px; width: 4.44%">浏览</th>
+                            <th style="min-width: 60px; width: 8.88%">添加人</th>
+                            <th style="min-width: 120px; width: 14.44%">时间</th>
+                            <th style="min-width: 60px; width: 8.88%">操作</th>
+                        }
+                    </tr>
+                    @foreach (DataRow row in Model.DataList.Rows)
+                    {
+                        <tr>
+                            @if (@Model.ArticleClassID == 262)
+                            {
+                                @*<td align="center"><input type="checkbox" value="@row["ArticleID"]" selectItem="true" name="articleIdList" /></td>*@
+
+                                <td align="center">@content</td>
+                                <td align="center">@row["Title"]</td>
+                                <td align="center">
+                                    @if (row["InformType"].ToString() == "0")
+                                    {
+                                        @:滚动通知
+                                                          }
+                                    else if (row["InformType"].ToString() == "1")
+                                    {
+                                        @:紧急通知
+                                                          }
+                                    else
+                                    {
+                                        @:待机全屏通知
+                            }
+                                </td>
+                                <td align="center">
+                                    @row["InformGroup"]
+
+                                </td>
+                                <td align="center">@row["Author"]</td>
+                                <td align="center">@row["EndTime"]</td>
+                                <td align="center">
+
+                                    @if (row["PushStatus"].ToString() == "1")
+                                    {
+                                        @:已推送
+                                }
+                                    else if (row["PushStatus"].ToString() == "2")
+                                    {
+                                        @:推送失败
+                                }
+                                    else
+                                    {
+                                        @:未推送
+                                }
+                                </td>
+                                <td align="center">
+                                    @if (row["PushStatus"].ToString() == "0")
+                                    {
+                                        @Html.ActionLink("推送到电子班牌", "Send", new { articleID = row["ArticleID"] }, new { @style = "margin-right:8px;" })
+                                        @Html.ActionLink("编辑", "Edit", new { articleID = row["ArticleID"] }, new { @style = "margin-right:8px;" })
+                                        @Html.ActionLink("删除", "Del", new { articleIdList = row["ArticleID"] }, new { @class = "deleteOperate" })
+                                    }
+                                    else if (row["PushStatus"].ToString() == "1")
+                                    {
+                                        @Html.ActionLink("删除", "Del", new { articleIdList = row["ArticleID"] }, new { @class = "deleteOperate" })
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("推送到电子班牌", "Send", new { articleID = row["ArticleID"] }, new { @style = "margin-right:8px;" })
+                                        @Html.ActionLink("删除", "Del", new { articleIdList = row["ArticleID"] }, new { @class = "deleteOperate" })
+                                    }
+                                </td>
+
+                            }
+                            else if (@Model.ArticleClassID == 263)
+                            {
+                                <td align="center"><input type="hidden" value="@row["ArticleID"]" selectitem="true" name="articleIdList" />@content</td>
+                                <td align="left">@BonSite.Core.StringHelper.SubString(row["Title"].ToString(), 30)</td>
+                                if (BonSite.Services.ArticleClass.AdminGetModelById(int.Parse(row["ArticleClassID"].ToString())) != null)
+                                {
+                                    <td align="center">@BonSite.Services.ArticleClass.AdminGetModelById(int.Parse(row["ArticleClassID"].ToString())).ClassName</td>
+                                }
+                                else
+                                {
+                                    <td align="center">未知栏目</td>
+                                }
+
+                                <td align="center">
+                                    @if (row["ApprovalStatus"].ToString() == "1")
+                                    {
+                                        @:通过
+                          }
+                                    else if (row["ApprovalStatus"].ToString() == "2")
+                                    {
+                                        @:未通过
+                        }
+                                    else
+                                    {
+                                        @:待审核
+                        }
+                                </td>
+                                if (row["IsClassBrand"].ToString() == "1")
+                                {
+                                    <td align="center">是</td>
+
+                                }
+                                else
+                                {
+                                    <td align="center">否</td>
+                                }
+                                <td align="center">
+                                    @BonSite.Core.StringHelper.SubString(row["InformGroup"].ToString(), 10)
+                                </td>
+                                 if (BonSite.Services.Users.GetPartUserById(Convert.ToInt32(row["AdminID"])) != null)
+                                {
+                                    <td align="center">@BonSite.Services.Users.GetPartUserById(Convert.ToInt32(row["AdminID"])).UserName</td>
+                                }
+                                else
+                                {
+                                    <td align="center"> </td>
+                                }
+                                <td align="center">@row["addtime"]</td>
+                                <td align="center">
+
+                                    @if (row["PushStatus"].ToString() == "1")
+                                    {
+                                        @:已推送
+                                }
+                                    else if (row["PushStatus"].ToString() == "2")
+                                    {
+                                        @:推送失败
+                                }
+                                    else
+                                    {
+                                        @:未推送
+                                }
+                                </td>
+                                <td align="center">
+                                    @Html.ActionLink("预览", "ClassBrand", new { id = row["ArticleID"] }, new { target = "_blank" })
+                                    @Html.ActionLink("编辑", "Edit", new { articleID = row["ArticleID"], DisplayType = 2 })
+                                    @Html.ActionLink("撤销班牌显示", "classBrandDel", new { id = row["ArticleID"] })
+                                    @{
+                                    int UserID = (int)ViewData["UserID"];
+                                    int wzglAdmin = (int)ViewData["wzglAdmin"];
+
+                                    if (row["AdminID"] != null && row["AdminID"].ToString().Equals(UserID.ToString()))
+                                       {
+                                            @Html.ActionLink("删除", "Del", new { articleIdList = row["ArticleID"] }, new { @class = "deleteOperate" })
+                                       }
+                                    else if (ViewData["wzAdmin"] != null && ViewData["wzAdmin"].ToString().Equals(wzglAdmin.ToString()))
+                                    {
+                                         @Html.ActionLink("删除", "Del", new { articleIdList = row["ArticleID"] }, new { @class = "deleteOperate" })
+                                    }
+                                    }
+                                   
+                                    @*<a href="http://zzbz.net:8080/ClassBrand/view?id=@row["ArticleID"]" target="_blank">预览</a>*@
+                                </td>
+                            }
+
+                            else
+                            {
+                                <td align="center"><input type="hidden" value="@row["ArticleID"]" selectitem="true" name="articleIdList" />@content</td>
+                                <td align="left">@BonSite.Core.StringHelper.SubString(row["Title"].ToString(), 30)</td>
+                                if (BonSite.Services.ArticleClass.AdminGetModelById(int.Parse(row["ArticleClassID"].ToString())) != null)
+                                {
+                                    <td align="center">@BonSite.Services.ArticleClass.AdminGetModelById(int.Parse(row["ArticleClassID"].ToString())).ClassName</td>
+                                }
+                                else
+                                {
+                                    <td align="center">未知栏目</td>
+                                }
+                                <td align="center">
+                                    @if (row["ApprovalStatus"].ToString() == "1")
+                                    {
+                                        @:通过
+                          }
+                                    else if (row["ApprovalStatus"].ToString() == "2")
+                                    {
+                                        @:未通过
+                        }
+                                    else
+                                    {
+                                        @:待审核
+                        }
+                                </td>
+                                <td align="center">
+                                    @if (row["isShow"].ToString() == "0")
+                                    {
+                                        @:否
+                          }
+                                    else
+                                    {
+                                        @:是
+                          }
+                                </td>
+                                <td align="center">
+                                    @if (row["isHome"].ToString() == "0")
+                                    {
+                                        @:否
+                          }
+                                    else
+                                    {
+                                        @:是
+                          }
+                                </td>
+                                <td align="center">
+                                    @if (row["isBest"].ToString() == "0")
+                                    {
+                                        @:否
+                          }
+                                    else
+                                    {
+                                        @:是
+                          }
+                                </td>
+                                <td align="center">
+                                    @if (row["isTop"].ToString() == "0")
+                                    {
+                                        @:否
+                          }
+                                    else
+                                    {
+                                        @:是
+                          }
+                                </td>
+                                <td align="center">@row["hits"] </td>
+                                if (BonSite.Services.Users.GetPartUserById(Convert.ToInt32(row["AdminID"])) != null)
+                                {
+                                    <td align="center">@BonSite.Services.Users.GetPartUserById(Convert.ToInt32(row["AdminID"])).UserName</td>
+                                }
+                                else
+                                {
+                                    <td align="center"> </td>
+                                }
+                                 
+                                <td align="center">@row["addtime"]</td>
+                                @*<td>
+                                       @{
+                                        DataTable namelist = (DataTable)ViewData["namelist"];
+                                        if (namelist != null && namelist.Rows.Count > 0)
+                                        {
+                                            foreach (DataRow dt in namelist.Rows)
+                                            {
+                                                @dt["ClassName"].ToString()
+                                            }
+                                        }
+
+                                       }
+                                    </td>*@
+
+                                
+
+                                <td align="center">
+                                    <a href="/ViewPc/@(row["ArticleID"]).html" target="_blank">预览</a>
+                                    @*@Html.ActionLink("预览", "Preview", new { id = row["ArticleID"] }, new { target = "_blank" })*@
+                                    @Html.ActionLink("编辑", "Edit", new { articleID = row["ArticleID"] })
+
+                                    @Html.ActionLink("删除", "Del", new { articleIdList = row["ArticleID"] }, new { @class = "deleteOperate" })
+                                </td>
+                            }
+                        </tr>
+                            content++;
+                    }
+                </table>
+                <div class="pagelist">
+                    @Html.AdminPager(Model.PageModel)
+                </div>
+            </div>
+
+        </div>
+    }
+}

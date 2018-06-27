@@ -1,0 +1,136 @@
+﻿@model BonSite.Web.Admin.Models.ArticleModel
+@section header{
+
+    <link rel="stylesheet" href="/administration/content/ueditor/themes/default/css/ueditor.css" />
+    <script type="text/javascript" src="/administration/scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/administration/content/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="/administration/content/ueditor/ueditor.all.js"></script>
+    <script type="text/javascript" src="/administration/scripts/jquery.validate.js"></script>
+    <script type="text/javascript" src="/administration/scripts/jquery.validate.unobtrusive.js"></script>
+    <script type="text/javascript" src="/administration/content/my97datepicker/WdatePicker.js"></script>
+    <link href="/administration/content/css/uploadify.css" rel="stylesheet" type="text/css" />
+    @*<script type="text/javascript" src="/administration/scripts/jquery.uploadify.js"></script>*@
+    <script language="javascript" type="text/javascript">
+        //防止客户端缓存文件，造成uploadify.js不更新，而引起的“喔唷，崩溃啦”
+        document.write("<script type='text/javascript' "
+                + "src='/administration/scripts/jquery.uploadify.js?" + new Date()
+                + "'></s" + "cript>");
+
+        function Submit() {
+            var arrayArticle = GetAccessInfo('ArticleGroup');
+            var arrayTag = GetAccessInfo('TagGroup');
+            //
+            if (arrayArticle == null || arrayArticle == "") {
+                alert("请选择文章！");
+                return false;
+            }
+            else if (arrayTag == null || arrayTag == "") {
+                alert("请选择分组！");
+                return false;
+            }
+            else {
+                var isSure = true;
+                if (isSure) {
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "/SourceAdmin/SendWeChatKefuSubmit",
+                        data: "{ mydata:'" + arrayArticle + "*" + arrayTag + "'}",
+                        dataType: "json",
+                        async: false,
+                        success: function (data) {
+                            alert("群发成功");
+                            //alertFrame("信息", '/admin/SourceAdmin/SendWeChat', 480, 340)
+                        },
+                        error: function (msg) {
+                            // alert(msg.responseText);
+                        }
+                    });
+                }
+
+            }
+        }
+
+        function GetAccessInfo(name) {
+            var delInfo = document.getElementsByName(name);
+            var array = '';
+            for (var i = 0; i < delInfo.length; i++) {
+                if (delInfo[i].checked) {
+                    array += delInfo[i].value + '#';
+                }
+            }
+            return array;
+        }
+
+    </script>
+
+}
+
+@section body{
+    <div class="main">
+
+        <ul class="submenu">
+            <li class="sel"><a href="#">微信粉丝推送</a></li>
+        </ul>
+
+        @using (Html.BeginForm())
+        {
+            <div class="top15">
+                <table width="100%" class="tbstyle1" cellpadding="5" cellspacing="1">
+
+                    <tr>
+                        <th>文章组1</th>
+                        <td>
+
+                            <div>
+                                @if (ViewData["ArticleList"] != null)
+                                {
+                                    foreach (BonSite.Web.Admin.Models.ArticleModel data in (ViewData["ArticleList"] as List<BonSite.Web.Admin.Models.ArticleModel>))
+                                    {
+                                        <input class="ck" name="ArticleGroup" id=@data.ArticleClassID type="checkbox" value="@data.ArticleClassID" checked="checked" /> <label>@data.Title</label>
+                                    }
+                                }
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>标签组1</th>
+                        <td>
+
+                            <div>
+                                @if (ViewData["TagList"] != null)
+                                {
+                                    @*<input id="btnCheckAll" type="button" value="全选" />*@
+                                    foreach (BonSite.Web.Admin.Models.Tag data in (ViewData["TagList"] as List<BonSite.Web.Admin.Models.Tag>))
+                                    {
+                                        <input class="ck" name="TagGroup" value="@data.id" id=@data.id type="checkbox" /> <label>@data.name</label>
+                                    }
+                                }
+                            </div>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <th></th>
+                        <td>
+                            @*<input id="btnSubmit" type="submit" value="提交" />*@
+                            <input id="btnSubmit" onclick="Submit()" type="button" value="提交" />
+                        </td>
+
+                    </tr>
+
+                </table>
+
+            </div>
+        }
+
+}
+
+
+@*SendWeChat
+    获取选择图文列表
+    获取分组信息
+    提交*@
+

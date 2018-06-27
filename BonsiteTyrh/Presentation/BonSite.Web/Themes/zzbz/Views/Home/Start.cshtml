@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "首页 - " + WorkContext.SiteConfig.SiteTitle;
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>郑州第八中学</title>
+    <link rel="stylesheet" href="@Url.Content("~/Content/pcWeb/css/style.css")">
+    <style>
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .spinner {
+        margin: 100px auto 0;
+        width: 150px;
+        text-align: center;
+    }
+
+    .spinner > div {
+        width: 30px;
+        height: 30px;
+        background-color: #67CF22;
+
+        border-radius: 100%;
+        display: inline-block;
+        -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+        animation: bouncedelay 1.4s infinite ease-in-out;
+        /* Prevent first frame from flickering when animation starts */
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+    }
+
+    .spinner .bounce1 {
+        -webkit-animation-delay: -0.32s;
+        animation-delay: -0.32s;
+    }
+
+    .spinner .bounce2 {
+        -webkit-animation-delay: -0.16s;
+        animation-delay: -0.16s;
+    }
+
+   
+    </style>
+</head>
+<body>
+    <div class="spinner" id="spiner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        function browserRedirect() {
+            var sUserAgent = navigator.userAgent.toLowerCase();
+            /* var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";*/
+            var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+            var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+            var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+            var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+            var bIsAndroid = sUserAgent.match(/android/i) == "android";
+            var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+            var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+            if (!(bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM)) {
+                window.location.href = "/home/indexpc"
+            } else {
+                window.location.href = "/home/index"
+            }
+        }
+        browserRedirect();
+    }
+</script>
+</html>

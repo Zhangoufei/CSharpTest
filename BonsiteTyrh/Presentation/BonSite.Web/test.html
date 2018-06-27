@@ -1,0 +1,32 @@
+<title>JS显示当前浏览器详细信息</title>
+<SCRIPT>
+<!-- Begin
+function whatBrowser() {
+document.Browser.Name.value=navigator.appName;
+document.Browser.Version.value=navigator.appVersion;
+document.Browser.Code.value=navigator.appCodeName;
+document.Browser.Agent.value=navigator.userAgent;
+}
+// End -->
+</SCRIPT>
+<TABLE BORDER>
+<FORM NAME="Browser">
+<TR>
+<TD> 名称: </TD>
+<TD> <INPUT TYPE="txt" NAME="Name" Size="100"></TD>
+</TR>
+<TR>
+<TD> 版本: </TD>
+<TD> <INPUT TYPE="txt" NAME="Version" Size="100"></TD>
+</TR>
+<TR>
+<TD> 内核: </TD>
+<TD> <INPUT TYPE="txt" NAME="Code" Size="100"></TD>
+</TR>
+<TR>
+<TD> User-Agent: </TD>
+<TD> <INPUT TYPE="txt" NAME="Agent" Size="100"></TD>
+</TR>
+</FORM>
+</TABLE>
+<body bgcolor="#fef4d9" onLoad="whatBrowser()"></body>

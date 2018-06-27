@@ -1,0 +1,65 @@
+﻿@model BonSite.Web.Admin.Models.FeedBackTypeModel
+@{
+    ViewBag.Title = "EditFeedBackType";
+}
+@section body{
+    
+     <div class="main">
+<div class="nav">当前位置：
+     <span> &rsaquo; </span> <a href="#">系统管理</a> 
+     <span> &rsaquo; </span> <a href="@Url.Action("FeedBackList")">信息反馈管理</a> 
+     <span> &rsaquo; </span> <a href="#">信息反馈分类管理</a> 
+     <span> &rsaquo; </span> <a href="#">编辑信息反馈</a> 
+
+</div>
+
+        <ul class="submenu">
+        	<li><a href="@Url.Action("FeedBackTypeList")">信息反馈分类列表</a></li>
+        	<li class="sel"><a href="#">编辑信息反馈分类</a></li>
+        </ul>
+
+
+    @using (Html.BeginForm())
+       { 
+           <div class="top15">
+        <table width="100%" class="tbstyle1" cellpadding="5" cellspacing="1">
+            <tr>
+    <th width="80px" align="right">分类名称：</th>
+    <td>@Html.TextBoxFor(x => x.TypeName, new { @class = "input", size = "35" })</td>
+    </tr>
+
+            <tr>
+                <th>显示列表：</th>
+                <td>  
+                <label>@Html.RadioButtonFor(x => x.IsShowList, 1, new { @class = "checkbox" }) 是</label>
+                <label>@Html.RadioButtonFor(x => x.IsShowList, 0, new { @class = "checkbox" }) 否</label>
+                <br />
+
+                </td>
+            </tr>
+   
+    <tr id="urlTr">
+    <th align="right">标签：</th>
+    <td>@Html.TextBoxFor(x => x.Tags, new { @class = "input", size = "35" })</td>
+    </tr>
+    <tr>
+    <th align="right">简介：</th>
+    <td>
+        @Html.TextAreaFor(x => x.Body, new { @class = "input", cols = "50", rows = "8"})
+    </td>
+    </tr>
+  
+    
+            <tr>
+                <th></th>
+                <td><input type="submit" value="提交" /></td>
+            </tr>
+        </table>
+
+           </div>
+       }
+
+         
+         </div>
+    }
+

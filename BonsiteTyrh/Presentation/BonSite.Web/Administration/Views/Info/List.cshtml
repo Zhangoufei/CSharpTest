@@ -1,0 +1,130 @@
+﻿@model BonSite.Web.Admin.Models.ArticleListModel
+@{
+    ViewBag.Title = "ArticleList";
+}
+@section header{
+<script type="text/javascript" src="/administration/scripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="/administration/scripts/showlist.js"></script>
+}
+
+@section body{
+    @using (Html.BeginForm("List", "Article"))
+{
+     <div class="main">
+<div class="nav">当前位置：<a href="@Url.Action("SiteRunInfo","Home")">管理后台</a>
+    @foreach(ArticleClassInfo info in (ViewData["classPath"] as List<ArticleClassInfo>))
+    {
+     <span> &rsaquo; </span> <a href="@Url.Action("List","Article",new {articleClassID=@info.ArticleClassID})">@info.ClassName</a> 
+    }
+
+</div>
+
+        <ul class="submenu">
+        	<li class="sel"><a href="#">@(Model.ClassInfo.ClassName)列表</a></li>
+        	<li ><a href="@Url.Action("Add", "Article", new { articleClassID = @Model.ArticleClassID, keyWord = "1" })">新加新内容</a></li>
+        </ul>
+         <div class="btnbar top15" style="display:none;">
+            搜索 标题：@Html.TextBox("NewsTitle", Model.ArticleTitle, new { height = "18" })
+             
+            <input type="hidden" value="@Model.ArticleClassID" id="articleClassID" name="sortDirection" />
+             <input type="submit" name="btnSearch" value="搜索" id="btnSearch" />
+
+             <a href="#" delUrl="@Url.Action("del")" >批量删除</a>
+         </div>
+
+
+    <div class="top15">
+        <input type="hidden" value="@Model.SortColumn" id="sortColumn" name="sortColumn" />
+    <input type="hidden" value="@Model.SortDirection" id="sortDirection" name="sortDirection" />
+        	<table width="100%" cellpadding="5" cellspacing="0" class="tblist">
+            	<tr>
+                    <th style="width:30px;"></th>
+                    <th>标题</th>
+                    <th style="width:60px;">审核状态</th>
+                    <th style="width:30px;">显示</th>
+                    <th style="width:30px;">首页</th>
+                    <th style="width:30px;">推荐</th>
+                    <th style="width:30px;">置顶</th>
+                    <th style="width:30px;">浏览</th>
+                    <th style="width:120px;">时间</th>
+                    <th style="width:60px;">操作</th>
+                </tr>
+                @foreach (DataRow row in Model.DataList.Rows)
+  {
+                <tr>
+                    <td align="center"><input type="checkbox" value="@row["ArticleID"]" selectItem="true" name="articleIdList" /></td>
+                    <td align="left">@row["Title"]</td>
+                   
+                    <td align="center">
+                        @if (row["ApprovalStatus"].ToString() == "1")
+                        {
+                            @:通过
+                          }
+                        else if (row["ApprovalStatus"].ToString() == "2")
+                        {
+                            @:未通过
+                        }
+                        else
+                        {
+                            @:待审核
+                        }
+                    </td>
+
+                    <td align="center">
+                         @if (row["isShow"].ToString() == "0")
+                          {
+                              @:否
+                          }
+                          else
+                          {
+                                @:是
+                          }
+                    </td>
+                    <td align="center">
+                         @if (row["isHome"].ToString() == "0")
+                          {
+                              @:否
+                          }
+                          else
+                          {
+                                @:是
+                          }
+                    </td>
+                    <td align="center">
+                         @if (row["isBest"].ToString() == "0")
+                          {
+                              @:否
+                          }
+                          else
+                          {
+                                @:是
+                          }
+                    </td>
+                    <td align="center">
+                         @if (row["isTop"].ToString() == "0")
+                          {
+                              @:否
+                          }
+                          else
+                          {
+                                @:是
+                          }
+                    </td>
+                    <td align="center">@row["hits"]</td>
+                    <td align="center">@row["addtime"]</td>
+                    <td>
+                        @*@Html.ActionLink("编辑", "Edit", new { articleID = row["ArticleID"] })*@
+                        <a href="@Url.Action("Edit", "Article", new { articleID = row["ArticleID"]})">编辑</a>
+                        <a class="deleteOperate" href="@Url.Action("Del", "Article", new { articleIdList = row["ArticleID"] })">删除</a>                        
+                    </td>
+                </tr>
+                }
+                </table>
+        <div class="pagelist">
+    @Html.AdminPager(Model.PageModel)
+</div>
+</div>
+         
+         </div>
+    }
+    }

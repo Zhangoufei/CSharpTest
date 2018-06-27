@@ -1,0 +1,252 @@
+﻿@using System.Data
+@{
+    ViewBag.Title = @Model.ArticleClassInfo.ClassName + " - " + @WorkContext.SiteConfig.SiteTitle;
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>郑州八中列表页</title>
+    @*分页*@
+    <link rel="stylesheet" href="@Url.Content("~/Content/layui/css/layui.css")" media="all" />
+    <style>
+        .layui-laypage > :last-child, .layui-laypage > :last-child em {
+            background-color: #a24a49;
+            color: #ffffff;
+            padding: 0px 12px;
+            border-radius: 1px;
+            font-size: 14px;
+            border-radius:6px;
+
+        }
+    </style>
+</head>
+
+<body style="background:#d3cab8">
+
+    <div class="mui-inner-wrap">
+        <div class="list-main container">
+            <div class="list-header">
+                <h2 class="list-title">@Model.ArticleClassInfo.ClassName </h2>
+                <p class="nav-link">
+                    @{
+                        DataTable namelist = (DataTable)ViewData["namelist"];
+                        if (namelist != null && namelist.Rows.Count > 0)
+                        {
+                            foreach (DataRow dt in namelist.Rows)
+                            {
+                                <a>@dt["ClassName"].ToString() - @Model.ArticleClassInfo.ClassName</a>
+                            }
+                        }
+
+                    }
+
+                </p>
+            </div>
+            <div class="list-content" style="@ViewData["isNotDisplay"]">
+                <div class="list-nav-left ">
+                    <div class="list-nav-show" id="list-nav-show_urlImg">
+                        <img src="/Content/Web/images/img5.jpg" alt="" style="width:100%;" />
+                        @*<img src="images/img3.jpg" class="list-nav-img2" />*@
+                    </div>
+                </div>
+                <div class="list-nav-right">
+                    <ul class="list-nav-box ">
+                        @{
+                            DataTable list = (DataTable)ViewData["list"];
+                            if (list != null && list.Rows.Count > 0)
+                            {
+
+                                foreach (DataRow dr in list.Rows)
+                                {
+                                    <li class="" acticleclassid="@dr["ArticleClassID"].ToString()" classtype="@dr["ClassType"].ToString()">
+                                        <div class="list-nav-img">
+                                            <a href="javascript:;"><img src="/upload/articleclass/source/@dr["ImgUrl"].ToString()" onerror="this.src ='/Content/Web/images/img7.jpg' " /></a>
+                                        </div>
+                                        <div class="list-nav-text">
+                                            <a href="javascript:;">
+                                                <h3>@dr["ClassName"].ToString()</h3>
+                                                <p>@dr["Subhead"].ToString()</p>
+                                            </a>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </li>
+                                }
+                            }
+                        }
+                    </ul>
+
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="list-header" id="articleClasstitle" style="@ViewData["isNotDisplay"]">
+                <h2 class="list-title"><span>青年志愿团队</span></h2>
+            </div>
+            <div id="articlelist">
+            </div>            
+            <div class="mui-off-canvas-backdrop"></div>
+        </div>        
+        <script src="@Url.Content("~/Content/layui/layui.js")"></script>
+        <script>
+    //三级菜单
+    var isNotAjax = true;
+    var acticleClassId = '@ViewData["acticleClassId"]';
+    var ClassType = '@ViewData["ClassType"]';
+    var totalcounts = '@ViewData["totalcount"]';
+    myAjax(1, isNotAjax, acticleClassId, ClassType, totalcounts);
+
+    $(".list-nav-box li").each(function (index) {
+        $(this).click(function () {
+            acticleClassId = $(this).attr("acticleClassId");
+            classtype = $(this).attr("classtype");
+            isNotAjax = true;
+            myAjax(1, isNotAjax, acticleClassId, ClassType, totalcounts);
+        })
+    });
+    function myAjax(curr, isNotAjax, acticleClassId, ClassType, totalcounts) {
+        if (isNotAjax) {
+            $.ajax({
+                type: "POST",
+                url: "/Article/JsonArticle",
+                dataType: "json",
+                data: {
+                    "acticleClassId": acticleClassId,
+                    //"acticleClassId": 195,
+                    "pindex": curr,
+                    "ClassType": ClassType,
+                    "totalcounts": totalcounts,
+
+                },
+                timeout: 20000,
+                success: function (data) {
+                    var strHtml = '';
+                    var imgHtml = '';
+                    //imgHtml = '<img src="/upload/articleclass/source/' + data.mainImg + '" alt="" class="list-nav-img1"/> ';
+                    imgHtml = '<img src="/upload/articleclass/source/' + data.ArticleClassImgUrl + '"  onerror=this.src="/Content/Web/images/img7.jpg" alt="" style="width:100%;" /> ';
+                    var titleHtml = '<h2 class="list-title">' + data.ClassName + '</span> </h2>';
+                    if (data.code == 1) {
+                        if (data.ClassType == 3) {
+                            if (data.count > 0) {
+                                strHtml += '<div class="nav-third-box"><ul class="nav-third-list">';
+                                for (var x = 0; x < data.count; x++) {
+                                    strHtml += '<a href="/View/' + data.ArticleList[x].ArticleID + '.html?ClassArticleId=' + data.ArticleList[x].ArticleClassID + '"><li class="col-lg-3 col-md-3 col-sm-4 col-xs-6"><div class="nav-third-line"><div class="nav-third-maging">';
+                                    strHtml += ' <img src="/Upload/Article/Show/thumb225_155/' + data.ArticleList[x].ImgUrl + '" onerror=this.src="/Content/Web/images/img7.jpg"  style="width:100%;height:165px" alt="" />';
+                                    strHtml += ' <h3>' + data.ArticleList[x].Title + '</h3>';
+                                    strHtml += ' <p>' + data.ArticleList[x].Digest + '</p>';
+                                    strHtml += ' </div> </div> </li></a>'
+                                }
+                                strHtml += '</div></div><div class="clear"></div><div id="page" style="text-align: center; background-color: #eeeeee"></div>';
+                            } else {
+                                strHtml = '<div class="nav-third-box"><input type="text" value="暂无数据"/></div>';
+                            }
+                        } else if (data.ClassType == 4) {
+                            if (data.count > 0) {
+                                strHtml += '<div class="nav-third-box"><ul class="nav-third-list">';
+                                for (var x = 0; x < data.count; x++) {
+                                    strHtml += '<a href="/View/' + data.ArticleList[x].ArticleID + '.html?ClassArticleId=' + data.ArticleList[x].ArticleClassID + '"><li class="col-lg-3 col-md-3 col-sm-4 col-xs-6" ><div class="nav-third-line" style="padding: 20px 0 0 0;min-height:inherit;"><div class="nav-third-maging" src="/Content/Web/images/player.png" style="position:relative">';
+                                    strHtml += '<div style="position:relative;"><div style="position:absolute;z-index:11;left:0;top:0;width:100%;height:100%;background-color:#000000;opacity:0.6;background-image:url(../Content/Web/images/player.png);background-size:60px 60px;background-position:center center;background-repeat:no-repeat;" class="player11"></div> <img src="/Upload/Article/Show/thumb225_155/' + data.ArticleList[x].ImgUrl + '" onerror=this.src="/upload/article/show/thumb640_480/' + data.ArticleList[x].ImgUrl + '"  style="width:100%;height:165px" alt="" /></div>';
+                                    strHtml += ' <h3>' + data.ArticleList[x].Title + '</h3>';
+                                    //strHtml += ' <p>' + data.ArticleList[x].Digest + '</p>';
+                                    strHtml += ' </div> </div> </li></a>'
+                                }
+                                strHtml += '</ul><div class="page-box"></div></div><div class="clear"></div><div id="page" style="text-align: center; background-color: #eeeeee"></div>';
+                            } else {
+                                strHtml = '<div class="nav-third-box"><input type="text" value="暂无数据"/></div>';
+                            }
+                        }
+                        else if (data.ClassType == 2) {
+                            if (data.count > 0) {
+                                //if (data.count > 7) {
+                                //    //显示最新资讯和历史资讯
+                                //    strHtml += '<div class="list-news-content"><ul class="list-news-list"><li><div class="list-news-title"><h2>最新资讯</h2><span>Now‘s information</span><div class="clear"></div></div><div class="list-news-line"><div class="list-news-img"><img src="/upload/articleclass/source/' + data.ArticleClassImgUrl + '" onerror=this.src="/Content/Web/images/img7.jpg" ></div><div class="list-news-box"><ul>';
+                                //    for (var i = 0; i < 7; i++) {
+                                //        //循环最新资讯列表
+                                //        strHtml += '<li><p class="list-news-text"><a href="/View/' + data.ArticleList[i].ArticleID + '.html?ClassArticleId=' + data.ArticleList[i].ArticleClassID + '">' + data.ArticleList[i].Title + '</a></p><span class="list-news-date">' + data.ArticleList[i].UpdateTime + '</span><div class="clear"></div></li>';
+                                //    }
+                                //    //历史资讯
+                                //    strHtml += '</ul></div><div class="clear"></div></div></li>';
+                                //    strHtml += '<li><div class="list-news-title"><h2>历史资讯</h2><span>Historical information</span><div class="clear"></div></div><div class="list-news-line"><div class="list-news-img"><img src="/upload/articleclass/source/' + data.ArticleClassImgUrl + '" onerror=this.src="/Content/Web/images/img7.jpg"></div><div class="list-news-box"><ul>';
+                                //    for (var i = 7; i < data.count; i++) {
+                                //        strHtml += '<li><p class="list-news-text"><a href="/View/' + data.ArticleList[i].ArticleID + '.html?ClassArticleId=' + data.ArticleList[i].ArticleClassID + '">' + data.ArticleList[i].Title + '</a></p><span class="list-news-date">' + data.ArticleList[i].UpdateTime + '</span><div class="clear"></div></li>';
+                                //    }
+                                //    strHtml += '</ul></div><div class="clear"></div></div></li></ul></div>';
+                                //} else {
+                                    //显示最新资讯
+                                    strHtml += '<div class="list-news-content"><ul class="list-news-list"><li><div class="list-news-title"><h2>最新资讯</h2><span>Now‘s information</span><div class="clear"></div></div><div class="list-news-line"><div class="list-news-img"><img src="/upload/articleclass/source/' + data.ArticleClassImgUrl + '" onerror=this.src="/Content/Web/images/img7.jpg"></div><div class="list-news-box"><ul>';
+                                    for (var i = 0; i < data.count; i++) {
+                                        //console.log(data.ArticleList[i].UpdateTime)
+                                        //循环当月资讯列表
+                                        strHtml += '<li><p class="list-news-text"><a href="/View/' + data.ArticleList[i].ArticleID + '.html?ClassArticleId=' + data.ArticleList[i].ArticleClassID + '">' + data.ArticleList[i].Title + '</a></p><span class="list-news-date">' + data.ArticleList[i].UpdateTime + '</span><div class="clear"></div></li>';
+                                    }
+                                    //历史资讯
+                                    strHtml += '</ul></div><div class="clear"></div></div></li>';
+                                    //strHtml += '<li><div class="list-news-title"><h2>历史资讯</h2><span>Historical information</span><div class="clear"></div></div><div class="list-news-line"><div class="list-news-img"><img src="/Content/Web/images/img7.jpg" ></div><div class="list-news-box"><ul>';
+                                    //for (var j = 7; j < data.count; j++) {
+                                    //    strHtml += '<li><p class="list-news-text"><a href="">' + data.ArticleList[j].Title + '</a></p><span class="list-news-date">' + data.ArticleList[j].UpdateTime + '</span><div class="clear"></div></li>';
+                                    //}
+                                    strHtml += '</ul></div><div class="clear"></div></div></li></ul></div><div id="page" style="text-align: center; background-color: #eeeeee"></div>';
+                               // }
+                            } else {
+                                strHtml = '<div class="nav-third-box"><input type="text" value="暂无数据"/></div>';
+                            }
+
+                        } else {
+                            strHtml = '<div class="nav-third-box"><input type="text" value="暂无数据"/></div>';
+                        }
+                    } else {
+                        strHtml = '<div class="nav-third-box"><input type="text" value="暂无数据"/></div>';
+                    }
+                    $("#articlelist").empty();
+                    $("#articlelist").append(strHtml);
+                    $("#list-nav-show_urlImg").empty();
+                    $("#list-nav-show_urlImg").append(imgHtml);
+                    $("#articleClasstitle").empty();
+                    $("#articleClasstitle").append(titleHtml);
+                    if (curr != data.totalcount) {
+                        layui.config({
+                            base: '/Content/layui/modules/'
+                        }).use(['form', 'laypage', 'layer'], function () {
+                            //下拉列表
+                            var form = layui.form(),
+                                $ = layui.jquery,
+                                laypage = layui.laypage,
+                                layer = parent.layer === undefined ? layui.layer : parent.layer;
+
+                            //分页设置                        
+                            laypage({
+                                cont: 'page',
+                                pages: data.totalcount  //总页数
+                                    ,
+                                next: '更多',
+                                prev: '',
+                                groups: 0 //连续显示分页数
+                                    ,
+                                curr: data.PageNumber//当前页@ViewData["pageindex"]
+                                    ,
+                                jump: function (obj, first) {
+                                    //得到了当前页，用于向服务端请求对应数据
+                                    var curr = obj.curr;
+                                    if (!first) {
+                                        //location.href = '/Article/JsonArticle';
+                                        //pindex=' + curr + "&gradeid=" + $("#gradeid").val() + "&classid=" + $("#classid").val()
+                                        myAjax(curr, isNotAjax, acticleClassId, ClassType, data.totalcount)
+                                    }
+                                }
+                            });
+                        });
+                    }
+          
+                },
+                error: function (errorThrown) {
+                }
+            });
+        }
+    }
+        </script>
+</body>
+</html>

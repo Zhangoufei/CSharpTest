@@ -1,0 +1,53 @@
+﻿@model BonSite.Web.Admin.Models.RoleMenuModel
+@section header{
+               
+    
+               }
+@section body{
+<div class="main">
+        <div class="nav">当前位置：<a href="@Url.Action("SiteRunInfo","Home")">管理后台</a>
+    
+     <span> &rsaquo; </span> <a href="@Url.Action("List", "UserRole")">角色管理</a> 
+    
+    <span> &rsaquo; </span> 编辑角色权限
+</div>
+        <ul class="submenu">
+        	<li class="sel"><a href="#">编辑角色权限</a></li>
+        </ul>
+
+       @using (Html.BeginForm())
+       { 
+           <div class="top15">
+        <table width="100%" class="tbstyle1" cellpadding="5" cellspacing="1">
+            
+            <tr>
+                <th>用户名：</th>
+                <td>@Model.UserRoleInfo.RoleName </td>
+            </tr> 
+           
+            <tr>
+                <th>权限：</th>
+                <td>
+                    @foreach (var item in Model.RoleMenuList)
+                    {
+                        if (item.isSels)
+                        {
+                            <input type="checkbox" id="checkboxRole" name="checkboxRole" value="@item.MenuIDs" checked="checked" /><span> @item.MenuNames</span>
+                        }
+                        else
+                        {
+                            <input type="checkbox" id="checkboxRole" name="checkboxRole" value="@item.MenuIDs" /><span> @item.MenuNames</span>
+                        }
+
+                        <br />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" value="提交" /></td>
+            </tr>
+        </table>
+
+           </div>
+       }

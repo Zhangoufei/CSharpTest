@@ -1,0 +1,66 @@
+﻿@model BonSite.Web.Admin.Models.SiteRunInfoModel
+@{
+    ViewBag.Title = "SiteRunInfo";
+}
+@section header{
+    <script src="/Scripts/utils.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function clearcache() {            
+            Ajax.post("/Admin/Home/Clear", null, false, clearcacheResponse);
+        }
+        function clearcacheResponse(data) {
+            var result = eval("(" + data + ")");
+            if (result.state == "success") {
+                alert(result.content);
+                location.reload();
+            }else
+            {
+                alert("出错了！");
+            }
+        }
+
+    </script>
+    }
+@section body{
+<div class="main">
+        <div class="nav">
+            当前位置：
+    <span> &rsaquo; </span>
+            管理首页
+</div>
+        <ul class="submenu">
+        	<li class="sel"><a href="#">管理首页</a></li>
+        </ul>
+
+       
+           <div class="top15">
+        <table width="700" class="tbstyle1" cellpadding="5" cellspacing="1">
+            <tr>
+                <th style="width:100px;">系统版本：</th>
+                <td>@Model.SiteVersion</td>
+                <th style="width:100px;">.NET框架：</th>
+                <td>@Model.NetVersion</td>
+            </tr>
+            <tr>
+                <th style="width:100px;">操作系统：</th>
+                <td>@Model.OSVersion</td>
+                <th style="width:100px;">运行时间：</th>
+                <td>@Model.TickCount 分钟</td>
+            </tr>
+            <tr>
+                <th style="width:100px;">CPU数量：</th>
+                <td>@Model.ProcessorCount 个</td>
+                <th style="width:100px;">占用内存：</th>
+                <td>@Model.WorkingSet M</td>
+            </tr>
+            <tr>
+                <th>缓存个数：</th>
+                <td>@Model.WorkingTick 个</td>
+                <th>是否清除：</th>
+                <td colspan="3"><a href="javascript:vod(0)" onclick="clearcache();">清除</a></td>
+            </tr>
+        </table>
+
+           </div>
+</div>
+}

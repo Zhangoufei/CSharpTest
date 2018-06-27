@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{24EEFABA-9874-4E2B-BD7F-9EB4C8C8D308}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BonSite.Web.Framework</RootNamespace>
+    <AssemblyName>BonSite.Web.Framework</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\BonSite.Web\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Flurl">
+      <HintPath>..\..\packages\Flurl.2.3.0\lib\portable40-net40+sl5+win8+wp8+wpa81\Flurl.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Web.XmlTransform">
+      <HintPath>..\..\packages\Microsoft.Web.Xdt.2.1.1\lib\net40\Microsoft.Web.XmlTransform.dll</HintPath>
+    </Reference>
+    <Reference Include="NuGet.Core, Version=2.14.0.832, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NuGet.Core.2.14.0\lib\net40-Client\NuGet.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.3.0.20105.1\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages.Razor">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\BaseAdminController.cs" />
+    <Compile Include="Controllers\BaseWebController.cs" />
+    <Compile Include="ImageResult.cs" />
+    <Compile Include="Pager\AdminPager.cs" />
+    <Compile Include="Pager\PageModel.cs" />
+    <Compile Include="Pager\Pager.cs" />
+    <Compile Include="Pager\PagerHtmlExtension.cs" />
+    <Compile Include="Pager\WebPager.cs" />
+    <Compile Include="PromptModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Theme\ThemeBuildManagerViewEngine .cs" />
+    <Compile Include="Theme\ThemeRazorViewEngine.cs" />
+    <Compile Include="Theme\ThemeVirtualPathProviderViewEngine.cs" />
+    <Compile Include="Validators\EmailAttribute.cs" />
+    <Compile Include="Validators\IdCardAttribute.cs" />
+    <Compile Include="Validators\MobileAttribute.cs" />
+    <Compile Include="Validators\NotLess\DateTimeNotLessAttribute.cs" />
+    <Compile Include="Validators\NotLess\DecimailNotLessAttribute.cs" />
+    <Compile Include="Validators\NotLess\IntNotLessAttribute.cs" />
+    <Compile Include="Validators\PassWordAttribute.cs" />
+    <Compile Include="Validators\PhoneAttribute.cs" />
+    <Compile Include="Validators\UrlAttribute.cs" />
+    <Compile Include="Validators\ZipCodeAttribute.cs.cs" />
+    <Compile Include="ViewPages\AdminViewPage.cs" />
+    <Compile Include="ViewPages\WebViewPage.cs" />
+    <Compile Include="WorkContext\AdminWorkContext.cs" />
+    <Compile Include="WorkContext\WebWorkContext.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\BonSite.Core\BonSite.Core.csproj">
+      <Project>{4b356b8e-0d6c-44f9-a1ea-33ea2ee01b4e}</Project>
+      <Name>BonSite.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\BonSite.Services\BonSite.Services.csproj">
+      <Project>{2d5a9d19-198f-4f2e-8fb8-95d88af9ffaf}</Project>
+      <Name>BonSite.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="bin\Release\BonSite.Core.dll" />
+    <Content Include="bin\Release\BonSite.Core.pdb" />
+    <Content Include="bin\Release\BonSite.Data.dll" />
+    <Content Include="bin\Release\BonSite.Data.pdb" />
+    <Content Include="bin\Release\BonSite.Services.dll" />
+    <Content Include="bin\Release\BonSite.Services.pdb" />
+    <Content Include="bin\Release\BonSite.Web.Framework.dll" />
+    <Content Include="bin\Release\BonSite.Web.Framework.pdb" />
+    <Content Include="bin\Release\Flurl.dll" />
+    <Content Include="bin\Release\Flurl.pdb" />
+    <Content Include="bin\Release\Flurl.xml" />
+    <Content Include="bin\Release\Microsoft.Web.XmlTransform.dll" />
+    <Content Include="bin\Release\Newtonsoft.Json.dll" />
+    <Content Include="bin\Release\NuGet.Core.dll" />
+    <Content Include="bin\Release\System.Web.Mvc.dll" />
+    <Content Include="bin\Release\System.Web.Mvc.xml" />
+    <Content Include="bin\Release\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\Release\System.Web.WebPages.Deployment.xml" />
+    <Content Include="bin\Release\System.Web.WebPages.dll" />
+    <Content Include="bin\Release\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\Release\System.Web.WebPages.Razor.xml" />
+    <Content Include="bin\Release\System.Web.WebPages.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

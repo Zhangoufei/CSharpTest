@@ -1,0 +1,53 @@
+﻿@model BonSite.Web.Admin.Models.FeedBackTypeListModel
+@{
+    ViewBag.Title = "FeedBackTypeList";
+}
+@section body{
+     <div class="main">
+<div class="nav">当前位置：
+     <span> &rsaquo; </span> <a href="#">系统管理</a> 
+     <span> &rsaquo; </span> <a href="@Url.Action("FeedBackList")">信息反馈管理</a> 
+     <span> &rsaquo; </span> <a href="#">信息反馈分类管理</a> 
+    
+
+</div>
+
+        <ul class="submenu">
+        	<li class="sel"><a href="#">信息反馈分类列表</a></li>
+        	<li><a href="@Url.Action("AddFeedBackType")">新加信息反馈分类</a></li>
+        </ul>
+
+
+    <div class="top15">
+        	<table width="100%" cellpadding="5" cellspacing="0" class="tblist">
+            	<tr>
+                    <th width="10" align="center">ID</th>
+                    <th width="80" align="center" >分类名称</th>  
+                    <th width="60" align="center" >显示列表</th>  
+                    <th width="100" align="center" >标签</th>  
+                    <th align="left" >简介</th> 
+                    <th width="80" align="left">管理操作</th>
+                </tr>
+                @foreach (FeedBackTypeInfo info in Model.FeedBackTypeList)
+  {
+  <tr>
+    <td align="center">@info.FeedBackTypeId</td>
+    <td>@info.TypeName</td>
+    <td>@info.IsShowList</td>
+    <td>@info.Tags</td>
+    <td>@info.Body</td>
+    <td>
+        @Html.ActionLink("[编辑]", "editfeedbacktype", new { typeId = info.FeedBackTypeId }, new { @class = "editOperate" })
+        @Html.ActionLink("[删除]", "delfeedbacktype", new { typeId = info.FeedBackTypeId }, new { @class = "deleteOperate" })
+    </td>
+    </tr>
+  }
+                </table>
+        <div class="dataListEdit">
+<a href="#" delUrl="@Url.Action("del")" class="batch batchDel">批量删除</a>
+</div>
+
+</div>
+         
+         </div>
+    }

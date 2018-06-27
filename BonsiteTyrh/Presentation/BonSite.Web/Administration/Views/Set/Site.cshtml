@@ -1,0 +1,83 @@
+﻿@model BonSite.Web.Admin.Models.SetModel
+@{
+    ViewBag.Title = "Site";
+}
+
+
+@section body{
+<div class="main">
+        <div class="nav">当前位置：<a href="@Url.Action("SiteRunInfo","Home")">管理后台</a>
+     <span> &rsaquo; </span> <a href="#">系统管理</a> 
+     <span> &rsaquo; </span> <a href="#">网站设置</a> 
+
+</div>
+        <ul class="submenu">
+        	<li class="sel"><a href="#">网站设置</a></li>
+        	<li><a href="@Url.Action("Upload","Set")">上传设置</a></li>
+        </ul>
+
+       @using (Html.BeginForm())
+       { 
+           <div class="top15">
+        <table width="100%" class="tbstyle1" cellpadding="5" cellspacing="1">
+            <tr>
+    <th width="80px" align="right">网站名称：</th>
+    <td>@Html.TextBoxFor(x => x.SiteName, new { size = "35" })</td>
+    </tr>
+          <tr>
+    <th align="right">网站地址：</th>
+    <td>@Html.TextBoxFor(x => x.SiteUrl, new { size = "35" })</td>
+    </tr>
+          <tr>
+    <th align="right">网站标题：</th>
+    <td>@Html.TextBoxFor(x => x.SiteTitle, new { size = "35" })</td>
+    </tr>
+        <tr>
+    <th align="right">SEO关键字：</th>
+    <td>
+        @Html.TextAreaFor(x => x.SEOKeyword, new { cols="40",rows="5"})
+    </td>
+    </tr>
+    <tr>
+    <th align="right">SEO描述：</th>
+    <td>@Html.TextAreaFor(x => x.SEODescription, new { cols="40",rows="5"})</td>
+    </tr>
+            
+      <tr>
+    <th align="right">备案信息：</th>
+    <td>@Html.TextBoxFor(x => x.ICP, new { size = "35" })</td>
+    </tr>
+      <tr>
+    <th align="right">脚本：</th>
+    <td>@Html.TextAreaFor(x => x.ICP, new { cols="40",rows="5" })</td>
+    </tr>
+      <tr>
+    <th align="right">版权：</th>
+    <td>
+        <label>
+@Html.RadioButtonFor(x => x.IsLicensed, 1, new { @class = "checkbox" })显示</label>
+      <label>
+@Html.RadioButtonFor(x => x.IsLicensed, 0, new { @class = "checkbox" })不显示</label>
+@Html.ValidationMessageFor(x => x.IsLicensed)
+    </td>
+    </tr>
+    <tr>
+        <th>单页SEO：</th>
+        <td>
+        <label>
+@Html.RadioButtonFor(x => x.ShowSEO, 1, new { @class = "checkbox" })启用</label>
+      <label>
+@Html.RadioButtonFor(x => x.ShowSEO, 0, new { @class = "checkbox" })不启用</label>
+
+        </td>
+    </tr>
+            <tr>
+                <th></th>
+                <td><input id="btnSubmit" type="submit" value="提交" /></td>
+            </tr>
+        </table>
+
+           </div>
+       }
+    </div>
+    }

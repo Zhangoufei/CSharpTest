@@ -1,0 +1,75 @@
+﻿body, form, ul, li, dl, dt, dd {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+	font-size: 14px;
+	line-height: 140%;
+}
+
+
+a {
+	color:#f1f1f1;
+}
+
+.menutopbar li {
+    position:relative;
+}
+.menutopbar:hover {
+    background-color:#4E5465;
+    border-left:3px solid #009688; 
+}
+
+#leftmenu{
+    width:200px;
+}
+#leftmenu i{
+    display:inline-block;
+    position:absolute;
+    left:20px;
+}
+.leftmenu {
+	color:#f2f2f2;
+	padding-top:０px;
+	padding-bottom:０px;
+    display:none;
+    background-color:#393D49;
+}
+.leftmenu li {
+    height:45px;
+    position:relative;
+    width:100%;
+}
+.leftmenu li a {
+	font-size: 14px;
+	line-height: 45px;
+	text-decoration: none;
+	display: block;
+	padding-left: 30px;
+    
+}
+.leftmenu li a:hover {
+    color:#FFFFFF;
+}
+.leftmenusel {
+	background-color:#009688;
+	color: #FFFFFF;
+	
+}
+.menutopbar {
+	font-family: "微软雅黑", "宋体";
+	font-size: 14px;
+	line-height: 45px;
+	background-image: url(Images/menu_ico.png);
+	background-repeat: no-repeat;
+	height: 45px;
+	width: auto;
+	margin-right: auto;
+	margin-left: auto;
+	color: #ffffff;
+	background-position: 5px center;
+	background-color: #2B2E37 ;
+	padding:0 20px;
+    cursor:pointer;
+    overflow:hidden;
+    white-space:nowrap;
+}

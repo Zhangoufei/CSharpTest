@@ -1,0 +1,55 @@
+﻿@model BonSite.Web.Admin.Models.AdvertPositionListModel
+@{
+    ViewBag.Title = "AdvertPositionList";
+}
+
+@section body{
+     <div class="main">
+<div class="nav">当前位置：
+     <span> &rsaquo; </span> <a href="#">系统管理</a> 
+     <span> &rsaquo; </span> <a href="@Url.Action("AdvertList")">广告管理</a> 
+     <span> &rsaquo; </span> <a href="#">广告位置管理</a> 
+    
+
+</div>
+
+        <ul class="submenu">
+        	<li><a href="@Url.Action("AdvertList")">广告列表</a></li>
+        	<li class="sel"><a href="#">广告位置列表</a></li>
+        	<li><a href="@Url.Action("AddAdvertPosition")">新加新广告位置</a></li>
+        </ul>
+
+
+    <div class="top15">
+        	<table width="100%" cellpadding="5" cellspacing="0" class="tblist">
+            	<tr>
+                    <th width="10" align="center"></th>
+                    <th width="30" align="center" >编号</th>  
+                    <th align="left" >标题</th> 
+                    <th width="90" align="left">管理操作</th>
+                </tr>
+                @foreach (AdvertPositionInfo info in Model.AdvertPositionList)
+  {
+  <tr>
+    <td></td>
+    <td align="center">@info.AdPosId</td>
+    <td>@info.Title</td>
+    <td>
+        @Html.ActionLink("[编辑]", "editadvertposition", new { adPosId = info.AdPosId }, new { @class = "editOperate" })
+        @Html.ActionLink("[删除]", "deladvertposition", new { adPosId = info.AdPosId }, new { @class = "deleteOperate" })
+    </td>
+    </tr>
+  }
+                </table>
+        <div class="dataListEdit">
+<a href="#" delUrl="@Url.Action("del")" class="batch batchDel">批量删除</a>
+</div>
+<div class="page">
+    @Html.AdminPager(Model.PageModel)
+</div>
+</div>
+         
+         </div>
+    
+    }
+    
