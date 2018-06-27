@@ -23,13 +23,11 @@ namespace BonSite.Web.UserService {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="UserServiceSoap", Namespace="http://zzbz.com.net/")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="UserServiceSoap", Namespace="http://utrust.zzbz.net/")]
     public partial class UserService : System.Web.Services.Protocols.SoapHttpClientProtocol {
-        
-        private System.Threading.SendOrPostCallback HelloWorldOperationCompleted;
         
         private System.Threading.SendOrPostCallback userloginOperationCompleted;
         
@@ -98,9 +96,6 @@ namespace BonSite.Web.UserService {
         }
         
         /// <remarks/>
-        public event HelloWorldCompletedEventHandler HelloWorldCompleted;
-        
-        /// <remarks/>
         public event userloginCompletedEventHandler userloginCompleted;
         
         /// <remarks/>
@@ -143,34 +138,7 @@ namespace BonSite.Web.UserService {
         public event addwxconfirmCompletedEventHandler addwxconfirmCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://zzbz.com.net/HelloWorld", RequestNamespace="http://zzbz.com.net/", ResponseNamespace="http://zzbz.com.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string HelloWorld() {
-            object[] results = this.Invoke("HelloWorld", new object[0]);
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void HelloWorldAsync() {
-            this.HelloWorldAsync(null);
-        }
-        
-        /// <remarks/>
-        public void HelloWorldAsync(object userState) {
-            if ((this.HelloWorldOperationCompleted == null)) {
-                this.HelloWorldOperationCompleted = new System.Threading.SendOrPostCallback(this.OnHelloWorldOperationCompleted);
-            }
-            this.InvokeAsync("HelloWorld", new object[0], this.HelloWorldOperationCompleted, userState);
-        }
-        
-        private void OnHelloWorldOperationCompleted(object arg) {
-            if ((this.HelloWorldCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.HelloWorldCompleted(this, new HelloWorldCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://zzbz.com.net/userlogin", RequestNamespace="http://zzbz.com.net/", ResponseNamespace="http://zzbz.com.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://utrust.zzbz.net/userlogin", RequestNamespace="http://utrust.zzbz.net/", ResponseNamespace="http://utrust.zzbz.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string userlogin(string user_account, string user_pwd, string isaccount, string appid) {
             object[] results = this.Invoke("userlogin", new object[] {
                         user_account,
@@ -205,7 +173,7 @@ namespace BonSite.Web.UserService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://zzbz.com.net/getuserinfo", RequestNamespace="http://zzbz.com.net/", ResponseNamespace="http://zzbz.com.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://utrust.zzbz.net/getuserinfo", RequestNamespace="http://utrust.zzbz.net/", ResponseNamespace="http://utrust.zzbz.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string getuserinfo(string appid, string user_token) {
             object[] results = this.Invoke("getuserinfo", new object[] {
                         appid,
@@ -236,7 +204,7 @@ namespace BonSite.Web.UserService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://zzbz.com.net/getaccesstoken", RequestNamespace="http://zzbz.com.net/", ResponseNamespace="http://zzbz.com.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://utrust.zzbz.net/getaccesstoken", RequestNamespace="http://utrust.zzbz.net/", ResponseNamespace="http://utrust.zzbz.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string getaccesstoken(string appid, string secret) {
             object[] results = this.Invoke("getaccesstoken", new object[] {
                         appid,
@@ -267,7 +235,7 @@ namespace BonSite.Web.UserService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://zzbz.com.net/getclasslist", RequestNamespace="http://zzbz.com.net/", ResponseNamespace="http://zzbz.com.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://utrust.zzbz.net/getclasslist", RequestNamespace="http://utrust.zzbz.net/", ResponseNamespace="http://utrust.zzbz.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string getclasslist(string access_token, string school_code, int pagenow, int pagesize) {
             object[] results = this.Invoke("getclasslist", new object[] {
                         access_token,
@@ -302,7 +270,7 @@ namespace BonSite.Web.UserService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://zzbz.com.net/getdepartmentlist", RequestNamespace="http://zzbz.com.net/", ResponseNamespace="http://zzbz.com.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://utrust.zzbz.net/getdepartmentlist", RequestNamespace="http://utrust.zzbz.net/", ResponseNamespace="http://utrust.zzbz.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string getdepartmentlist(string access_token, string school_code) {
             object[] results = this.Invoke("getdepartmentlist", new object[] {
                         access_token,
@@ -333,7 +301,7 @@ namespace BonSite.Web.UserService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://zzbz.com.net/getuserrolelist", RequestNamespace="http://zzbz.com.net/", ResponseNamespace="http://zzbz.com.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://utrust.zzbz.net/getuserrolelist", RequestNamespace="http://utrust.zzbz.net/", ResponseNamespace="http://utrust.zzbz.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string getuserrolelist(string access_token) {
             object[] results = this.Invoke("getuserrolelist", new object[] {
                         access_token});
@@ -362,7 +330,7 @@ namespace BonSite.Web.UserService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://zzbz.com.net/getuserlist", RequestNamespace="http://zzbz.com.net/", ResponseNamespace="http://zzbz.com.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://utrust.zzbz.net/getuserlist", RequestNamespace="http://utrust.zzbz.net/", ResponseNamespace="http://utrust.zzbz.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string getuserlist(string access_token, string school_code, string role_code, string updatetime, int pagenow, int pagesize) {
             object[] results = this.Invoke("getuserlist", new object[] {
                         access_token,
@@ -401,7 +369,7 @@ namespace BonSite.Web.UserService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://zzbz.com.net/getschoolyearlist", RequestNamespace="http://zzbz.com.net/", ResponseNamespace="http://zzbz.com.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://utrust.zzbz.net/getschoolyearlist", RequestNamespace="http://utrust.zzbz.net/", ResponseNamespace="http://utrust.zzbz.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string getschoolyearlist(string access_token, string school_code) {
             object[] results = this.Invoke("getschoolyearlist", new object[] {
                         access_token,
@@ -432,7 +400,7 @@ namespace BonSite.Web.UserService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://zzbz.com.net/getcourselist", RequestNamespace="http://zzbz.com.net/", ResponseNamespace="http://zzbz.com.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://utrust.zzbz.net/getcourselist", RequestNamespace="http://utrust.zzbz.net/", ResponseNamespace="http://utrust.zzbz.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string getcourselist(string access_token, string school_code) {
             object[] results = this.Invoke("getcourselist", new object[] {
                         access_token,
@@ -463,7 +431,7 @@ namespace BonSite.Web.UserService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://zzbz.com.net/getcanlendarlistbymonth", RequestNamespace="http://zzbz.com.net/", ResponseNamespace="http://zzbz.com.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://utrust.zzbz.net/getcanlendarlistbymonth", RequestNamespace="http://utrust.zzbz.net/", ResponseNamespace="http://utrust.zzbz.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string getcanlendarlistbymonth(string access_token, string school_code, string month) {
             object[] results = this.Invoke("getcanlendarlistbymonth", new object[] {
                         access_token,
@@ -496,7 +464,7 @@ namespace BonSite.Web.UserService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://zzbz.com.net/getcanlendardatebymonth", RequestNamespace="http://zzbz.com.net/", ResponseNamespace="http://zzbz.com.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://utrust.zzbz.net/getcanlendardatebymonth", RequestNamespace="http://utrust.zzbz.net/", ResponseNamespace="http://utrust.zzbz.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string getcanlendardatebymonth(string access_token, string school_code, string month) {
             object[] results = this.Invoke("getcanlendardatebymonth", new object[] {
                         access_token,
@@ -529,7 +497,7 @@ namespace BonSite.Web.UserService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://zzbz.com.net/getcanlendarlistbydate", RequestNamespace="http://zzbz.com.net/", ResponseNamespace="http://zzbz.com.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://utrust.zzbz.net/getcanlendarlistbydate", RequestNamespace="http://utrust.zzbz.net/", ResponseNamespace="http://utrust.zzbz.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string getcanlendarlistbydate(string access_token, string school_code, string ca_begaintime, string ca_endtime) {
             object[] results = this.Invoke("getcanlendarlistbydate", new object[] {
                         access_token,
@@ -564,7 +532,7 @@ namespace BonSite.Web.UserService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://zzbz.com.net/getcanlendardetail", RequestNamespace="http://zzbz.com.net/", ResponseNamespace="http://zzbz.com.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://utrust.zzbz.net/getcanlendardetail", RequestNamespace="http://utrust.zzbz.net/", ResponseNamespace="http://utrust.zzbz.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string getcanlendardetail(string access_token, int ca_id) {
             object[] results = this.Invoke("getcanlendardetail", new object[] {
                         access_token,
@@ -595,7 +563,7 @@ namespace BonSite.Web.UserService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://zzbz.com.net/addwxconfirm", RequestNamespace="http://zzbz.com.net/", ResponseNamespace="http://zzbz.com.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://utrust.zzbz.net/addwxconfirm", RequestNamespace="http://utrust.zzbz.net/", ResponseNamespace="http://utrust.zzbz.net/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string addwxconfirm(string access_token, string oid, string mob) {
             object[] results = this.Invoke("addwxconfirm", new object[] {
                         access_token,
@@ -647,37 +615,11 @@ namespace BonSite.Web.UserService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
-    public delegate void HelloWorldCompletedEventHandler(object sender, HelloWorldCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class HelloWorldCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal HelloWorldCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     public delegate void userloginCompletedEventHandler(object sender, userloginCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class userloginCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -699,11 +641,11 @@ namespace BonSite.Web.UserService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     public delegate void getuserinfoCompletedEventHandler(object sender, getuserinfoCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getuserinfoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -725,11 +667,11 @@ namespace BonSite.Web.UserService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     public delegate void getaccesstokenCompletedEventHandler(object sender, getaccesstokenCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getaccesstokenCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -751,11 +693,11 @@ namespace BonSite.Web.UserService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     public delegate void getclasslistCompletedEventHandler(object sender, getclasslistCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getclasslistCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -777,11 +719,11 @@ namespace BonSite.Web.UserService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     public delegate void getdepartmentlistCompletedEventHandler(object sender, getdepartmentlistCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getdepartmentlistCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -803,11 +745,11 @@ namespace BonSite.Web.UserService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     public delegate void getuserrolelistCompletedEventHandler(object sender, getuserrolelistCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getuserrolelistCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -829,11 +771,11 @@ namespace BonSite.Web.UserService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     public delegate void getuserlistCompletedEventHandler(object sender, getuserlistCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getuserlistCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -855,11 +797,11 @@ namespace BonSite.Web.UserService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     public delegate void getschoolyearlistCompletedEventHandler(object sender, getschoolyearlistCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getschoolyearlistCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -881,11 +823,11 @@ namespace BonSite.Web.UserService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     public delegate void getcourselistCompletedEventHandler(object sender, getcourselistCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getcourselistCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -907,11 +849,11 @@ namespace BonSite.Web.UserService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     public delegate void getcanlendarlistbymonthCompletedEventHandler(object sender, getcanlendarlistbymonthCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getcanlendarlistbymonthCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -933,11 +875,11 @@ namespace BonSite.Web.UserService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     public delegate void getcanlendardatebymonthCompletedEventHandler(object sender, getcanlendardatebymonthCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getcanlendardatebymonthCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -959,11 +901,11 @@ namespace BonSite.Web.UserService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     public delegate void getcanlendarlistbydateCompletedEventHandler(object sender, getcanlendarlistbydateCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getcanlendarlistbydateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -985,11 +927,11 @@ namespace BonSite.Web.UserService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     public delegate void getcanlendardetailCompletedEventHandler(object sender, getcanlendardetailCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getcanlendardetailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1011,11 +953,11 @@ namespace BonSite.Web.UserService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     public delegate void addwxconfirmCompletedEventHandler(object sender, addwxconfirmCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class addwxconfirmCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

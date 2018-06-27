@@ -1509,18 +1509,6 @@
       <Project>{05923d7f-771b-467b-9555-aff99170338a}</Project>
       <Name>BonSite.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Libraries\BonSite.Services\BonSite.Services.csproj">
-      <Project>{2d5a9d19-198f-4f2e-8fb8-95d88af9ffaf}</Project>
-      <Name>BonSite.Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Strategies\BonSite.CacheStrategy.AspNet\BonSite.CacheStrategy.AspNet.csproj">
-      <Project>{14001f2c-ed7e-4754-8cdc-6b524a169315}</Project>
-      <Name>BonSite.CacheStrategy.AspNet</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Strategies\BonSite.ConfigStrategy.File\BonSite.ConfigStrategy.File.csproj">
-      <Project>{d5e23502-7717-41e8-a511-ee1f339a0140}</Project>
-      <Name>BonSite.ConfigStrategy.File</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Strategies\BonSite.EmailStrategy.DotNet\BonSite.EmailStrategy.DotNet.csproj">
       <Project>{2c5fc42c-2c32-4358-9516-2b94fd10744a}</Project>
       <Name>BonSite.EmailStrategy.DotNet</Name>
@@ -1533,18 +1521,6 @@
       <Project>{7864c0b9-e1a9-4687-8b04-59d9afde201a}</Project>
       <Name>BonSite.RDBSStrategy.SqlServer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Strategies\BonSite.SessionStrategy.AspNetCache\BonSite.SessionStrategy.AspNetCache.csproj">
-      <Project>{8eb5eeb9-919a-49e9-820c-40fb3c8bd5f5}</Project>
-      <Name>BonSite.SessionStrategy.AspNetCache</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BonSite.Web.Framework\BonSite.Web.Framework.csproj">
-      <Project>{24eefaba-9874-4e2b-bd7f-9eb4c8c8d308}</Project>
-      <Name>BonSite.Web.Framework</Name>
-    </ProjectReference>
-    <ProjectReference Include="Administration\BonSite.Web.Admin.csproj">
-      <Project>{2d9dd5a3-5a79-424b-b21b-ae37cda30010}</Project>
-      <Name>BonSite.Web.Admin</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -1553,10 +1529,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://192.168.18.106:8003/api/UserService.asmx">
+    <WebReferenceUrl Include="http://10.0.64.186:82/api/UserService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\UserService\</RelPath>
-      <UpdateFromURL>http://192.168.18.106:8003/api/UserService.asmx</UpdateFromURL>
+      <UpdateFromURL>http://10.0.64.186:82/api/UserService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
