@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
-  <contractRef ref="http://192.168.18.106:8003/api/UserService.asmx?wsdl" docRef="http://192.168.18.106:8003/api/UserService.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
-  <soap address="http://192.168.18.106:8003/api/UserService.asmx" xmlns:q1="http://zzbz.com.net/" binding="q1:UserServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
-  <soap address="http://192.168.18.106:8003/api/UserService.asmx" xmlns:q2="http://zzbz.com.net/" binding="q2:UserServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <contractRef ref="http://10.0.64.186:82/api/UserService.asmx?wsdl" docRef="http://10.0.64.186:82/api/UserService.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://10.0.64.186:82/api/UserService.asmx" xmlns:q1="http://utrust.zzbz.net/" binding="q1:UserServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://10.0.64.186:82/api/UserService.asmx" xmlns:q2="http://utrust.zzbz.net/" binding="q2:UserServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
 </discovery>

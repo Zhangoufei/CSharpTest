@@ -83,7 +83,6 @@
     <Compile Include="Domain\Article\FileDataInfo.cs" />
     <Compile Include="Domain\Article\SpecialInfo.cs" />
     <Compile Include="Domain\Job\JobInfo.cs" />
-    <Compile Include="Domain\Log\LogInfo.cs" />
     <Compile Include="Domain\Plugins\ProductFeedbacksInfo.cs" />
     <Compile Include="Domain\Plugins\ServiceEvalInfo.cs" />
     <Compile Include="Domain\Product\ProductClassInfo.cs" />
@@ -157,6 +156,9 @@
     <Content Include="bin\Release\Microsoft.Web.XmlTransform.dll" />
     <Content Include="bin\Release\Newtonsoft.Json.dll" />
     <Content Include="bin\Release\NuGet.Core.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Domain\Log\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

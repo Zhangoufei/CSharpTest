@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="BonSite_Web_UserService_UserService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://192.168.18.106:8003/api/UserService.asmx</Value>
+      <Value Profile="(Default)">http://10.0.64.186:82/api/UserService.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>
