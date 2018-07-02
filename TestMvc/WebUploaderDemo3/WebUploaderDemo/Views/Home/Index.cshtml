@@ -1,0 +1,118 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>WebUploaderDemo(上传)</title>
+
+    @*<link href="/Scripts/WebUploader/webuploader.css" rel="stylesheet" />
+        <link href="/Scripts/WebUploader/uploadify.css" rel="stylesheet" />*@
+    <link href="/Content/webupload1.5/css/uploadify.css" rel="stylesheet" />
+    <link href="/Content/webupload1.5/css/webuploader.css" rel="stylesheet" />
+
+    <script src="/Scripts/jquery-1.7.1.min.js"></script>
+
+    @*<script src="/Scripts/WebUploader/webuploader.js"></script>
+        <script src="/Scripts/WebUploader/jquery.uploadify.js"></script>*@
+
+    <script src="/Content/webupload1.5/js/webuploader.js"></script>
+    <script src="/Content/webupload1.5/js/jquery.uploadify.js"></script>
+
+
+</head>
+<body>
+    <h1>天业仁和测试软件</h1>
+    <div id="uploader" class="wu-example">
+        <!--用来存放文件信息-->
+        <div id="thelist" class="uploader-list"></div>
+        <div class="btns">
+            <div id="picker">选择文件</div>
+        </div>
+        <div>
+            <p><a href="" id="down" target="view_frame"></a> <a id="down1" style="margin-left:100px;"></a></p>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+
+    var uploader = WebUploader.create({
+        auto: true,														    //自动上传
+        swf: '/Scripts/WebUploader/Uploader.swf',
+        server: '/Home/FileUpload',						                   //文件接收服务端。
+        pick: { id: '#picker' },									   	//选择文件的按钮容器
+        duplicate: true,													//去重
+        resize: false,
+        fileNumLimit: 1,
+        chunkSize: 1 * 1024 * 1024, //每次上传2M
+        chunked: true,//是否要分片处理大文件上传
+        threads: 1,//上传并发数。允许同时最大上传进程数
+        fileSizeLimit: 100 * 200 * 1024 * 1024,    // 200 M*100
+        fileSingleSizeLimit: 1000 * 50 * 1024 * 1024    // 50 M*1000
+    });
+
+    // 当有文件被添加进队列的时候
+    //显示用户的选择
+    var $list = $("#thelist");
+    uploader.on('fileQueued', function (file) {
+        $list.append('<div id="' + file.id + '" class="item">' +
+            '<h4 class="info">' + file.name + '</h4>' +
+            '<p class="state">等待上传...</p>' +
+            '</div>');
+
+    });
+    var startIndex = 0;//post数据包的索引
+    // 文件上传过程中创建进度条实时显示。
+    uploader.on('uploadProgress', function (file, percentage) {
+
+        var $li = $('#' + file.id);
+        var $percent = $li.find('.progress .progress-bar');
+        // 避免重复创建
+        if (!$percent.length) {
+            $percent = $('<div class="progress progress-striped active">' +
+                '<div class="progress-bar" role="progressbar" style="width: 0%">' +
+                '</div>' +
+                '</div>').appendTo($li).find('.progress-bar');
+        }
+        $li.find('p.state').text('上传中');
+        $percent.css('width', percentage * 100 + '%');
+
+        ++startIndex;
+    });
+    //文件上传失败会派送uploadError事件，
+    //成功则派送uploadSuccess事件。
+    //不管成功或者失败，在文件上传完后都会触发uploadComplete事件。
+    uploader.on('uploadSuccess', function (file, data) {//成功
+        startIndex = 0;
+        $('#' + file.id).find('p.state').text('已上传');
+        console.log(data);
+        var tempFileName = "/upload/Files/" + data["_raw"];
+        $("#down").attr("href", tempFileName);
+        $("#down").text("点击播放");
+        $("#down1").text("下载");
+        $("#down1").attr("download", tempFileName);
+        $("#down1").attr("href", tempFileName);
+        $('#' + file.id).find('.progress').fadeOut();
+    });
+
+    uploader.on('uploadError', function (file) {//报错
+        startIndex = 0;
+        $('#' + file.id).find('p.state').text('上传出错');
+    });
+
+    uploader.on('uploadComplete', function (file) {
+        alert("上传成功");
+        $('#' + file.id).find('.progress').fadeOut();
+
+    });
+
+    ////上传事件
+    //$("#ctlBtn").click(function () {
+    //    uploader.upload();
+    //});
+    ////////////////
+
+</script>
